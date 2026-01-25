@@ -22,7 +22,7 @@ Row Assist is a command-line indoor rowing assistant that takes the user's indoo
 #### 1. Strategy
 
 > **MVP** <br>
-> A command-line indoor rowing assistant that collects basic user >and performance data, calculates derived metrics, compares them against performance standards and provides tailored, categorised feedback to the user.
+> A command-line indoor rowing assistant that collects basic user and performance data, calculates derived metrics, compares them against performance standards and provides tailored, categorised feedback to the user.
 
 **Purpose**
 - Provide users with alternative metrics for their workout 
@@ -48,7 +48,6 @@ Row Assist is a command-line indoor rowing assistant that takes the user's indoo
 - Derived content - system calculated values for watt output and 500m split time 
 - Feedback content - calculated values (split and watts) and performance category (beginner - world record) with contextual explanation of category
 - Future content - stored historical user performance data, trend analysis, visual charts
-<br>
 <br>
 
 **Content Constraints**
