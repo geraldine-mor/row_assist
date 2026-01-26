@@ -92,15 +92,16 @@ I included potential future features to map out how they would fit with the app.
 
 | Target | Expectation | Outcome |
 | --- | --- | --- |
-| As a rower | I would like to input my age, gender and 2000m time | so that the app can evaluate my performance |
+| As a user | I want to be greeted and receive clear instruction throughout | so that I understand and can use the app fully and easily. |
+| As a rower | I would like to input my age, gender and 2000m time | so that the app can evaluate my performance. |
 | As a rower | I would like the app to calculate my split time and watts | so that I can understand more about my workout. |
 | As a rower | I would like the application to compare my output to reference data | so that I can receive a category ranking relevant to my demographic. |
 | As a rower | I would like information about my ranking category | so that I can understand how my ranking compares to others. |
+| As a coach | I would like to choose between exiting the program and restarting | so that all my athletes can enter their data. |
 | As a returning user | I would like the application to store my performance tests | so that I can track improvements over time. |
 | As a returning user | I would like to see trends in my performance | so that I can evaluate my training effectivesness. |
 | As a returning user | I would like to see visual charts of my performance history | so that progress is easy to interpret and compare. |
 | As a rower | I would like to enter alternative distances | so that I can evaluate performance over a range of tests. |
-| As a rower | I would like distance related reference rankings | so that comparisons remain accurate. |
 | As a lightweight rower | I would like to see weight class adjustments | so that rankings are fair and my feedback is relevant |
 | As a new user | I would like to create a profile | so that my details don't need to be re-entered each time. |
 | As a returning user | I would like to update my profile | so that performance comparisons remain valid. |

@@ -23,7 +23,7 @@ def main():
     """
     typed("Welcome to Row Assist, your indoor rowing assistant.\n")
     typed("You will soon be asked for your gender, age and your latest 2k test time.\n")
-    typed("I will calculate your split time and watts and provide you with a ranking.\n")
+    typed("I will calculate your split time and watts and provide you with a ranking.")
     print("\n")
     age = data.get_user_age()
     gender = data.get_user_gender()
