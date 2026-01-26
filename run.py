@@ -2,7 +2,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 from utils import typed
 import data
-import math
+import calc
 
 
 SCOPE = [
@@ -16,52 +16,6 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 
 SHEET = GSPREAD_CLIENT.open("row_assist")
-
-def calculate_splits(data):
-    """
-    Calculates the time per 500m from the data provided 
-    Time(s) / (distance / 500)
-    Converts result into readable time format
-    """
-    distance = 2000
-    calc_split = data / (distance / 500)
-    split_mins = math.floor(calc_split / 60)
-    split_secs = round(calc_split - (split_mins * 60), 1)
-    user_split = f"Your split time is: {split_mins}:{str(split_secs).zfill(4)}\n"
-    typed(user_split)
-
-    return calc_split
-
-
-def calculate_watts(data):
-    """
-    Converts split times into watts
-    2.8 / (split(s) / 500)^3
-    Rounds to nearest int as per 
-    """
-    watts = round(2.8 / (data / 500)**3)
-    typed(f"Your watts generated are: {watts}\n")
-
-    return watts
-
-def get_reference_min_age(data):
-    """
-    Retrieve min age column from google sheets
-    """
-    ref_sheet = SHEET.worksheet(f"{data}_2000")
-    age_min = ref_sheet.col_values(1)
-    
-    return age_min
-
-
-def get_reference_max_age(data):
-    """
-    Retrieve max age column from google sheets
-    """
-    ref_sheet = SHEET.worksheet(f"{data}_2000")
-    age_max = ref_sheet.col_values(2)
-    
-    return age_max
 
 
 def ages_tuple(min, max):
@@ -79,10 +33,10 @@ def age_index(data, value):
     and returns the list index of the correct range tuple
     """
     del data[0]
-    for index, age in enumerate(data):
+    for index, age in enumerate(data, 1):
         a,b = age
         if int(value) >= int(a) and int(value) <= int(b):
-            return index + 1
+            return index 
         
 
 def main():
@@ -95,13 +49,16 @@ def main():
     print("\n")
     age = data.get_user_age()
     gender = data.get_user_gender()
+    distance = 2000 # Added to make sure functions will run correctly when more distances added
     row_time = data.get_user_row_time()
-    user_split = calculate_splits(row_time)
-    user_watts = calculate_watts(user_split)
-    min_age = get_reference_min_age(gender)
-    max_age = get_reference_max_age(gender)
+    user_split = calc.calculate_splits(row_time)
+    user_watts = calc.calculate_watts(user_split)
+    # The fllowing vars should be moved 
+    sheet = SHEET.worksheet(f"{gender}_{distance}") 
+    min_age = sheet.col_values(1)
+    max_age = sheet.col_values(2)
     age_range = ages_tuple(min_age, max_age)
     row_index = age_index(age_range, age)
-
+    print(row_index)
 
 main()

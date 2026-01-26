@@ -87,7 +87,7 @@ def get_user_row_time():
     print("\n")               
     actual_time = (int(user_minutes) * 60) + int(user_seconds) + (int(user_tenths) / 10)
     utils.check_wr(actual_time)
-    utils.typed("Calculating your scores and retrieving your ranking...\n")
+    utils.typed("Calculating your scores...\n")
 
     return actual_time   
 
