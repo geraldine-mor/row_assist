@@ -38,6 +38,11 @@ def calculate_watts(data):
 
     return watts
 
+def get_reference(data):
+    ref_sheet = SHEET.worksheet(f"{data}_2000")
+    ref_data = ref_sheet.get_all_values()
+    print(ref_data)
+
 
 def main():
     """
@@ -47,10 +52,11 @@ def main():
     typed("You will soon be asked for your gender, age and your latest 2k test time.\n")
     typed("I will calculate your split time and watts and provide you with a ranking.")
     print("\n")
-    age = data.get_user_age()
+    # age = data.get_user_age()
     gender = data.get_user_gender()
-    row_time = data.get_user_row_time()
-    split_time = calculate_splits(row_time)
-    user_watts = calculate_watts(split_time)
+    # row_time = data.get_user_row_time()
+    # split_time = calculate_splits(row_time)
+    # user_watts = calculate_watts(split_time)
+    get_reference(gender)
 
 main()
