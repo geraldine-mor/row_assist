@@ -69,25 +69,39 @@ def ages_tuple(min, max):
     Creates a list of tuples (min, max)
     """
     reference_ages = [(x, y) for x, y in zip(min, max)]
-    print(reference_ages)
     
+    return reference_ages
 
+
+def age_index(data, value):
+    """
+    Loops through the list comparing each tuple to the provided age
+    and returns the list index of the correct range tuple
+    """
+    del data[0]
+    for index, age in enumerate(data):
+        a,b = age
+        if int(value) >= int(a) and int(value) <= int(b):
+            return index + 1
+        
 
 def main():
     """
     Runs all functions
     """
-    # typed("Welcome to Row Assist, your indoor rowing assistant.\n")
-    # typed("You will soon be asked for your gender, age and your latest 2k test time.\n")
-    # typed("I will calculate your split time and watts and provide you with a ranking.")
-    # print("\n")
-    # age = data.get_user_age()
+    typed("Welcome to Row Assist, your indoor rowing assistant.\n")
+    typed("You will soon be asked for your age, gender and your latest 2k test time.\n")
+    typed("I will calculate your split time and watts and provide you with a ranking.")
+    print("\n")
+    age = data.get_user_age()
     gender = data.get_user_gender()
-    # row_time = data.get_user_row_time()
-    # user_split = calculate_splits(row_time)
-    # user_watts = calculate_watts(user_split)
+    row_time = data.get_user_row_time()
+    user_split = calculate_splits(row_time)
+    user_watts = calculate_watts(user_split)
     min_age = get_reference_min_age(gender)
     max_age = get_reference_max_age(gender)
-    ages_tuple(min_age, max_age)
+    age_range = ages_tuple(min_age, max_age)
+    row_index = age_index(age_range, age)
+
 
 main()
