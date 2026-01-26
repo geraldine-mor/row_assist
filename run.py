@@ -2,6 +2,8 @@ import gspread
 from google.oauth2.service_account import Credentials
 from utils import typed
 import data
+import math
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -15,6 +17,26 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 
 SHEET = GSPREAD_CLIENT.open("row_assist")
 
+def calculate_splits(data):
+    """
+    Calculates the time per 500m from the data provided
+    Converts resul into readable time format
+    """
+    distance = 2000
+    calc_split = data / (distance / 500)
+    split_mins = math.floor(calc_split / 60)
+    split_secs = round(calc_split - (split_mins * 60), 1)
+    user_split = f"Your split time is: {split_mins}:{str(split_secs).zfill(4)}\n"
+    typed(user_split)
+
+    return calc_split
+
+
+def calculate_watts(data):
+    watts = round(2.8 / (data / 500)**3)
+    typed(f"Your watts generated are: {watts}\n")
+
+    return watts
 
 
 def main():
@@ -28,6 +50,7 @@ def main():
     age = data.get_user_age()
     gender = data.get_user_gender()
     row_time = data.get_user_row_time()
-    
+    split_time = calculate_splits(row_time)
+    user_watts = calculate_watts(split_time)
 
 main()
