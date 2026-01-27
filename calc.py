@@ -25,7 +25,7 @@ def calculate_watts(data):
     Rounds to nearest int as per 
     """
     watts = round(2.8 / (data / 500)**3)
-    typed(f"Your watts generated are: {watts}\n")
+    typed(f"Your watts generated are: {watts}")
     print("\n")
     typed("Retrieving your ranking...\n")
     
