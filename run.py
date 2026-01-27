@@ -47,9 +47,12 @@ def get_data_row(sheet, index, value):
     watts_row = sheet.row_values(index)
     watts_row = watts_row[2:] # Removes min_age and max_age values
     for r_index, watts in enumerate(watts_row, 3): # Cols 1&2 are age values
-        if int(value) < int(watts):
+        if int(value) < int(sheet.cell(index, 3).value):
+            return 3
+        elif int(value) < int(watts):
             return r_index - 1 # Remove 1 because end point is the first category NOT achieved
-
+        elif int(value) >= int(sheet.cell(index, 8).value):
+            return 8
 
 def get_category(sheet, value):
     """
@@ -57,7 +60,20 @@ def get_category(sheet, value):
     ranking category and display it to the user
     """
     category = sheet.cell(1, int(value)).value
-    typed(f"Your performance category is {category.capitalize()}!\n")
+    typed(f"Your performance category is {category.title()}!\n")
+    return category
+
+
+def get_category_description():
+    """
+    Retrieves all values from the categories sheet and converts 
+    them to a dictionary.
+    """    
+    keys = SHEET.worksheet("categories").col_values(1)
+    values = SHEET.worksheet("categories").col_values(2)
+    categories = {key: value for key, value in zip(keys, values)}
+    return categories
+
 
 def main():
     """
@@ -81,6 +97,7 @@ def main():
     row_index = age_index(age_range, age)
     col_index = get_data_row(sheet, row_index, user_watts)
     category = get_category(sheet, col_index)
-    
+    category_description = get_category_description()
+    typed(f"You are: {category_description[category]}")
 
 main()
