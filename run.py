@@ -49,7 +49,15 @@ def get_data_row(sheet, index, value):
     for r_index, watts in enumerate(watts_row, 3): # Cols 1&2 are age values
         if int(value) < int(watts):
             return r_index - 1 # Remove 1 because end point is the first category NOT achieved
-        
+
+
+def get_category(sheet, value):
+    """
+    Uses previously generated column index to retrieve the correct
+    ranking category and display it to the user
+    """
+    category = sheet.cell(1, int(value)).value
+    typed(f"Your performance category is {category.capitalize()}!\n")
 
 def main():
     """
@@ -72,6 +80,7 @@ def main():
     age_range = ages_tuple(min_age, max_age)
     row_index = age_index(age_range, age)
     col_index = get_data_row(sheet, row_index, user_watts)
+    category = get_category(sheet, col_index)
     
 
 main()
