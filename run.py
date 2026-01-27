@@ -3,6 +3,7 @@ from google.oauth2.service_account import Credentials
 from utils import typed
 import data
 import calc
+import os
 
 
 SCOPE = [
@@ -74,11 +75,27 @@ def get_category_description():
     categories = {key: value for key, value in zip(keys, values)}
     return categories
 
+def program_exit():
+    """
+    Asks user if they would like to exit or restart
+    Exit commands triggers exit, restart triggers main()
+    """
+    typed("Do you wish to exit now or restart?\n")
+    exit_command = input("Press 'x' to exit, press any other key to restart: ") # Add a newline character before deployment
+    if exit_command.lower() == "x":
+        typed("You entered 'x' are you sure you wish to exit?\n")
+        exit_response = input("Exit?: Y/N ")
+        if exit_response.lower() == "y":
+            typed("Exiting Row Assist, Goodbye")
+            print("\n")
+            return True
+
 
 def main():
     """
     Runs all functions
     """
+    os.system('cls' if os.name == 'nt' else 'clear') # Source - https://stackoverflow.com/a/2084628
     typed("Welcome to Row Assist, your indoor rowing assistant.\n")
     typed("You will soon be asked for your age, gender and your latest 2k test time.\n")
     typed("I will calculate your split time and watts and provide you with a ranking.")
@@ -98,6 +115,14 @@ def main():
     col_index = get_data_row(sheet, row_index, user_watts)
     category = get_category(sheet, col_index)
     category_description = get_category_description()
-    typed(f"You are: {category_description[category]}")
+    typed(f"You are: {category_description[category]}\n")
+    print("\n")
 
-main()
+
+def run():
+    while True:
+        main()
+        if program_exit():
+            break
+
+run()
