@@ -83,13 +83,10 @@ def program_exit():
     typed("Do you wish to exit now or restart?\n")
     exit_command = input("Press 'x' to exit, press any other key to restart: ") # Add a newline character before deployment
     if exit_command.lower() == "x":
-        typed("You entered 'x' are you sure you wish to exit?\n")
-        exit_response = input("Exit?: Y/N ")
-        if exit_response.lower() == "y":
-            typed("Exiting Row Assist, Goodbye")
-            print("\n")
-            return True
-
+        typed("Exiting Row Assist, Goodbye\n")
+        print("\n")
+        return True
+                     
 
 def main():
     """
@@ -120,6 +117,10 @@ def main():
 
 
 def run():
+    """
+    Restart main if any other key is pressed in program_exit
+    Exits the program cleanly if user chooses exit option
+    """
     while True:
         main()
         if program_exit():
