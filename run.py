@@ -1,9 +1,10 @@
 import gspread
 from google.oauth2.service_account import Credentials
-from utils import typed
+from utils import typed, program_exit
 import inputs
 import calc
 import os
+import ref_data
 
 
 SCOPE = [
@@ -19,74 +20,13 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("row_assist")
 
 
-def ages_tuple(min, max):  # Move this into age_index()
-    """
-    Creates a list of tuples (min, max)
-    """
-    reference_ages = [(x, y) for x, y in zip(min, max)]
-
-    return reference_ages
-
-
-def age_index(data, value):
-    """
-    Loops through the list comparing each tuple to the provided age
-    and returns the list index of the correct range tuple
-    """
-    del data[0]  # Removes title cell
-    for index, age in enumerate(data, 2):  # Row 0 doesn't exist and row 1 is headings
-        a, b = age
-        if int(value) >= int(a) and int(value) <= int(b):
-            return index
-
-
-def get_data_row(sheet, index, value):
-    """
-    Retrieves the correct row of data from the google sheet, looks up
-    watts value and returns the column number for the PREVIOUS column
-    """
-    watts_row = sheet.row_values(index)
-    watts_row = watts_row[2:]  # Removes min_age and max_age values
-    for r_index, watts in enumerate(watts_row, 3):  # Cols 1&2 are age values
-        if int(value) < int(sheet.cell(index, 3).value):
-            return 3
-        elif int(value) < int(watts):
-            return r_index - 1  # Remove 1 because end point is the first category NOT achieved
-        elif int(value) >= int(sheet.cell(index, 8).value):
-            return 8
-
-def get_category(sheet, value):
-    """
-    Uses previously generated column index to retrieve the correct
-    ranking category and display it to the user
-    """
-    category = sheet.cell(1, int(value)).value
-    typed(f"Your performance category is {category.title()}!\n")
-    return category
-
-
-def get_category_description():
-    """
-    Retrieves all values from the categories sheet and converts 
-    them to a dictionary.
-    """    
-    keys = SHEET.worksheet("categories").col_values(1)
-    values = SHEET.worksheet("categories").col_values(2)
-    categories = {key: value for key, value in zip(keys, values)}
-    return categories
-
-def program_exit():
-    """
-    Asks user if they would like to exit or restart
-    Exit commands triggers exit, restart triggers main()
-    """
-    typed("Do you wish to exit now or restart?\n")
-    exit_command = input("Press 'x' to exit, press any other key to restart: ") # Add a newline character before deployment
-    if exit_command.lower() == "x":
-        typed("Exiting Row Assist, Goodbye\n")
-        print("\n")
-        return True
-                     
+def category_data(age, gender, distance, watts):
+    sheet = SHEET.worksheet(f"{gender}_{distance}") 
+    age_range = ref_data.ages_tuple(sheet.col_values(1), sheet.col_values(2))
+    row_index = ref_data.age_index(age_range, age)
+    col_index = ref_data.get_data_row(sheet, row_index, watts)
+    category_data = ref_data.get_category(sheet, col_index)
+    return category_data
 
 def main():
     """
@@ -103,15 +43,9 @@ def main():
     row_time = inputs.get_row_time()
     split_time = calc.calculate_splits(row_time, distance)
     watts = calc.calculate_watts(split_time)
-    # The following vars should be moved 
-    sheet = SHEET.worksheet(f"{gender}_{distance}") 
-    min_age = sheet.col_values(1)
-    max_age = sheet.col_values(2)
-    age_range = ages_tuple(min_age, max_age)
-    row_index = age_index(age_range, age)
-    col_index = get_data_row(sheet, row_index, watts)
-    category = get_category(sheet, col_index)
-    category_description = get_category_description()
+    category = category_data(age, gender, distance, watts)
+    category_sheet = SHEET.worksheet("categories")
+    category_description = ref_data.get_category_description(category_sheet)
     typed(f"You are: {category_description[category]}\n")
     print("\n")
 
