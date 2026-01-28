@@ -1,17 +1,16 @@
-⚠️ --- Deployed site link --- ⚠️
-# [Row Assist](heroku link)
+# [row_assist](https://row-assist-0ee155171c88.herokuapp.com)
 
 Developer: Geraldine Morey ([geraldine-mor](https://www.github.com/geraldine-mor))
 
-⚠️ --- Create or generate correct badges once deployed --- ⚠️ <br>
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/t/geraldine-mor/love_sandwiches)](https://www.github.com/geraldine-mor/love_sandwiches/commits/main)
-[![GitHub last commit](https://img.shields.io/github/last-commit/geraldine-mor/love_sandwiches)](https://www.github.com/geraldine-mor/love_sandwiches/commits/main)
-[![GitHub repo size](https://img.shields.io/github/repo-size/geraldine-mor/love_sandwiches)](https://www.github.com/geraldine-mor/love_sandwiches)
-[![badge](https://img.shields.io/badge/deployment-Heroku-purple)](https://love-sandwiches-gm-c489adc8c525.herokuapp.com)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/t/geraldine-mor/row_assist)](https://www.github.com/geraldine-mor/row_assist/commits/main)
+[![GitHub last commit](https://img.shields.io/github/last-commit/geraldine-mor/row_assist)](https://www.github.com/geraldine-mor/row_assist/commits/main)
+[![GitHub repo size](https://img.shields.io/github/repo-size/geraldine-mor/row_assist)](https://www.github.com/geraldine-mor/row_assist)
+[![badge](https://img.shields.io/badge/deployment-Heroku-purple)](https://row-assist-0ee155171c88.herokuapp.com)
 
 Row Assist is a command-line indoor rowing assistant that takes the user's indoor rowing performance data and calculates the watts generated and average /500m split time, compares the user's performance to a reference table and returns a ranking. The application runs as a single-use session. The user enters their personal attributes (ie age, gender) and their latest rowing test data and receives feedback. This model reflects real-world rowing practice where rowing tests occur as distinct events. This also allows the feedback to remain visible on screen until the program is exited or run again. Running the program implies either a new test has been completed or another uses wishes to evaluate their data. 
 
-⚠️ --- Screenshot / amiresponsive --- ⚠️
+⚠️ --- Screenshot of amiresponsive if illustrations used--- ⚠️<br>
+source: [row_assist amiresponsive](https://ui.dev/amiresponsive?url=https://row-assist-0ee155171c88.herokuapp.com)
 
 ⚠️ --- Instructions - How to use the app --- ⚠️
 
@@ -76,7 +75,7 @@ Row Assist is a command-line indoor rowing assistant that takes the user's indoo
 
 #### 5. Surface
 
-⚠️ --- If colour text is used, keep otherwise delete --- ⚠️
+⚠️ --- If colour text is used, keep otherwise delete --- ⚠️<br>
 **Visual Design Elements**
 - **[Colours](#colour-scheme)** (see below)
 
