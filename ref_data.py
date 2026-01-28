@@ -16,53 +16,47 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("row_assist")
 
 
-def ages_tuple(min, max):
+def get_row_number(col1, col2, age):
     """
-    Creates a list of tuples (min, max)
-    """
-    reference_ages = [(x, y) for x, y in zip(min, max)]
-
-    return reference_ages
-
-
-def age_index(data, value):
-    """
+    Creates a list of tuples from the 2 age columns
     Loops through the list comparing each tuple to the provided age
     and returns the list index of the correct range tuple
     """
-    del data[0]  # Removes title cell
-    for index, age in enumerate(data, 2):
+    age_range = [(x, y) for x, y in zip(col1, col2)]
+    del age_range[0]  # Removes title cell
+    for row_index, age_tuple in enumerate(age_range, 2):
         # Row 0 doesn't exist and row 1 is headings
-        a, b = age
-        if int(value) >= int(a) and int(value) <= int(b):
-            return index
+        min_age, max_age = age_tuple
+        if int(age) >= int(min_age) and int(age) <= int(max_age):
+            return row_index
 
 
-def get_data_row(sheet, index, value):
+def get_col_number(sheet, index, watts):
     """
-    Retrieves the correct row of data from the google sheet, looks up
-    watts value and returns the column number for the PREVIOUS column
+    Retrieves the reference row of data from the google sheet, loops
+    through the watts values to find the right one and returns
+    the column number for the PREVIOUS column
     """
     watts_row = sheet.row_values(index)
     watts_row = watts_row[2:]  # Removes min_age and max_age values
-    for r_index, watts in enumerate(watts_row, 3):  # Cols 1&2 are age values
-        if int(value) < int(sheet.cell(index, 3).value):
+    for col_index, ref_watts in enumerate(watts_row, 3):
+        # Cols 1&2 are age values so enumerate starts at 3
+        if int(watts) < int(sheet.cell(index, 3).value):
             return 3
-        elif int(value) < int(watts):
-            return r_index - 1
+        elif int(watts) < int(ref_watts):
+            return col_index - 1
         # Remove 1 because end point is the first category NOT achieved
-        elif int(value) >= int(sheet.cell(index, 8).value):
+        elif int(watts) >= int(sheet.cell(index, 8).value):
             return 8
 
 
-def get_category(sheet, value):
+def get_category(sheet, index):
     """
-    Uses previously generated column index to retrieve the correct
-    ranking category and display it to the user
+    Uses column index to retrieve the correct category
     """
-    category = sheet.cell(1, int(value)).value
-    typed(f"Your performance category is {category.title()}!\n")
-    return category
+    user_category = sheet.cell(1, int(index)).value
+
+    return user_category
 
 
 def get_category_description():
@@ -76,10 +70,13 @@ def get_category_description():
     return categories
 
 
-def category_data(age, gender, distance, watts):
+def lookup_category(age, gender, distance, watts):
+    """
+    Determines user's performance category by looking up their age
+    and watts against the relevant reference sheet
+    """
     sheet = SHEET.worksheet(f"{gender}_{distance}")
-    age_range = ages_tuple(sheet.col_values(1), sheet.col_values(2))
-    row_index = age_index(age_range, age)
-    col_index = get_data_row(sheet, row_index, watts)
-    category_data = get_category(sheet, col_index)
-    return category_data
+    row_index = get_row_number(sheet.col_values(1), sheet.col_values(2), age)
+    col_index = get_col_number(sheet, row_index, watts)
+    category = get_category(sheet, col_index)
+    return category

@@ -28,8 +28,9 @@ def main():
     row_time = inputs.get_row_time()
     split_time = calc.calculate_splits(row_time, distance)
     watts = calc.calculate_watts(split_time)
-    category = ref_data.category_data(age, gender, distance, watts)
+    category = ref_data.lookup_category(age, gender, distance, watts)
     category_description = ref_data.get_category_description()
+    typed(f"Your performance category is {category.title()}!\n")
     typed(f"You are: {category_description[category]}\n")
     print("\n")
 
