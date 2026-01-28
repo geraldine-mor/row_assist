@@ -39,7 +39,7 @@ def get_row_time():
     """
     utils.typed(
         "Please enter your latest 2k test time. Minutes, seconds, tenths\n"
-    )
+        )
     minutes = get_time("minutes")
     seconds = get_time("seconds")
     tenths = get_tenths()

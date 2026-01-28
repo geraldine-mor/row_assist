@@ -1,21 +1,22 @@
-# import gspread
-# from google.oauth2.service_account import Credentials
+import gspread
+from google.oauth2.service_account import Credentials
 from utils import typed
 
-# SCOPE = [
-#     "https://www.googleapis.com/auth/spreadsheets",
-#     "https://www.googleapis.com/auth/drive.file",
-#     "https://www.googleapis.com/auth/drive"
-# ]
 
-# CREDS = Credentials.from_service_account_file("creds.json")
-# SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-# GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive"
+]
 
-# SHEET = GSPREAD_CLIENT.open("row_assist")
+CREDS = Credentials.from_service_account_file("creds.json")
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+
+SHEET = GSPREAD_CLIENT.open("row_assist")
 
 
-def ages_tuple(min, max):  # Move this into age_index()
+def ages_tuple(min, max):
     """
     Creates a list of tuples (min, max)
     """
@@ -30,7 +31,8 @@ def age_index(data, value):
     and returns the list index of the correct range tuple
     """
     del data[0]  # Removes title cell
-    for index, age in enumerate(data, 2):  # Row 0 doesn't exist and row 1 is headings
+    for index, age in enumerate(data, 2):
+        # Row 0 doesn't exist and row 1 is headings
         a, b = age
         if int(value) >= int(a) and int(value) <= int(b):
             return index
@@ -47,9 +49,11 @@ def get_data_row(sheet, index, value):
         if int(value) < int(sheet.cell(index, 3).value):
             return 3
         elif int(value) < int(watts):
-            return r_index - 1  # Remove 1 because end point is the first category NOT achieved
+            return r_index - 1
+        # Remove 1 because end point is the first category NOT achieved
         elif int(value) >= int(sheet.cell(index, 8).value):
             return 8
+
 
 def get_category(sheet, value):
     """
@@ -61,13 +65,21 @@ def get_category(sheet, value):
     return category
 
 
-def get_category_description(data):
+def get_category_description():
     """
-    Retrieves all values from the categories sheet and converts 
+    Retrieves all values from the categories sheet and converts
     them to a dictionary.
-    """    
-    keys = data.col_values(1)
-    values = data.col_values(2)
+    """
+    keys = SHEET.worksheet("categories").col_values(1)
+    values = SHEET.worksheet("categories").col_values(2)
     categories = {key: value for key, value in zip(keys, values)}
     return categories
 
+
+def category_data(age, gender, distance, watts):
+    sheet = SHEET.worksheet(f"{gender}_{distance}")
+    age_range = ages_tuple(sheet.col_values(1), sheet.col_values(2))
+    row_index = age_index(age_range, age)
+    col_index = get_data_row(sheet, row_index, watts)
+    category_data = get_category(sheet, col_index)
+    return category_data
