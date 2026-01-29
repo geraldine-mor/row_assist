@@ -65,8 +65,10 @@ def get_category_description():
     them to a dictionary.
     """
     keys = SHEET.worksheet("categories").col_values(1)
-    values = SHEET.worksheet("categories").col_values(2)
-    categories = {key: value for key, value in zip(keys, values)}
+    col2 = SHEET.worksheet("categories").col_values(2)
+    col3 = SHEET.worksheet("categories").col_values(3)
+    col4 = SHEET.worksheet("categories").col_values(4)
+    categories = {key: [a, b, c] for key, a, b, c in zip(keys, col2, col3, col4)}
     return categories
 
 
@@ -80,3 +82,4 @@ def lookup_category(age, gender, distance, watts):
     col_index = get_col_number(sheet, row_index, watts)
     category = get_category(sheet, col_index)
     return category
+

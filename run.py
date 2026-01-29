@@ -31,7 +31,7 @@ def main():
     category = ref_data.lookup_category(age, gender, distance, watts)
     category_description = ref_data.get_category_description()
     typed(f"Your performance category is {category.title()}!\n")
-    typed(f"You are: {category_description[category]}\n")
+    typed(f"You are: {category_description[category][0]}\n{category_description[category][1]}\n{category_description[category][2]}")
     print("\n")
 
 
