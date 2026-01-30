@@ -161,20 +161,14 @@ Source: [Mermaid Flowchart for Row Assist](https://mermaid.ai/app/projects/212e9
 
 ### Future Features
 
-⚠️ INSTRUCTIONS ⚠️
-
-Do you have additional ideas that you'd like to include on your project in the future? Fantastic, list them here! It's always great to have plans for future improvements. Consider adding any helpful links or notes to help remind you in the future, if you revisit the project in a couple years.
-
-A few examples are listed below to align with possible ways to improve on the sample walkthrough project, to give you some inspiration.
-
-⚠️ --- END ---⚠️
-
-- **User Authentication and Role Management**: Implement a login system with roles (e.g., admin, employee) to restrict data access based on user roles.
-- **Data Visualization**: Add charts and graphs to visually represent sales trends, stock levels, and surplus/waste over time.
-- **Real-time Data Sync**: Integrate real-time syncing of sales and stock data across multiple devices to support live updates.
-- **Automated Restocking Alerts**: Notify users when stock levels fall below a certain threshold, prompting restock orders.
-- **Predictive Analytics**: Use historical sales data to predict future demand, helping to optimize stock levels and minimize waste.
-- **Multilingual Support**: Add support for multiple languages to make the app more accessible to a global audience.
+- **Basic History Storage**: Create a way to store the user's row time and access
+- **Performance progression comparison**: Provide user feedback based on past performances  
+- **Data Visualization**: Add charts and graphs to visually represent performance trends.
+- **Add Multiple Distance Options**: Allow the user to input the row distance instead of only 2000m.
+- **Add User Weight Category**: Allow user to specify weight category for fairer comparisons.
+- **User Profile Creation**: Allow users to create a profile to store their age, gender and weightclass (if applicable) as well as their row performance history.
+- **Profile Access**: Allow users to access and update their profiles.
+- ⚠️-- Continue from here, predictive analytics and languages could've stayed so put back in --⚠️
 - **Mobile App Integration**: Develop a mobile version of the app for easier data input and stock management on the go.
 - **Reporting and Exporting**: Generate and export detailed reports in PDF or CSV format for deeper analysis of sales, surplus, and stock data.
 - **Inventory Management**: Include functionality to track supplier information, order inventory, and manage costs directly within the app.
