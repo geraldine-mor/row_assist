@@ -61,7 +61,7 @@ def get_time(string):
     """
     while True:
         user_time = input(f"{string.capitalize()}: ")
-        if validate.validate_time(user_time):
+        if validate.validate_time(user_time, string):
             return user_time
 
 

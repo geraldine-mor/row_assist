@@ -150,12 +150,14 @@ Source: [Mermaid Flowchart for Row Assist](https://mermaid.ai/app/projects/212e9
 
 | Feature | Notes | Screenshot |
 | --- | --- | --- |
-| Greeting | The program greets the user and provides instruction about how to use the app. | ![screenshot of greeting and instructions](documentation/features/greeting.png) |
-| API Update | Sales, surplus, and stock data are updated in the relevant Google Sheets worksheet using gspread functionality. | ![screenshot](documentation/features/api-update.png) |
-| Surplus Calculation | Calculates surplus by comparing the latest stock and sales data to identify potential waste or shortages. | ![screenshot](documentation/features/surplus-calculation.png) |
-| Last 5 Sales Entries | Retrieves the last five sales entries from the "sales" worksheet for calculating stock averages. | ![screenshot](documentation/features/latest-entries.png) |
-| Stock Calculation | Computes stock based on the last 5 sales entries, adding 10% to the average to ensure adequate future stock. | ![screenshot](documentation/features/stock-calculation.png) |
-| Sales Data Automation | Automates the entire process of retrieving, validating, and updating sales, surplus, and stock data in Google Sheets. | ![screenshot](documentation/features/sales-data.png) |
+| Greeting | Greets the user and provides instruction about how to use the app. | ![screenshot of greeting](documentation/features/greeting.png) |
+| Data Collection | Requests the user's age, gender and latest 2k test time. | ![screenshot of user inputs](documentation/features/user_inputs.png) |
+| Input Validation <br>⚠️ - Replace screenshot with fixed version from deployed site - ⚠️| Validates that the age provided is in the range 10-90, that the gender provided is either m or f and that the minutes and seconds are in the range 0-59 and the tenths 0-9. | ![screenshot of validation messages](documentation/features/input_validation.png) |
+| Time Transformation | Time inputs are _collated_ into the format mm:ss.d for user display and _parsed_ to total seconds for calculations. | ![screenshot of formatted time](documentation/features/time_format.png) |
+| Split-time Calculation | Calculates the split-time from the data provided and displays it to the user. | ![screenshot of split-time](documentation/features/split_time.png) |
+| Watts Calculation | Calculates watts from from the generated split-time value and displays it to the user. | ![screenshot of watts](documentation/features/watts.png) |
+| Performance Ranking | Retrieves the performance category and correspoding description from the relevant Google Sheets worksheet based on age, gender and watts value and displays them to the user. | ![screenshot of category and description](documentation/features/category.png) |
+| Program Exit / Restart | Asks the user to exit or restart. Exit closes the program safely and restart begins the program again with a clear terminal. | ![screenshot of program exit request](documentation/features/program_exit.png) |
 
 ### Future Features
 

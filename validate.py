@@ -38,7 +38,7 @@ def validate_gender(gender):
     return True
 
 
-def validate_time(time):
+def validate_time(time, string):
     """
     Inside the try, converts time to integer
     Raises ValueError if the string can't be converted or if minutes
@@ -48,7 +48,7 @@ def validate_time(time):
         if int(time) < 0 or int(time) > 59:
             raise ValueError
     except ValueError:
-        utils.typed(f"Invalid entry, please enter a {time}s value between 0 and 59")
+        utils.typed(f"Invalid entry, please enter a {string} value between 0 and 59")
         print("\n")
         return False
 
