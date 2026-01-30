@@ -12,7 +12,21 @@ Row Assist is a command-line indoor rowing assistant that takes the user's indoo
 ⚠️ --- Screenshot of amiresponsive if illustrations used--- ⚠️<br>
 source: [row_assist amiresponsive](https://ui.dev/amiresponsive?url=https://row-assist-0ee155171c88.herokuapp.com)
 
-⚠️ --- Instructions - How to use the app --- ⚠️
+## Instructions
+
+⚠️ --- Currently set for the MVP and will need updating as features added --- ⚠️
+
+**How to use Row Assist**
+
+You will be greeted and asked to enter your age - _please enter a number between 10 and 90_<br>
+
+You will then be asked to enter your gender - _please enter either m or f_<br>
+
+You will finally be asked to enter the time of your last 2k test. _This is broken in to 3 inputs, minutes, seconds and tenths to ensure correct input format and is similar to web platforms that have separate input boxes for the different parts of the time._
+
+With this information, the program calculates the 2 standard rowing metrics of split time and watts, and reports these back to you.
+
+The program also delivers a performance category or ranking and exlpains how this category compares to other rowers.
 
 ## UX
 
@@ -41,6 +55,8 @@ source: [row_assist amiresponsive](https://ui.dev/amiresponsive?url=https://row-
 
 **[Features](#features)** (see below)
 
+⚠️ --- Currently set for the MVP and will need updating as features added --- ⚠️
+
 **Content Requirements**
 - Input content - user attributes (age, gender) and row performance data (time)
 - Reference content - Google sheet containing categorised, searchable data sorted by gender, age range, watt threshold and performance category
@@ -63,6 +79,7 @@ source: [row_assist amiresponsive](https://ui.dev/amiresponsive?url=https://row-
   - User demography and row performance data input as the primary focus for ease of use
 
 ⚠️ --- Currently set for the MVP and will need updating as features added --- ⚠️
+
 **User Flow**
 1. User opens the app → user views greeting and instructions
 2. User enters data as prompted → system checks data for type and validity → generates error message if invalid, proceeds if valid
@@ -83,9 +100,28 @@ source: [row_assist amiresponsive](https://ui.dev/amiresponsive?url=https://row-
 
 To follow best practice, a flowchart was created to showcase the progression of the Python app.
 I used [draw.io](https://www.drawio.com/) to design my app flowchart.
-I included potential future features to map out how they would fit with the app. 
+I used [chatGPT](http://www.chatgpt.com) and [Mermaid Chart](http://www.mermaid.ai) to convert the flowchart to an interactive mermaid version.
 
-![screenshot](documentation/flowchart.png)
+```Mermaid
+flowchart TD
+    A([Start Program])
+    A --> B["Greet user and<br/>provide instruction"]
+
+    B --> C["Request data from user: age, gender"]
+    C --> D["Request row data: duration (MM:SS.s), distance"]
+
+    D --> E{Is data valid?}
+    E -- No --> D
+    E -- Yes --> F["Parse data into correct format"]
+
+    F --> G["Calculate watts and 500m splits"]
+    G --> H["Lookup category"]
+    H --> I["Provide user feedback"]
+
+    I --> J(["End / Restart Program"])
+```
+
+Source: [Mermaid Flowchart for Row Assist](https://mermaid.ai/app/projects/212e9a6a-2b8a-4b72-be94-8a77217d6f55/diagrams/ccf39e03-b715-4b69-a013-1cd69f5dea7f/version/v0.1/edit)
 
 ## User Stories
 
@@ -108,19 +144,13 @@ I included potential future features to map out how they would fit with the app.
 
 ## Features
 
-⚠️ INSTRUCTIONS ⚠️
-
-In this section, you should go over the different parts of your project, and describe each feature. You should explain what value each of the features provides for the user, focusing on your target audience, what they want to achieve, and how your project can help them achieve these things.
-
-**IMPORTANT**: Remember to always include a screenshot of each individual feature!
-
-⚠️ --- END --- ⚠️
+⚠️ --- Currently set for the MVP and will need updating as features added --- ⚠️
 
 ### Existing Features
 
 | Feature | Notes | Screenshot |
 | --- | --- | --- |
-| Data Input Validation | The program validates user input by ensuring the data is exactly six comma-separated numbers before continuing. | ![screenshot](documentation/features/data-validation.png) |
+| Greeting | The program greets the user and provides instruction about how to use the app. | ![screenshot of greeting and instructions](documentation/features/greeting.png) |
 | API Update | Sales, surplus, and stock data are updated in the relevant Google Sheets worksheet using gspread functionality. | ![screenshot](documentation/features/api-update.png) |
 | Surplus Calculation | Calculates surplus by comparing the latest stock and sales data to identify potential waste or shortages. | ![screenshot](documentation/features/surplus-calculation.png) |
 | Last 5 Sales Entries | Retrieves the last five sales entries from the "sales" worksheet for calculating stock averages. | ![screenshot](documentation/features/latest-entries.png) |
@@ -188,34 +218,6 @@ To follow best practice, a flowchart was created for the app's logic, and mapped
 
 ![screenshot](documentation/flowchart.png)
 
-⚠️ RECOMMENDED ⚠️
-
-Looking for an interactive version of your flowchart? Consider using a [`Mermaid flowchart`](https://mermaid.live). To simplify the process, you can ask ChatGPT (or similar) the following prompt:
-
-> ChatGPT Prompt:  
-> "Generate a Markdown syntax Mermaid flowchart using a screenshot of my existing flowchart"  
-> [paste-your-flowchart-screenshot-into-ChatGPT]
-
-The "Love Sandwiches" sample flowchart in Markdown syntax using Mermaid can be seen below as an example.
-
-**NOTE**: A Markdown Preview tool doesn't show the interactive flowchart, you must first commit/push the code to your GitHub repository in order to see it live in action.
-
-```mermaid
-flowchart TD
-    A[Start] --> B[Get Sales Data]
-    B --> C{Is Data Valid?}
-    C -->|Yes| D[Convert Data to Integers]
-    C -->|No| B
-    D --> E[Update Sales Worksheet]
-    E --> F[Calculate Surplus Data]
-    F --> G[Update Surplus Worksheet]
-    G --> H[Get Last 5 Sales Entries]
-    H --> I[Calculate Stock Data]
-    I --> J[Update Stock Worksheet]
-    J --> K[End]
-```
-
-Source: [Mermaid Flowchart for Love Sandwiches](https://mermaid.live/edit#pako:eNpdkctugzAQRX_F8jpZdsOiVXkkIa26SR9qgcUIJoAwNjLjVlXIv5cMJErjlWfu8b0z8kHmpkDpyb0yP3kFlsRrmGoxnsdkR2OdieXyXvjJGknsQGEvQiDIJsZnMTjEU1e8g6qLh-MkBidx-MR-EGESGP2NoztjZESsCUu0fXbNvphB-FMjZOcoeesKIJyTP4xt-gqR5lcRQ6skAJU7xZyznXL_ZlwxtL44zcSt15qxDe_5DD2Juzk00mRrPA-6YSy-jiSTN9eBMSPbSyDrt3Fbhp6SSBeZXMgWbQt1MX7E4aSnkipsMZXeeC3ANqlM9XHkwJHZ_epcemQdLqTjjLCG0kJ7bnagv4y5lNa4spLeHlSPxz-Rd5za)
 
 ⚠️ --- END --- ⚠️
 

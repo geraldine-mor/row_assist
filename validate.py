@@ -5,17 +5,17 @@ def validate_age(age):
     """
     Inside the try, converts age to an integer.
     Raises ValueError if string cannot be converted into int
-    Raises TypeError if age falls outside the range 10-100
+    Raises TypeError if age falls outside the range 10-90
     """
     try:
-        if int(age) < 10 or int(age) > 100:
+        if int(age) < 10 or int(age) > 90:
             raise TypeError
     except ValueError:
-        utils.typed("Invalid age, please enter a number between 10 and 100")
+        utils.typed("Invalid age, please enter a number between 10 and 90")
         print("\n")
         return False
     except TypeError:
-        utils.typed("I'm sorry only ages between 10 and 100 can be accepted")
+        utils.typed("I'm sorry only ages between 10 and 90 can be accepted")
         print("\n")
         return False
 
@@ -48,7 +48,7 @@ def validate_time(time):
         if int(time) < 0 or int(time) > 59:
             raise ValueError
     except ValueError:
-        utils.typed(f"Invalid entry, please enter a value between 0 and 59")
+        utils.typed(f"Invalid entry, please enter a {time}s value between 0 and 59")
         print("\n")
         return False
 

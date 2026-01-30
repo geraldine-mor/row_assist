@@ -26,8 +26,12 @@ def main():
     distance = 2000
     # Added to make sure functions will run correctly when more distances added
     row_time = inputs.get_row_time()
-    split_time = calc.calculate_splits(row_time, distance)
+    split_time, display_split = calc.calculate_splits(row_time, distance)
+    typed(f"Your split time is: {display_split}\n")
     watts = calc.calculate_watts(split_time)
+    typed(f"Your watts generated are: {watts}")
+    print("\n")
+    typed("Retrieving your ranking, please wait...\n")
     category = ref_data.lookup_category(age, gender, distance, watts)
     category_description = ref_data.get_category_description()
     typed(f"Your performance category is {category.title()}!\n")
