@@ -102,23 +102,23 @@ To follow best practice, a flowchart was created to showcase the progression of 
 I used [draw.io](https://www.drawio.com/) to design my app flowchart.
 I used [chatGPT](http://www.chatgpt.com) and [Mermaid Chart](http://www.mermaid.ai) to convert the flowchart to an interactive mermaid version.
 
-```Mermaid
+```mermaid
 flowchart TD
-    A[Start Program]
-    A --> B[Greet user and provide instruction]
+    A([Start Program])
+    A --> B["Greet user and<br/>provide instruction"]
 
-    B --> C[Request data from user: age, gender]
-    C --> D[Request row data: duration (MM:SS.s), distance]
+    B --> C["Request data from user: age, gender"]
+    C --> D["Request row data: duration (MM:SS.s), distance"]
 
     D --> E{Is data valid?}
     E -- No --> D
-    E -- Yes --> F[Parse time data into seconds]
+    E -- Yes --> F["Parse data into correct format"]
 
-    F --> G[Calculate watts and 500m splits]
-    G --> H[Lookup category]
-    H --> I[Provide user feedback]
+    F --> G["Calculate watts and 500m splits"]
+    G --> H["Lookup category"]
+    H --> I["Provide user feedback"]
 
-    I --> J([End / Restart Program])
+    I --> J(["End / Restart Program"])
 ```
 
 Source: [Mermaid Flowchart for Row Assist](https://mermaid.ai/app/projects/212e9a6a-2b8a-4b72-be94-8a77217d6f55/diagrams/ccf39e03-b715-4b69-a013-1cd69f5dea7f/version/v0.1/edit)
