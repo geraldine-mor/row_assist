@@ -104,21 +104,21 @@ I used [chatGPT](http://www.chatgpt.com) and [Mermaid Chart](http://www.mermaid.
 
 ```Mermaid
 flowchart TD
-    A([Start Program])
-    A --> B["Greet user and<br/>provide instruction"]
+    A[Start Program]
+    A --> B[Greet user and provide instruction]
 
-    B --> C["Request data from user: age, gender"]
-    C --> D["Request row data: duration (MM:SS.s), distance"]
+    B --> C[Request data from user: age, gender]
+    C --> D[Request row data: duration (MM:SS.s), distance]
 
     D --> E{Is data valid?}
     E -- No --> D
-    E -- Yes --> F["Parse data into correct format"]
+    E -- Yes --> F[Parse time data into seconds]
 
-    F --> G["Calculate watts and 500m splits"]
-    G --> H["Lookup category"]
-    H --> I["Provide user feedback"]
+    F --> G[Calculate watts and 500m splits]
+    G --> H[Lookup category]
+    H --> I[Provide user feedback]
 
-    I --> J(["End / Restart Program"])
+    I --> J([End / Restart Program])
 ```
 
 Source: [Mermaid Flowchart for Row Assist](https://mermaid.ai/app/projects/212e9a6a-2b8a-4b72-be94-8a77217d6f55/diagrams/ccf39e03-b715-4b69-a013-1cd69f5dea7f/version/v0.1/edit)
@@ -152,7 +152,7 @@ Source: [Mermaid Flowchart for Row Assist](https://mermaid.ai/app/projects/212e9
 | --- | --- | --- |
 | Greeting | Greets the user and provides instruction about how to use the app. | ![screenshot of greeting](documentation/features/greeting.png) |
 | Data Collection | Requests the user's age, gender and latest 2k test time. | ![screenshot of user inputs](documentation/features/user_inputs.png) |
-| Input Validation <br>⚠️ - Replace screenshot with fixed version from deployed site - ⚠️| Validates that the age provided is in the range 10-90, that the gender provided is either m or f and that the minutes and seconds are in the range 0-59 and the tenths 0-9. | ![screenshot of validation messages](documentation/features/input_validation.png) |
+| Input Validation | Validates that the age provided is in the range 10-90, that the gender provided is either m or f and that the minutes and seconds are in the range 0-59 and the tenths 0-9. | ![screenshot of validation messages](documentation/features/input_validation.png) |
 | Time Transformation | Time inputs are _collated_ into the format mm:ss.d for user display and _parsed_ to total seconds for calculations. | ![screenshot of formatted time](documentation/features/time_format.png) |
 | Split-time Calculation | Calculates the split-time from the data provided and displays it to the user. | ![screenshot of split-time](documentation/features/split_time.png) |
 | Watts Calculation | Calculates watts from from the generated split-time value and displays it to the user. | ![screenshot of watts](documentation/features/watts.png) |
@@ -161,61 +161,47 @@ Source: [Mermaid Flowchart for Row Assist](https://mermaid.ai/app/projects/212e9
 
 ### Future Features
 
-- **Basic History Storage**: Create a way to store the user's row time and access
-- **Performance progression comparison**: Provide user feedback based on past performances  
-- **Data Visualization**: Add charts and graphs to visually represent performance trends.
+- **Basic History Storage**: Store the user's row times with timestamps to enable performance tracking over time.
+- **Performance progression comparison**: Provide user feedback based on past performances.  
+- **Data Visualisation**: Add charts and graphs to visually represent performance trends.
 - **Add Multiple Distance Options**: Allow the user to input the row distance instead of only 2000m.
-- **Add User Weight Category**: Allow user to specify weight category for fairer comparisons.
-- **User Profile Creation**: Allow users to create a profile to store their age, gender and weightclass (if applicable) as well as their row performance history.
-- **Profile Access**: Allow users to access and update their profiles.
-- ⚠️-- Continue from here, predictive analytics and languages could've stayed so put back in --⚠️
-- **Mobile App Integration**: Develop a mobile version of the app for easier data input and stock management on the go.
-- **Reporting and Exporting**: Generate and export detailed reports in PDF or CSV format for deeper analysis of sales, surplus, and stock data.
-- **Inventory Management**: Include functionality to track supplier information, order inventory, and manage costs directly within the app.
-- **Customer Feedback Integration**: Allow customers to leave feedback on sold items, giving insight into sales performance and customer satisfaction.
-- **Customizable Dashboards**: Provide users with the ability to customize their dashboard, selecting which data points and metrics they want to monitor.
-- **Historical Data Comparison**: Implement functionality to compare current sales and stock data with data from the same period in previous years.
-- **Seasonal Adjustment Recommendations**: Analyze sales patterns and suggest stock adjustments for holidays or other seasonal trends.
-- **API Integration**: Provide an API for integrating with other third-party services, such as point-of-sale systems or accounting software.
+- **Add User Weight Category**: Allow user to specify weight category (HW or LW) for fairer comparisons.
+- **User Profile Management**: Allow users to create, access and update profiles containing demographic information and performance history.
+- **Dashboard**: Provide users with user-friendly dashboard to view results and feedback.
+- **User login types and roles**: Implement different user types and assign roles to facilitate coach oversight of multiple athletes.
+- **Dashboard Options**: Provide setup options for single user or coach/club group management.
+- **Predictive Analytics**: Use historical performance data to predict future results giving the athletes personalised training targets.
+- **Multilingual Support**: Add support for multiple languages to make the app more accessible to a global audience.
+- **Mobile App Integration**: Develop a mobile version of the app for rowing feedback in any gym and on the go.
+- **Reporting and Exporting**: Generate and export detailed reports in PDF or CSV format for deeper analysis of performance metrics over time.
+- **API Integration**: Provide an API for integrating with other third-party services, such as concept2's ErgData or fitness trackers and heart rate monitors.
 
 ## Tools & Technologies
 
 | Tool / Tech | Use |
 | --- | --- |
 | [![badge](https://img.shields.io/badge/Markdown_Builder-grey?logo=markdown&logoColor=000000)](https://markdown.2bn.dev) | Generate README and TESTING templates. |
-| [![badge](https://img.shields.io/badge/Git-grey?logo=git&logoColor=F05032)](https://git-scm.com) | Version control. (`git add`, `git commit`, `git push`) |
+| [![badge](https://img.shields.io/badge/Git-grey?logo=git&logoColor=F05032)](https://git-scm.com) | Version control. (`git add`, `git commit`, `git push`, `git pull`) |
 | [![badge](https://img.shields.io/badge/GitHub-grey?logo=github&logoColor=181717)](https://github.com) | Secure online code storage. |
 | [![badge](https://img.shields.io/badge/VSCode-grey?logo=htmx&logoColor=007ACC)](https://code.visualstudio.com) | Local IDE for development. |
 | [![badge](https://img.shields.io/badge/Python-grey?logo=python&logoColor=3776AB)](https://www.python.org) | Back-end programming language. |
 | [![badge](https://img.shields.io/badge/Heroku-grey?logo=heroku&logoColor=430098)](https://www.heroku.com) | Hosting the deployed back-end site. |
 | [![badge](https://img.shields.io/badge/Google_Sheets-grey?logo=googlesheets&logoColor=34A853)](https://docs.google.com/spreadsheets) | Storing data from my Python app. |
-| [![badge](https://img.shields.io/badge/chatGPT-grey?logo=openai&logoColor=75A99C)](https://chat.openai.com) | Help debug, troubleshoot, and explain things. |
+| [![badge](https://img.shields.io/badge/chatGPT-grey?logo=openai&logoColor=75A99C)](https://chat.openai.com) | Help with initial planning. |
 | [![badge](https://img.shields.io/badge/draw.io-grey?logo=diagramsdotnet)](https://www.drawio.com) | Flow diagrams for mapping the app's logic. |
-| [![badge](https://img.shields.io/badge/W3Schools-grey?logo=w3schools&logoColor=04AA6D)](https://www.w3schools.com) | Tutorials/Reference Guide |
-
-
-⚠️ NOTE ⚠️
-
-Want to add more?
-
-- Tutorial: https://shields.io/badges/static-badge
-- Icons/Logos: https://simpleicons.org
-  - FYI: not all logos are available to use
-
-🛑 --- END --- 🛑
+| [![badge](https://img.shields.io/badge/W3Schools-grey?logo=w3schools&logoColor=04AA6D)](https://www.w3schools.com) | Tutorials/Reference Guide. |
+| [![badge](https://img.shields.io/badge/StackOverflow-grey?logo=stackoverflow&logoColor=F58025)](https://stackoverflow.com) | Tutorials/Reference Guide. |
+| [![badge](https://img.shields.io/badge/Claude-grey?logo=claude&logoColor=%23D97757&color=gray)](https://claude.ai) | Help debug, troubleshoot, and explain things. |
 
 ## Database Design
 
 ### Data Model
-
+⚠️ --- Add information here about the data used, storage, etc. Create new flowchart for data flow rather than logic. --- ⚠️
 #### Flowchart
 
-To follow best practice, a flowchart was created for the app's logic, and mapped out using a free version of [Lucidchart](https://www.lucidchart.com/pages/ER-diagram-symbols-and-meaning) and/or [Draw.io](https://www.draw.io). The flowchart below represents the main process of this Python program. It shows the entire cycle of the application.
+To follow best practice, a flowchart was created for the app's logic, and mapped out using [Draw.io](https://www.draw.io). The flowchart below represents the main process of this Python program. It shows the entire cycle of the application.
 
 ![screenshot](documentation/flowchart.png)
-
-
-⚠️ --- END --- ⚠️
 
 #### Classes & Functions
 
