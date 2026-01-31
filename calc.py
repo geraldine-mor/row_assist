@@ -1,5 +1,4 @@
 from math import floor
-from utils import typed
 
 
 def calculate_splits(seconds, distance):

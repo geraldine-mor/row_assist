@@ -196,20 +196,34 @@ Source: [Mermaid Flowchart for Row Assist](https://mermaid.ai/app/projects/212e9
 ## Database Design
 
 ### Data Model
-⚠️ --- Add information here about the data used, storage, etc. Create new flowchart for data flow rather than logic. --- ⚠️
-#### Flowchart
 
-To follow best practice, a flowchart was created for the app's logic, and mapped out using [Draw.io](https://www.draw.io). The flowchart below represents the main process of this Python program. It shows the entire cycle of the application.
+The Row Assist app uses Google Sheets as its data repository with a structured, scalable design to support multiple demographics and distances.
 
-![screenshot](documentation/flowchart.png)
+Reference data is organised into separate worksheets following the naming convention: `{gender}_{distance}` (currently `m_2000` and `f_2000`) but the app has been designed in a way to accommodate more sheets in future, allowing for the inclusion of alternative distances.
+
+Each reference sheet contains age range boundaries in the first 2 columns and performance category watt thresholds (columns 3-8), with category names stored as column headers.
+
+A separate worksheet titled `categories` provides detailed descriptions for each performance category. 
+
+To follow best practice, a charts were created for the app's data structure, data flow and logic. I mapped them out using [Draw.io](https://www.draw.io). 
+
+>#### Data structure diagram
+>
+>![data structure diagram](documentation/mvp_data_structure.png)
+
+>#### Data flow diagram
+>
+>![data flow diagram](documentation/data_flow.png)
+
+>#### Flowchart
+>
+>The flowchart below represents the main process of this Python program. It shows the entire cycle of the application. I included potential future features to map out how they would fit in the app.
+>
+>![screenshot](documentation/flowchart.png)
 
 #### Classes & Functions
 
-⚠️ INSTRUCTIONS ⚠️
-
-Use this space to explain your Python classes (if applicable) and functions. Examples below for inspiration, although Love Sandwiches doesn't use this example `Person` class/object.
-
-⚠️ --- END --- ⚠️
+⚠️ --- Add class if used for users, otherwise remove --- ⚠️
 
 The program uses classes as a blueprint for the project's object-oriented programming (OOP). This allows for the object to be reusable and callable where necessary.
 
@@ -225,64 +239,82 @@ class Person:
 
 The primary functions used on this application are:
 
-- `get_sales_data()`
-    - Get sales figures input from the user.
-- `validate_data()`
-    - Converts all string values into integers.
-- `update_worksheet()`
-    - Update the relevant worksheet with the data provided.
-- `calculate_surplus_data()`
-    - Compare sales with stock and calculate the surplus for each item type.
-- `get_last_5_entries_sales()`
-    - Collects columns of data from sales worksheet.
-- `calculate_stock_data()`
-    -  Calculate the average stock for each item type, adding 10%.
+- `typed()`
+    - Display text to the terminal with a typewriter effect. 
+- `get_age()`
+    - Get age input from the user.
+- `validate_age()`
+    - Check age input is an integer in the range 10-90.
+- `get_gender()`
+    - Get gender input from the user.
+- `validate_gender()`
+    - Check gender input is either m or f.
+- `get_time()`
+    - Get minutes and seconds inputs from the user.
+- `validate_time()`
+    - Check time inputs are integers in the range 0-59.     
+- `get_tenths()`
+    - Get tenths inputs from the user. 
+- `validate_tenths()`
+    - Check tenths input is an integer in the range 0-9.
+- `get_row_time()`
+    - Collect all time data, format into user readable string and parse into a total seconds float for calculations. 
+- `calculate_splits()`
+    - Calculate split time from inputs.  
+- `calculate_watts()`
+    - Calculate watts from calculated split time. 
+- `get_row_number()`
+    - Compare user's age against spreadsheet age ranges to find the correct row number.  
+- `get_col_number()`
+    - Check watts against the thresholds in the retrieved data row to find the correct column number. 
+- `get_category()`
+    - Retrieve the correct column heading from the reference worksheet.
+- `get_category_description()`
+    - Retrieve performance categories and descriptions from spreadsheet and convert to dictionary for lookup.  
+- `lookup_category()`
+    - Run all data lookup functions to determine user's performance category. 
+- `program_exit()`
+    - Ask user to choose between exit and restart.
 - `main()`
     - Run all program functions.
+- `run()`
+    - Handle the exit program loop: exit if condition is met, otherwise restart.   
 
 #### Imports
 
-⚠️ INSTRUCTIONS ⚠️
-
-Use this space to explain your Python imports and packages, with some common examples found below.
-
-⚠️ --- END --- ⚠️
+⚠️ --- Complete to mvp --- ⚠️
 
 I've used the following Python packages and external imports.
 
-- `gspread`: used with the Google Sheets API
-- `google.oauth2.service_account`: used for the Google Sheets API credentials
-- `time`: used for adding time delays
-- `os`: used for adding a `clear()` function
-- `colorama`: used for including color in the terminal
-- `random`: used to get a random choice from a list
+- `gspread`: used with the Google Sheets API.
+- `google.oauth2.service_account`: used for the Google Sheets API credentials.
+- `time`: used for adding time delays.
+- `math`: used for `floor()` function in split-time calculation.
+- `os`: used for clearing the terminal screen.
+- `colorama`: used for including colour in the terminal. ⚠️ Remove if not used ⚠️ 
 
 ## Agile Development Process
 
 ### GitHub Projects
 
-⚠️ TIP ⚠️
+[GitHub Projects](https://www.github.com/geraldine-mor/row_assist/projects) served as an Agile tool for this project. Through it, User Stories and issues/bugs were planned and tracked using a Kanban project board.
 
-Consider adding screenshots of your Projects Board(s), Issues (open and closed), and Milestone tasks.
+![screenshot](documentation/project_board.png)
 
-⚠️ --- END ---⚠️
+⚠️ --- Take screenshots when all issues closed / moved to backlog ---⚠️
 
-[GitHub Projects](https://www.github.com/geraldine-mor/love_sandwiches/projects) served as an Agile tool for this project. Through it, EPICs, User Stories, issues/bugs, and Milestone tasks were planned, then subsequently tracked on a regular basis using the Kanban project board.
+### GitHub Issues 
 
-![screenshot](documentation/gh-projects.png)
-
-### GitHub Issues
-
-[GitHub Issues](https://www.github.com/geraldine-mor/love_sandwiches/issues) served as an another Agile tool. There, I managed my User Stories and Milestone tasks, and tracked any issues/bugs.
+[GitHub Issues](https://www.github.com/geraldine-mor/row_assist/issues) served as an another Agile tool. There, I managed my User Stories and tracked any issues/bugs.
 
 | Link | Screenshot |
 | --- | --- |
-| [![GitHub issues](https://img.shields.io/github/issues-search/geraldine-mor/love_sandwiches?query=is%3Aissue%20is%3Aopen%20-label%3Abug&label=Open%20Issues&color=yellow)](https://www.github.com/geraldine-mor/love_sandwiches/issues?q=is%3Aissue%20is%3Aopen%20-label%3Abug) | ![screenshot](documentation/gh-issues-open.png) |
-| [![GitHub closed issues](https://img.shields.io/github/issues-search/geraldine-mor/love_sandwiches?query=is%3Aissue%20is%3Aclosed%20-label%3Abug&label=Closed%20Issues&color=green)](https://www.github.com/geraldine-mor/love_sandwiches/issues?q=is%3Aissue%20is%3Aclosed%20-label%3Abug) | ![screenshot](documentation/gh-issues-closed.png) |
+| [![GitHub issues](https://img.shields.io/github/issues-search/geraldine-mor/row_assist?query=is%3Aissue%20is%3Aopen%20-label%3Abug&label=Open%20Issues&color=yellow)](https://www.github.com/geraldine-mor/row_assist/issues?q=is%3Aissue%20is%3Aopen%20-label%3Abug) | ![screenshot](documentation/gh-issues-open.png) |
+| [![GitHub closed issues](https://img.shields.io/github/issues-search/geraldine-mor/row_assist?query=is%3Aissue%20is%3Aclosed%20-label%3Abug&label=Closed%20Issues&color=green)](https://www.github.com/geraldine-mor/row_assist/issues?q=is%3Aissue%20is%3Aclosed%20-label%3Abug) | ![screenshot](documentation/gh-issues-closed.png) |
 
-### MoSCoW Prioritization
+### MoSCoW Prioritization ⚠️ --- Update when complete ---⚠️
 
-I've decomposed my Epics into User Stories for prioritizing and implementing them. Using this approach, I was able to apply "MoSCoW" prioritization and labels to my User Stories within the Issues tab.
+I categorised my User Stories for prioritising and implementing them. Using this approach, I was able to apply "MoSCoW" prioritisation and labels to my User Stories within the Issues tab.
 
 - **Must Have**: guaranteed to be delivered - required to Pass the project (*max ~60% of stories*)
 - **Should Have**: adds significant value, but not vital (*~20% of stories*)
@@ -356,6 +388,9 @@ This application uses [Google Sheets](https://docs.google.com/spreadsheets) to h
 
 ⚠️ INSTRUCTIONS ⚠️
 
+Google sheets link:
+https://docs.google.com/spreadsheets/d/119Xo6s5GHh3TByg5RX9KweasEAjIXfFIDiJ2PawTKCo/edit?usp=sharing
+
 The sample Sheet below follows along with the CI Love Sandwiches lessons, so make sure to refactor to your own project requirements.
 
 ⚠️ --- END ---⚠️
@@ -409,18 +444,18 @@ If using any confidential credentials, such as `CREDS.json` or `env.py` data, th
 
 You can clone the repository by following these steps:
 
-1. Go to the [GitHub repository](https://www.github.com/geraldine-mor/love_sandwiches).
+1. Go to the [GitHub repository](https://www.github.com/geraldine-mor/row_assist).
 2. Locate and click on the green "Code" button at the very top, above the commits and files.
 3. Select whether you prefer to clone using "HTTPS", "SSH", or "GitHub CLI", and click the "copy" button to copy the URL to your clipboard.
 4. Open "Git Bash" or "Terminal".
 5. Change the current working directory to the location where you want the cloned directory.
 6. In your IDE Terminal, type the following command to clone the repository:
-	- `git clone https://www.github.com/geraldine-mor/love_sandwiches.git`
+	- `git clone https://www.github.com/geraldine-mor/row_assist.git`
 7. Press "Enter" to create your local clone.
 
 Alternatively, if using Ona (formerly Gitpod), you can click below to create your own workspace using this repository.
 
-[![Open in Ona-Gitpod](https://ona.com/run-in-ona.svg)](https://gitpod.io/#https://www.github.com/geraldine-mor/love_sandwiches)
+[![Open in Ona-Gitpod](https://ona.com/run-in-ona.svg)](https://gitpod.io/#https://www.github.com/geraldine-mor/row_assist)
 
 **Please Note**: in order to directly open the project in Ona (Gitpod), you should have the browser extension installed. A tutorial on how to do that can be found [here](https://www.gitpod.io/docs/configure/user-settings/browser-extension).
 
@@ -428,7 +463,7 @@ Alternatively, if using Ona (formerly Gitpod), you can click below to create you
 
 By forking the GitHub Repository, you make a copy of the original repository on our GitHub account to view and/or make changes without affecting the original owner's repository. You can fork this repository by using the following steps:
 
-1. Log in to GitHub and locate the [GitHub Repository](https://www.github.com/geraldine-mor/love_sandwiches).
+1. Log in to GitHub and locate the [GitHub Repository](https://www.github.com/geraldine-mor/row_assist).
 2. At the top of the Repository, just below the "Settings" button on the menu, locate and click the "Fork" Button.
 3. Once clicked, you should now have a copy of the original repository in your own GitHub account!
 
