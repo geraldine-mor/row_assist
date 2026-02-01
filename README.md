@@ -207,6 +207,24 @@ A separate worksheet titled `categories` provides detailed descriptions for each
 
 To follow best practice, a charts were created for the app's data structure, data flow and logic. I mapped them out using [Draw.io](https://www.draw.io). 
 
+#### Key Design Decisions
+
+- The use of `distance` variable and `{gender}_{distance}` sheet naming convention allows for much easier scalability should extra distances be added in future.
+- Performance thresholds are defined in whole number watts rather than split-times. While split-times may be the domain standard metric, watts are highly standardised within the domain and are far easier to compute. 
+- The raw data provided only single age figures in 5-year jumps, these were transformed into 5-year age ranges to allow for more consistent lookup and to preserve domain realism.
+- Three-part time input (minutes, seconds, tenths) was chosen to reduce user errors, simplify validation and align with domain standard inputs:
+
+*Examples of time entry formats from Concept2 platforms:*
+
+|  |  |
+| --- | --- |
+|![screenshot of concept2 logbook time entry](documentation/concept2_logbook.png) | ![screenshot of concept2 calculator time entry](documentation/concept2_calculator.png) |
+
+- The application was split into modules with new modules created for input handling, validation, calculation, utilities and spreadsheet communication. The program was separated into smaller files to improve readability, testing and future expansion.
+- Validation checks for structurally valid inputs and does not screen for realistic values. Unrealistic but valid values (such as world record performances) are permitted with appropriate user messaging. This is in part to separate the concerns of validity and realism and also to allow for multiple distance entries in the future where a valid 500m time entry would definitely be below 2km world record time.
+- 2000m was chosen as the MVP scope boundary since it is the international gold standard of indoor rowing.
+- An exit/restart loop was chosen over exiting after each run to reflect real-world cases of multi-user or repeated-use scenarios such as rowing clubs or shared terminals. 
+
 >#### Data structure diagram
 >
 >![data structure diagram](documentation/mvp_data_structure.png)
@@ -386,22 +404,19 @@ The Python terminal window should now be connected and deployed to Heroku!
 
 This application uses [Google Sheets](https://docs.google.com/spreadsheets) to handle a "makeshift" database on the live site.
 
-⚠️ INSTRUCTIONS ⚠️
+To run your own version of this application, you will need to create your own Google Sheet. Please access the reference data from [this Google Sheet](https://docs.google.com/spreadsheets/d/119Xo6s5GHh3TByg5RX9KweasEAjIXfFIDiJ2PawTKCo/edit?usp=sharing) or the screenshots below:
 
-Google sheets link:
-https://docs.google.com/spreadsheets/d/119Xo6s5GHh3TByg5RX9KweasEAjIXfFIDiJ2PawTKCo/edit?usp=sharing
+>*Sheet must be named m_2000*
+>
+>![screenshot of m_2000 worksheet](documentation/m_2000.png)
 
-The sample Sheet below follows along with the CI Love Sandwiches lessons, so make sure to refactor to your own project requirements.
+>*Sheet must be named f_2000*
+>
+>![screenshot of f_2000 worksheet](documentation/f_2000.png)
 
-⚠️ --- END ---⚠️
-
-To run your own version of this application, you will need to create your own Google Sheet with three sheets named `sales`, `surplus`, and `stock` in the following format:
-
-| cheese ham | tom moz | chicken salad | egg salad | hummus veg | ham egg |
-| --- | --- | --- | --- | --- | --- |
-| sample data | sample data | sample data | sample data | sample data | sample data |
-| sample data | sample data | sample data | sample data | sample data | sample data |
-| sample data | sample data | sample data | sample data | sample data | sample data |
+>*Sheet must be named categories*
+>
+>![screenshot of categories worksheet](documentation/categories.png)
 
 A credentials file in `.JSON` format from the Google Cloud Platform is also mandatory:
 
@@ -469,74 +484,31 @@ By forking the GitHub Repository, you make a copy of the original repository on 
 
 ### Local VS Deployment
 
-⚠️ INSTRUCTIONS ⚠️
-
-Use this space to discuss any differences between the local version you've developed, and the live deployment site. Generally, there shouldn't be [m]any major differences, so if you honestly cannot find any differences, feel free to use the following example:
-
-⚠️ --- END --- ⚠️
-
 There are no remaining major differences between the local version when compared to the deployed version online.
 
 ## Credits
 
-⚠️ INSTRUCTIONS ⚠️
-
-In the following sections, you need to reference where you got your content, media, and any extra help. It is common practice to use code from other repositories and tutorials (which is totally acceptable), however, it is important to be very specific about these sources to avoid potential plagiarism.
-
-⚠️ --- END ---⚠️
-
 ### Content
-
-⚠️ INSTRUCTIONS ⚠️
-
-Use this space to provide attribution links for any borrowed code snippets, elements, and resources. Ideally, you should provide an actual link to every resource used, not just a generic link to the main site. If you've used multiple components from the same source (such as Bootstrap), then you only need to list it once, but if it's multiple Codepen samples, then you should list each example individually. If you've used AI for some assistance (such as ChatGPT or Perplexity), be sure to mention that as well. A few examples have been provided below to give you some ideas.
-
-Eventually you'll want to learn how to use Git branches. Here's a helpful tutorial called [Learn Git Branching](https://learngitbranching.js.org) to bookmark for later.
-
-⚠️ --- END ---⚠️
 
 | Source | Notes |
 | --- | --- |
 | [Markdown Builder](https://markdown.2bn.dev) | Help generating Markdown files |
-| [Chris Beams](https://chris.beams.io/posts/git-commit) | "How to Write a Git Commit Message" |
 | [Love Sandwiches](https://codeinstitute.net) | Code Institute walkthrough project inspiration |
-| [Real Python](https://realpython.com/python-quiz-application) | Inspiration for a quiz app |
-| [BroCode](https://www.youtube.com/watch?v=ag8NtD1e0Kc) | Inspiration for hangman game |
-| [Python Tutor](https://pythontutor.com) | Additional Python help |
+| [Stack Overflow](https://stackoverflow.com/questions/54372087/python-3-how-to-create-a-typing-effect-in-command-line-window) | `time.sleep()` - Typewriter effect |
+| [Reddit](https://www.reddit.com/r/learnpython/comments/wo2dsf/help_with_turning_the_output_time_into_double/) | `zfill()` - Inserting a 0 in front of single digit minutes |
+| [Concept2](https://www.concept2.com/training/watts-calculator?srsltid=AfmBOopI0dHvoliPGL3P7TfzIBMty9e94rKL8qJ5mvJNdeJP5Di-7f1g) | Split-time to watts formula |
+| [Rowing Level](https://rowinglevel.com/rowing-times/2000m-times) | Rowing reference data |
+| [Geeks for Geeks](https://www.geeksforgeeks.org/python/enumerate-in-python/) | `enumerate()` - Retrieving indeces |
+| [Geeks for Geeks](https://www.geeksforgeeks.org/python/python-removing-first-element-of-list/) | `del` - Removing the first list item |  
+| [gspread](https://docs.gspread.org/en/latest/user-guide.html#getting-a-cell-value) | `.cell(row, col).value` Retrieving a cell value |
 | [Colorama](https://www.youtube.com/watch?v=u51Zjlnui4Y) | Adding color in Python |
-| [StackOverflow](https://stackoverflow.com/a/50921841) | Clear screen in Python |
-| [ChatGPT](https://chatgpt.com) | Help with code logic and explanations |
+| [StackOverflow](https://stackoverflow.com/questions/2084508/clear-the-terminal-in-python) | Clear the terminal screen |
+| [ChatGPT](https://chatgpt.com) | Help with planning and explanations |
+| [Claude](https://claude.ai) | Development support and technical guidance |
 
 ### Media
 
-⚠️ INSTRUCTIONS ⚠️
-
-Use this space to provide attribution links to any media files borrowed from elsewhere (images, videos, audio, etc.). If you're the owner (or a close acquaintance) of some/all media files, then make sure to specify this information. Let the assessors know that you have explicit rights to use the media files within your project. Ideally, you should provide an actual link to every media file used, not just a generic link to the main site, unless it's AI-generated artwork.
-
-Looking for some media files? Here are some popular sites to use. The list of examples below is by no means exhaustive.
-
-- Images
-    - [Pexels](https://www.pexels.com)
-    - [Unsplash](https://unsplash.com)
-    - [Pixabay](https://pixabay.com)
-    - [Lorem Picsum](https://picsum.photos) (placeholder images)
-    - [Wallhere](https://wallhere.com) (wallpaper / backgrounds)
-    - [This Person Does Not Exist](https://thispersondoesnotexist.com) (reload to get a new person)
-- Audio
-    - [Audio Micro](https://www.audiomicro.com/free-sound-effects)
-    - [Button Clicks](https://www.zapsplat.com/sound-effect-category/button-clicks)
-    - [Lasers & Weapons](https://www.zapsplat.com/sound-effect-category/lasers-and-weapons/page/5)
-    - [Puzzle Music](https://soundimage.org/puzzle-music)
-    - [Camtasia Audio](https://library.techsmith.com/camtasia/assets/Audio)
-- Video
-    - [Videvo](https://www.videvo.net)
-- Image Compression
-    - [TinyPNG](https://tinypng.com) (for images <5MB)
-    - [CompressPNG](https://compresspng.com) (for images >5MB)
-
-A few examples have been provided below to give you some ideas on how to do your own Media credits.
-
-⚠️ --- END ---⚠️
+⚠️ --- Remove if not used ---⚠️
 
 | Source | Notes |
 | --- | --- |
@@ -544,16 +516,12 @@ A few examples have been provided below to give you some ideas on how to do your
 | [TEXT-IMAGE](https://www.text-image.com) | Converting an image to ASCII art |
 | [Patorjk](https://patorjk.com/software/taag) | Converting text to ASCII art |
 
+### AI Use
+
+⚠️ --- Include section clearly detailing AI use for this project and include screenshots ---⚠️
+
 ### Acknowledgements
 
-⚠️ INSTRUCTIONS ⚠️
-
-Use this space to provide attribution and acknowledgement to any supports that helped, encouraged, or supported you throughout the development stages of this project. It's always lovely to appreciate those that help us grow and improve our developer skills. A few examples have been provided below to give you some ideas.
-
-⚠️ --- END ---⚠️
-
-- I would like to thank my Code Institute mentor, [Tim Nelson](https://www.github.com/TravelTimN) for the support throughout the development of this project.
-- I would like to thank the [Code Institute](https://codeinstitute.net) Tutor Team for their assistance with troubleshooting and debugging some project issues.
-- I would like to thank the [Code Institute Slack community](https://code-institute-room.slack.com) and [Code Institute Discord community](https://discord-portal.codeinstitute.net) for the moral support; it kept me going during periods of self doubt and impostor syndrome.
-- I would like to thank my partner, for believing in me, and allowing me to make this transition into software development.
-- I would like to thank my employer, for supporting me in my career development change towards becoming a software developer.
+- I would like to thank my Code Institute mentor, ⚠️ - [Tim Nelson](https://www.github.com/TravelTimN) - ⚠️ for the support throughout the development of this project.
+- I would like to thank the [Code Institute Discord community](https://discord-portal.codeinstitute.net) for the moral support; it kept me going during periods of self doubt and impostor syndrome.
+- I would like to thank my partner, Niall, for believing in me and allowing me to make this transition into software development.
