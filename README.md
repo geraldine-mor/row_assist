@@ -484,6 +484,8 @@ By forking the GitHub Repository, you make a copy of the original repository on 
 
 ### Local VS Deployment
 
+⚠️ Add a note about the clear function working on local but not deployed - link to testing, known issues ⚠️
+
 There are no remaining major differences between the local version when compared to the deployed version online.
 
 ## Credits

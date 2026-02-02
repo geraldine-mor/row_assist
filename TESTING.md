@@ -13,6 +13,8 @@ Initially some of the files had several issues but all were largely whitespace e
 
 > ![screenshot of validation errors](documentation/validation/validation_errors.png)
 
+⚠️ Reconfirm all linter links show no errors before submission ⚠️
+
 | Directory | File | URL | Screenshot | Notes |
 | --- | --- | --- | --- | --- |
 |  | [calc.py](https://github.com/geraldine-mor/row_assist/blob/main/calc.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/geraldine-mor/row_assist/main/calc.py) | ![screenshot of calc.py no issues](documentation/validation/calc_validation.png) |  |
@@ -37,59 +39,48 @@ Lighthouse audits are not applicable to this project since they do not test the 
 
 ## Defensive Programming
 
-⚠️ INSTRUCTIONS ⚠️
-
-Defensive programming (defensive design) is extremely important! When building projects that accept user inputs or forms, you should always test the level of security for each form field. Examples of this could include (but not limited to):
-
-All Projects:
-
-- Users cannot submit an empty form (add the `required` attribute)
-- Users must enter valid field types (ensure the correct input `type=""` is used)
-- Users cannot brute-force a URL to navigate to a restricted pages
-
-Python Projects:
-
-- Users cannot perform CRUD functionality if not authenticated (if login functionality exists)
-- User-A should not be able to manipulate data belonging to User-B, or vice versa
-- Non-Authenticated users should not be able to access pages that require authentication
-- Standard users should not be able to access pages intended for superusers/admins
-
-You'll want to test all functionality on your application, whether it's a standard form, or CRUD functionality, for data manipulation on a database. Try to access various pages on your site as different user types (User-A, User-B, guest user, admin, superuser). You should include any manual tests performed, and the expected results/outcome.
-
-Testing should be replicable (can someone else replicate the same outcome?). Ideally, tests cases should focus on each individual section of every page on the website. Each test case should be specific, objective, and step-wise replicable.
-
-Instead of adding a general overview saying that everything works fine, consider documenting tests on each element of the page (eg. button clicks, input box validation, navigation links, etc.) by testing them in their "happy flow", their "bad/exception flow", mentioning the expected and observed results, and drawing a parallel between them where applicable.
-
-Consider using the following format for manual test cases:
-
-- Expected Outcome / Test Performed / Result Received / Fixes Implemented
-
-- **Expected**: "Feature is expected to do X when the user does Y."
-- **Testing**: "Tested the feature by doing Y."
-- (either) **Result**: "The feature behaved as expected, and it did Y."
-- (or) **Result**: "The feature did not respond to A, B, or C."
-- **Fix**: "I did Z to the code because something was missing."
-
-Use the table below as a basic start, and expand on it using the logic above.
-
-⚠️ --- END --- ⚠️
-
-Defensive programming was manually tested with the below user acceptance testing:
+Defensive programming was manually tested with the below user acceptance testing to ensure invalid or unexpected user input is handled with clear feedback and without causing the program to crash.
 
 | Feature | Expectation | Test | Result | Screenshot |
 | --- | --- | --- | --- | --- |
-| Sales Input | Feature is expected to allow users to input the number of each sandwich type sold during the day. | Entered sales data for various sandwich types using a mock dataset. | Sales data was successfully recorded and saved. | ![screenshot](documentation/defensive/sales-input.png) |
-| | Feature is expected to minimize typing for quick input. | Used pre-defined options for sandwich types to streamline data entry. | Input process was fast and required minimal typing. | ![screenshot](documentation/defensive/quick-input.png) |
-| Sales Breakdown | Feature is expected to show a breakdown of total sandwich sales by type. | Reviewed the breakdown output after entering sales data. | Breakdown displayed correctly, with sales totals for each sandwich type. | ![screenshot](documentation/defensive/sales-breakdown.png) |
-| | Feature is expected to categorize sandwiches by type (e.g., vegetarian, meat, cheese). | Checked the categorization of sandwiches in the breakdown. | Sandwiches were correctly categorized by dietary type. | ![screenshot](documentation/defensive/categorization.png) |
-| Total Sales | Feature is expected to calculate the total sandwiches sold for the day. | Verified the total sales calculation with a known dataset. | Total sales calculation matched the expected result. | ![screenshot](documentation/defensive/total-sales.png) |
-| Trends | Feature is expected to display a trend of sandwich sales over time (e.g., week, month). | Input sales data for a week and reviewed the trend output. | Trends were displayed accurately for the selected timeframe. | ![screenshot](documentation/defensive/sales-trend.png) |
-| Suggestions | Feature is expected to suggest estimated sales for the next day based on past sales data. | Input past sales data and reviewed next-day suggestions. | Suggestions were reasonable and based on past sales trends. | ![screenshot](documentation/defensive/sales-suggestions.png) |
-| Usability | Feature is expected to be intuitive and easy to use. | Used the app without referring to documentation or prior knowledge. | App was intuitive and user-friendly for sales tracking. | ![screenshot](documentation/defensive/usability.png) |
+| Age Input Validation | Feature is expected to reject non-numeric input. | Entered "forty" when prompted for the age. | Error message displayed: "Invalid age, please enter a number between 10 and 90" and re-prompted | ![screenshot of error message](documentation/defensive/age_forty.png) |
+| | Feature is expected to reject age entries below minimum (10). | Entered "7" for the age. | Error message displayed: "I'm sorry, only ages between 10 and 90 can be accepted" and re-prompted. | ![screenshot of error message](documentation/defensive/age_7.png) |
+|  | Feature is expected to reject age entries above the maximum (90). | Entered "92" for the age. | Error message displayed: "I'm sorry, only ages between 10 and 90 can be accepted" and re-prompted. | ![screenshot of error message](documentation/defensive/age_92.png) |
+| | Feature is expected to accept valid age input at the boundaries. | Entered "10" and "90". | Both ages accepted without issue and program moved on to next step. | ![screenshot of successful input](documentation/defensive/age_10.png) ![screenshot of successful input](documentation/defensive/age_90.png) |
+|  | Feature is expected to reject blank entries. | Pressed enter with no value entered. | Error message displayed: "Invalid age, please enter a number between 10 and 90" and re-prompted. | ![screenshot of error message](documentation/defensive/age_blank.png) |
+| Gender Input Validation | Feature is expected to reject all non-alphabetic characters. | Entered "4" and "," for the gender. | Error message displayed both times: "Invalid entry, please enter either m or f" and re-prompted. | ![screenshot of error message](documentation/defensive/gender_4.png) ![screenshot of error message](documentation/defensive/gender_comma.png) |
+|  | Feature is expected to reject any letter except "m" or "f". | Entered "g" for the gender. | Error message displayed: "Invalid entry, please enter either m or f" and re-prompted. | ![screenshot of error message](documentation/defensive/gender_g.png) |
+|  | Feature is expected to reject multiple characters or words. | Entered "male" for the gender. | Error message displayed: "Invalid entry, please enter either m or f" and re-prompted. | ![screenshot of error message](documentation/defensive/gender_male.png) |
+|  | Feature is expected to accept lowercase valid input. | Entered both "m" and "f" for gender. | Both values accepted without issue and program moved on to next step. | ![screenshot of successful input](documentation/defensive/gender_m.png)  ![screenshot of successful input](documentation/defensive/gender_f.png) |
+|  | Feature is expected to accept uppercase valid input. | Entered both "M" and "F" for gender. | Both values accepted without issue and program moved on to next step. | ![screenshot of successful input](documentation/defensive/gender_M.png)  ![screenshot of successful input](documentation/defensive/gender_F.png) |
+|  | Feature is expected to reject blank entries. | Pressed enter with no value entered. | Error message displayed: "Invalid entry, please enter either m or f" and re-prompted. | ![screenshot of error message](documentation/defensive/gender_blank.png) |
+| Minutes Input Validation | Feature is expected to reject non-numeric characters. | Entered "z" for minutes. | Error message displayed: "Invalid entry, please enter a minutes value between 0 and 59" and re-prompted. | ![screenshot of error message](documentation/defensive/minutes_z.png) |
+|  | Feature is expected to reject negative values | Entered "-3" for minutes. | Error message displayed: "Invalid entry, please enter a minutes value between 0 and 59" and re-prompted. | ![screenshot of error message](documentation/defensive/minutes_negative.png) |
+|  | Feature is expected to reject values above 59 | Entered "64" for minutes. | Error message displayed: "Invalid entry, please enter a minutes value between 0 and 59" and re-prompted. | ![screenshot of error message](documentation/defensive/minutes_64.png) |
+|  | Feature is expected to reject blank input | Pressed enter with no value entered. | Error message displayed: "Invalid entry, please enter a minutes value between 0 and 59" and re-prompted. | ![screenshot of error message](documentation/defensive/minutes_blank.png) |
+|  | Feature is expected to accept valid minutes value at the boundaries | Entered "0" and "59" for minutes. | Both values accepted without issue and program moved on to next step. | ![screenshot of successful input](documentation/defensive/minutes_0.png) ![screenshot of successful input](documentation/defensive/minutes_59.png) |
+| Seconds Input Validation | Feature is expected to reject non-numeric characters. | Entered "x" for seconds. | Error message displayed: "Invalid entry, please enter a seconds value between 0 and 59" and re-prompted. | ![screenshot of error message](documentation/defensive/seconds_x.png) |
+|  | Feature is expected to reject negative values | Entered "-7" for seconds. | Error message displayed: "Invalid entry, please enter a seconds value between 0 and 59" and re-prompted. | ![screenshot of error message](documentation/defensive/seconds_negative.png) |
+|  | Feature is expected to reject values above 59 | Entered "72" for seconds. | Error message displayed: "Invalid entry, please enter a seconds value between 0 and 59" and re-prompted. | ![screenshot of error message](documentation/defensive/seconds_72.png) |
+|  | Feature is expected to reject blank input | Pressed enter with no value entered. | Error message displayed: "Invalid entry, please enter a seconds value between 0 and 59" and re-prompted. | ![screenshot of error message](documentation/defensive/seconds_blank.png) |
+|  | Feature is expected to accept valid seconds values at the boundaries | Entered "0" and "59" for seconds. | Both values accepted without issue and program moved on to next step. | ![screenshot of successful input](documentation/defensive/seconds_0.png) ![screenshot of successful input](documentation/defensive/seconds_59.png) |
+| Tenths Input Validation | Feature is expected to reject non-numeric characters. | Entered "d" for tenths. | Error message displayed: "Invalid entry, please enter a tenths value between 0 and 9" and re-prompted. | ![screenshot of error message](documentation/defensive/tenths_d.png) |
+|  | Feature is expected to reject negative values | Entered "-1" for tenths. | Error message displayed: "Invalid entry, please enter a tenths value between 0 and 9" and re-prompted. | ![screenshot of error message](documentation/defensive/tenths_negative.png) |
+|  | Feature is expected to reject values above 9. | Entered "12" for tenths. | Error message displayed: "Invalid entry, please enter a tenths value between 0 and 9" and re-prompted. | ![screenshot of error message](documentation/defensive/tenths_12.png) |
+|  | Feature is expected to reject blank input. | Pressed enter with no value entered. | Error message displayed: "Invalid entry, please enter a tenths value between 0 and 9" and re-prompted. | ![screenshot of error message](documentation/defensive/tenths_blank.png) |
+|  | Feature is expected to accept valid tenths values at the boundaries. | Entered "0" and "9" for tenths. | Both values accepted without issue and program moved on to next step. | ![screenshot of successful input](documentation/defensive/tenths_0.png) ![screenshot of successful input](documentation/defensive/tenths_9.png) |
+| Program Restart | Feature is expected to restart the program with a clear screen when any key except "x" is entered. | Entered "w", "Insert" and "7" as well as no value. | All values initiated the program restart and cleared the visible window though scrolling upward revealed uncleared text (see [known issues](#known-issues)). | ![screenshot of restart](documentation/defensive/restart.png) |
+| Program Exit | Feature is expected to safely close the program if "x" is entered. | Entered "x" and "X". | Program closed with no issues. | ![screenshot of closed program](documentation/defensive/exit_x.png) ![screenshot of closed program](documentation/defensive/exit_X.png) | 
+
+### Edge Case Handling
+
+| Feature | Test | Result | Screenshot |
+| --- | --- | --- | --- |
+| World Record Detection | Entered time faster than world record (5:35.8) | Humorous message displayed: "Greetings Barry Allen! The fastest 2k ever recorded is 5:35.8 and you smashed it!" | ![screenshot of world record message](documentation/wr_message.png) |
 
 ## User Story Testing
 
-⚠️ INSTRUCTIONS ⚠️
+⚠️ Pick Up Here ⚠️
 
 Testing User Stories is actually quite simple, once you've already got the stories defined on your README.
 
