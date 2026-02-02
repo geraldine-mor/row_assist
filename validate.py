@@ -48,7 +48,8 @@ def validate_time(time, string):
         if int(time) < 0 or int(time) > 59:
             raise ValueError
     except ValueError:
-        utils.typed(f"Invalid entry, please enter a {string} value between 0 and 59")
+        utils.typed(
+            f"Invalid entry, please enter a {string} value between 0 and 59")
         print("\n")
         return False
 
@@ -66,8 +67,7 @@ def validate_tenths(tenths):
             raise ValueError
     except ValueError:
         utils.typed(
-            "Invalid entry, please enter a tenths value between 0 and 9"
-            )
+            "Invalid entry, please enter a tenths value between 0 and 9")
         print("\n")
         return False
 

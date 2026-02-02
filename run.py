@@ -13,13 +13,15 @@ def main():
     # Source - https://stackoverflow.com/a/2084628
     typed(
         "Welcome to Row Assist, your indoor rowing assistant.\n"
-        )
+    )
     typed(
-        "You will soon be asked for your age, gender and your latest 2k test time.\n"
-        )
+        "You will soon be asked for your age, "
+        "gender and your latest 2k test time.\n"
+    )
     typed(
-        "I will calculate your split time and watts and provide you with a ranking."
-        )
+        "I will calculate your split time and watts "
+        "and provide you with a ranking."
+    )
     print("\n")
     age = inputs.get_age()
     gender = inputs.get_gender()
@@ -35,7 +37,8 @@ def main():
     category = ref_data.lookup_category(age, gender, distance, watts)
     category_description = ref_data.get_category_description()
     typed(f"Your performance category is {category.title()}!\n")
-    typed(f"You are: {category_description[category][0]}\n{category_description[category][1]}\n{category_description[category][2]}")
+    description = category_description[category]
+    typed(f"You are: {description[0]}\n{description[1]}\n{description[2]}")
     print("\n")
 
 

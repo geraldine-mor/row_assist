@@ -503,6 +503,7 @@ There are no remaining major differences between the local version when compared
 | [gspread](https://docs.gspread.org/en/latest/user-guide.html#getting-a-cell-value) | `.cell(row, col).value` Retrieving a cell value |
 | [Colorama](https://www.youtube.com/watch?v=u51Zjlnui4Y) | Adding color in Python |
 | [StackOverflow](https://stackoverflow.com/questions/2084508/clear-the-terminal-in-python) | Clear the terminal screen |
+| [Botanic Garden Berlin Museum](https://www.bgbm.org/cdefd/collectionmodel/dsd.htm) | Data structure diagram example |
 | [ChatGPT](https://chatgpt.com) | Help with planning and explanations |
 | [Claude](https://claude.ai) | Development support and technical guidance |
 
@@ -518,7 +519,19 @@ There are no remaining major differences between the local version when compared
 
 ### AI Use
 
-⚠️ --- Include section clearly detailing AI use for this project and include screenshots ---⚠️
+AI tools [chatGPT](https://chatgpt.com) and [Claude](https://claude.ai) were used throughout the planning and development process as a learning aid to clarify concepts and principles, and explain Python behaviours and errors.
+
+It was also used as a sounding board to help explain new concepts such as modules, data modeling and diagrams and to help map out my own thoughts to guide me towards decisions. 
+
+I requested that both models used the Socratic approach and instructed both to avoid showing solutions or writing code on my behalf. I switched to Claude because chatGPT might fall out of character and reveal solutions if I forgot to reiterate this request each time I would share my code.
+
+>_chatGPT example_
+>
+> ![screenshot of chatGPT conversation](documentation/chatgpt_example.png)
+
+>_Claude example_
+>
+>![screenshot of claude conversation](documentation/claude_example.png)
 
 ### Acknowledgements
 

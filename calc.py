@@ -13,7 +13,7 @@ def calculate_splits(seconds, distance):
     user_split = f"{split_mins}:{str(split_secs).zfill(4)}"
     # z-fill(4) was used because split_secs was always in the format
     # 0.0 so min 4 characters was required to always achieve 00.0
-    
+
     return calc_split, user_split
 
 
@@ -24,5 +24,5 @@ def calculate_watts(split):
     Rounds to nearest int as per row erg monitors
     """
     calc_watts = round(2.8 / (split / 500)**3)
-    
+
     return calc_watts
