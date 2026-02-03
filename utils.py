@@ -19,8 +19,8 @@ def check_wr(time):
     the world record
     """
     if time < 335.8:  # Correct as of 28/1/26 (set in 2018)
-        typed("Greetings Barry Allen!\n")
-        typed("The fastest 2k ever recorded is 5:35.8 and you smashed it!")
+        typed(" Greetings Barry Allen!\n")
+        typed(" The fastest 2k ever recorded is 5:35.8 and you smashed it!")
         print("\n")
 
 
@@ -29,9 +29,9 @@ def program_exit():
     Asks user if they would like to exit or restart
     Exit commands triggers exit, restart triggers main()
     """
-    typed("Do you wish to exit now or restart?\n")
-    exit_command = input("Press 'x' to exit, press any other key to restart: ")
+    typed(" Do you wish to exit now or restart?\n")
+    exit_command = input(" Press 'x' to exit, press any other key to restart: ")
     if exit_command.lower() == "x":
-        typed("Exiting Row Assist, Goodbye\n")
+        typed(" Exiting Row Assist, Goodbye\n")
         print("\n")
         return True

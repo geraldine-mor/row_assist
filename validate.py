@@ -11,11 +11,11 @@ def validate_age(age):
         if int(age) < 10 or int(age) > 90:
             raise TypeError
     except ValueError:
-        utils.typed("Invalid age, please enter a number between 10 and 90")
+        utils.typed(" Invalid age, please enter a number between 10 and 90")
         print("\n")
         return False
     except TypeError:
-        utils.typed("I'm sorry only ages between 10 and 90 can be accepted")
+        utils.typed(" I'm sorry only ages between 10 and 90 can be accepted")
         print("\n")
         return False
 
@@ -31,7 +31,7 @@ def validate_gender(gender):
         if gender.lower() != "f" and gender.lower() != "m":
             raise ValueError
     except ValueError:
-        utils.typed("Invalid entry, please enter either m or f")
+        utils.typed(" Invalid entry, please enter either m or f")
         print("\n")
         return False
 
@@ -49,7 +49,7 @@ def validate_time(time, string):
             raise ValueError
     except ValueError:
         utils.typed(
-            f"Invalid entry, please enter a {string} value between 0 and 59")
+            f" Invalid entry, please enter a {string} value between 0 and 59")
         print("\n")
         return False
 
@@ -67,7 +67,7 @@ def validate_tenths(tenths):
             raise ValueError
     except ValueError:
         utils.typed(
-            "Invalid entry, please enter a tenths value between 0 and 9")
+            " Invalid entry, please enter a tenths value between 0 and 9")
         print("\n")
         return False
 

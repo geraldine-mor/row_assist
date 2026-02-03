@@ -11,15 +11,25 @@ def main():
     """
     os.system('cls' if os.name == 'nt' else 'clear')
     # Source - https://stackoverflow.com/a/2084628
+
+    print("""
+ ██████╗  ██████╗ ██╗    ██╗    █████╗ ███████╗███████╗██╗███████╗████████╗
+ ██╔══██╗██╔═══██╗██║    ██║   ██╔══██╗██╔════╝██╔════╝██║██╔════╝╚══██╔══╝
+ ██████╔╝██║   ██║██║ █╗ ██║   ███████║███████╗███████╗██║███████╗   ██║   
+ ██╔══██╗██║   ██║██║███╗██║   ██╔══██║╚════██║╚════██║██║╚════██║   ██║   
+ ██║  ██║╚██████╔╝╚███╔███╔╝   ██║  ██║███████║███████║██║███████║   ██║   
+ ╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝    ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝╚══════╝   ╚═╝   
+    """)  # Title artwork created with claude.ai
+    
     typed(
-        "Welcome to Row Assist, your indoor rowing assistant.\n"
+        " Welcome to Row Assist, your indoor rowing assistant.\n"
     )
     typed(
-        "You will soon be asked for your age, "
+        " You will soon be asked for your age, "
         "gender and your latest 2k test time.\n"
     )
     typed(
-        "I will calculate your split time and watts "
+        " I will calculate your split time and watts "
         "and provide you with a ranking."
     )
     print("\n")
@@ -29,16 +39,16 @@ def main():
     # Added to make sure functions will run correctly when more distances added
     row_time = inputs.get_row_time()
     split_time, display_split = calc.calculate_splits(row_time, distance)
-    typed(f"Your split time is: {display_split}\n")
+    typed(f" Your split time is: {display_split}\n")
     watts = calc.calculate_watts(split_time)
-    typed(f"Your watts generated are: {watts}")
+    typed(f" Your watts generated are: {watts}")
     print("\n")
-    typed("Retrieving your ranking, please wait...\n")
+    typed(" Retrieving your ranking, please wait...\n")
     category = ref_data.lookup_category(age, gender, distance, watts)
     category_description = ref_data.get_category_description()
-    typed(f"Your performance category is {category.title()}!\n")
+    typed(f" Your performance category is {category.title()}!\n")
     description = category_description[category]
-    typed(f"You are: {description[0]}\n{description[1]}\n{description[2]}")
+    typed(f" You are: {description[0]}\n{description[1]}\n{description[2]}")
     print("\n")
 
 
