@@ -48,7 +48,7 @@ def main():
     category_description = ref_data.get_category_description()
     typed(f" Your performance category is {category.title()}!\n")
     description = category_description[category]
-    typed(f" You are: {description[0]}\n{description[1]}\n{description[2]}")
+    typed(f" You are: {description[0]}\n {description[1]}\n {description[2]}")
     print("\n")
 
 
