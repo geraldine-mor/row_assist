@@ -1,4 +1,4 @@
-from utils import typed, program_exit
+from utils import typed, program_exit, display_header
 import inputs
 import calc
 import os
@@ -12,15 +12,8 @@ def main():
     os.system('cls' if os.name == 'nt' else 'clear')
     # Source - https://stackoverflow.com/a/2084628
 
-    print("""
- ██████╗  ██████╗ ██╗    ██╗    █████╗ ███████╗███████╗██╗███████╗████████╗
- ██╔══██╗██╔═══██╗██║    ██║   ██╔══██╗██╔════╝██╔════╝██║██╔════╝╚══██╔══╝
- ██████╔╝██║   ██║██║ █╗ ██║   ███████║███████╗███████╗██║███████╗   ██║   
- ██╔══██╗██║   ██║██║███╗██║   ██╔══██║╚════██║╚════██║██║╚════██║   ██║   
- ██║  ██║╚██████╔╝╚███╔███╔╝   ██║  ██║███████║███████║██║███████║   ██║   
- ╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝    ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝╚══════╝   ╚═╝   
-    """)  # Title artwork created with claude.ai
-    
+    display_header()
+   
     typed(
         " Welcome to Row Assist, your indoor rowing assistant.\n"
     )
