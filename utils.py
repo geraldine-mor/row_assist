@@ -33,9 +33,7 @@ def program_exit():
     exit_command = input(" Press 'x' to exit, press any other key to restart: ")
     if exit_command.lower() == "x":
         typed(" Exiting Row Assist, Goodbye\n")
-        print("""
-                                                                      
-                                                                      
+        print("""                                                  
                       .%@@@@=                                         
                       +@@@@@+                                         
                       .@@@@@@.                                        
@@ -59,5 +57,4 @@ def program_exit():
      %%                                                   @*          
    =@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.    
         """)
-        print("\n")
         return True
