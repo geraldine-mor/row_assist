@@ -88,7 +88,7 @@ def save_row_data(date, time, watts, user_login):
     if user_login:
         while True:
             save = input(" Do you wish to save this test data? Y/N:")
-            user_sheet = SHEET.worksheet("demo")
+            user_sheet = SHEET.worksheet(user_login)
             if save.lower() == "y":
                 save_data = [str(date), time, watts]
                 user_sheet.append_row(save_data)
