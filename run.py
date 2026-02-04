@@ -14,6 +14,12 @@ USER = {
 
 
 def check_user():
+    """
+    Requests and verifies user login, if verified, retrieves stored 
+    age and gender data. Alternatively offers the option to proceed 
+    as a guest user requesting the age and gender data.
+    Function returns user age, gender and login
+    """
     while True:
         user_login = input(" Login: ")
         if user_login.lower() == USER["login"]:

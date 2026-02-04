@@ -85,6 +85,10 @@ def lookup_category(age, gender, distance, watts):
     return category
 
 def save_row_data(date, time, watts, user_login):
+    """
+    Provides option to save user data if the user is "logged in" and 
+    stores the data in the Google sheet
+    """
     if user_login:
         while True:
             save = input(" Do you wish to save this test data? Y/N:")

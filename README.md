@@ -7,26 +7,49 @@ Developer: Geraldine Morey ([geraldine-mor](https://www.github.com/geraldine-mor
 [![GitHub repo size](https://img.shields.io/github/repo-size/geraldine-mor/row_assist)](https://www.github.com/geraldine-mor/row_assist)
 [![badge](https://img.shields.io/badge/deployment-Heroku-purple)](https://row-assist-0ee155171c88.herokuapp.com)
 
-Row Assist is a command-line indoor rowing assistant that takes the user's indoor rowing performance data and calculates the watts generated and average /500m split time, compares the user's performance to a reference table and returns a ranking. The application runs as a single-use session. The user enters their personal attributes (ie age, gender) and their latest rowing test data and receives feedback. This model reflects real-world rowing practice where rowing tests occur as distinct events. This also allows the feedback to remain visible on screen until the program is exited or run again. Running the program implies either a new test has been completed or another uses wishes to evaluate their data. 
+```text
+ ██████╗  ██████╗ ██╗    ██╗    █████╗ ███████╗███████╗██╗███████╗████████╗
+ ██╔══██╗██╔═══██╗██║    ██║   ██╔══██╗██╔════╝██╔════╝██║██╔════╝╚══██╔══╝
+ ██████╔╝██║   ██║██║ █╗ ██║   ███████║███████╗███████╗██║███████╗   ██║
+ ██╔══██╗██║   ██║██║███╗██║   ██╔══██║╚════██║╚════██║██║╚════██║   ██║
+ ██║  ██║╚██████╔╝╚███╔███╔╝   ██║  ██║███████║███████║██║███████║   ██║
+ ╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝    ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝╚══════╝   ╚═╝
+```
 
-⚠️ --- Screenshot of amiresponsive if illustrations used--- ⚠️<br>
-source: [row_assist amiresponsive](https://ui.dev/amiresponsive?url=https://row-assist-0ee155171c88.herokuapp.com)
+
+Row Assist is a command-line indoor rowing assistant that takes the user's indoor rowing 2k test performance data and calculates the watts generated and average /500m split time, compares the user's performance to a reference table and returns a ranking. 
+
+The application runs as a single-use session with 2 modes of operation: **persistent user** and **guest**. The persistent user enters their login name and latest 2k test time, guest users are asked to enter their demographic attributes (age & gender) as well as their latest rowing test data.
+
+The app then provides user feedback based on the data provided. The persistent user is offered the opportunity to store their workout info prior to exit, the guest user is not. 
+
+This model reflects real-world rowing practice where rowing tests occur as distinct events. Feedback remains visible on screen until the program is exited or run again. Running the program implies either a new test has been completed or another user wishes to evaluate their data. 
 
 ## Instructions
 
-⚠️ --- Currently set for the MVP and will need updating as features added --- ⚠️
+⚠️ --- Needs updating as features added --- ⚠️
 
 **How to use Row Assist**
 
-You will be greeted and asked to enter your age - _please enter a number between 10 and 90_<br>
+**User:**
 
-You will then be asked to enter your gender - _please enter either m or f_<br>
+You will be greeted and asked to enter your login or press 'Enter' to continue as a guest 
 
-You will finally be asked to enter the time of your last 2k test. _This is broken in to 3 inputs, minutes, seconds and tenths to ensure correct input format and is similar to web platforms that have separate input boxes for the different parts of the time._
+The 'Login' for demonstration purposes is "demo"
+
+You will be asked to enter the time of your last 2k test. _This is broken in to 3 inputs, minutes, seconds and tenths to ensure correct input format_
 
 With this information, the program calculates the 2 standard rowing metrics of split time and watts, and reports these back to you.
 
-The program also delivers a performance category or ranking and exlpains how this category compares to other rowers.
+The program also delivers a performance category or ranking and explains how this category compares to other rowers in your demographic.
+
+You are then offered the option to save or discard the data before being asked if you would like to exit or restart.
+
+**Guest:**
+
+After the greeting, press 'Enter' to enter guest mode and you will be prompted to enter your age and indicate your gender before being asked to enter your time as above.
+
+The program delivers the same feedback but will not offer the option to save prior to exiting.
 
 ## UX
 
@@ -62,15 +85,15 @@ The program also delivers a performance category or ranking and exlpains how thi
 - Reference content - Google sheet containing categorised, searchable data sorted by gender, age range, watt threshold and performance category
 - Derived content - system calculated values for watt output and 500m split time 
 - Feedback content - calculated values (split and watts) and performance category (beginner - world record) with contextual explanation of category
-- Future content - stored historical user performance data, trend analysis, visual charts
+- Persistent content - Optional storage of user workout data for persistent users
+- Future content - trend analysis, visual charts
 <br>
 
 **Content Constraints**
 - Only 2000m tests accepted in MVP
 - Age must map to a defined range
 - Only male & female categories supported - HW and LW removed from MVP due to lack of available data
-- User data is not persisted between sessions in MVP
-- The deployment terminal is set to 80 columns wide by 24 rows.
+- The deployment terminal is set to 80 columns wide by 24 rows
 
 #### 3. Structure
 
@@ -78,13 +101,14 @@ The program also delivers a performance category or ranking and exlpains how thi
 - **Hierarchy**:
   - User demography and row performance data input as the primary focus for ease of use
 
-⚠️ --- Currently set for the MVP and will need updating as features added --- ⚠️
+⚠️ --- Needs updating as features added --- ⚠️
 
 **User Flow**
 1. User opens the app → user views greeting and instructions
 2. User enters data as prompted → system checks data for type and validity → generates error message if invalid, proceeds if valid
 3. System computes metrics and compares to reference document → user receives feedback messages
-4. User chooses whether to exit the program or restart
+4. If applicable, user chooses whether to save data → is informed of successful save or deletion
+5. User chooses whether to exit the program or restart
 
 #### 4. Skeleton
 
@@ -92,9 +116,8 @@ The program also delivers a performance category or ranking and exlpains how thi
 
 #### 5. Surface
 
-⚠️ --- If colour text is used, keep otherwise delete --- ⚠️<br>
 **Visual Design Elements**
-- **[Colours](#colour-scheme)** (see below)
+- **Graphics** - ASCII graphics were added for a heading and closing image.
 
 ## Wireframes
 
@@ -103,22 +126,36 @@ I used [draw.io](https://www.drawio.com/) to design my app flowchart.
 I used [chatGPT](http://www.chatgpt.com) and [Mermaid Chart](http://www.mermaid.ai) to convert the flowchart to an interactive mermaid version.
 
 ```mermaid
+---
+config:
+  theme: mc
+---
 flowchart TD
     A([Start Program])
-    A --> B["Greet user and<br/>provide instruction"]
+    A --> B["Greet user and<br/>provide instructions"]
 
-    B --> C["Request data from user: age, gender"]
-    C --> D["Request row data: duration (MM:SS.s), distance"]
+    B --> C{"Login or continue<br/>as guest?"}
+    C -- Persistent user --> D["Retrieve stored user data<br/>(age, gender)"]
+    C -- Guest --> E["Request user data:<br/>age, gender"]
 
-    D --> E{Is data valid?}
-    E -- No --> D
-    E -- Yes --> F["Parse data into correct format"]
+    D --> F["Request row data:<br/>duration (MM:SS.s), distance"]
+    E --> F
 
-    F --> G["Calculate watts and 500m splits"]
-    G --> H["Lookup category"]
-    H --> I["Provide user feedback"]
+    F --> G{Is data valid?}
+    G -- No --> F
+    G -- Yes --> H["Parse data into<br/>correct format"]
 
-    I --> J(["End / Restart Program"])
+    H --> I["Calculate watts<br/>and 500m split"]
+    I --> J["Lookup performance category"]
+    J --> K["Provide user feedback"]
+
+    K --> L{"Persistent user?"}
+    L -- Yes --> M{"Save workout data?"}
+    M -- Yes --> N["Store workout data"]
+    M -- No --> O(["End / Restart Program"])
+
+    L -- No --> O
+    N --> O
 ```
 
 Source: [Mermaid Flowchart for Row Assist](https://mermaid.ai/app/projects/212e9a6a-2b8a-4b72-be94-8a77217d6f55/diagrams/ccf39e03-b715-4b69-a013-1cd69f5dea7f/version/v0.1/edit)
@@ -144,7 +181,7 @@ Source: [Mermaid Flowchart for Row Assist](https://mermaid.ai/app/projects/212e9
 
 ## Features
 
-⚠️ --- Currently set for the MVP and will need updating as features added --- ⚠️
+⚠️ --- Needs updating as features added --- ⚠️
 
 ### Existing Features
 
@@ -158,10 +195,11 @@ Source: [Mermaid Flowchart for Row Assist](https://mermaid.ai/app/projects/212e9
 | Watts Calculation | Calculates watts from from the generated split-time value and displays it to the user. | ![screenshot of watts](documentation/features/watts.png) |
 | Performance Ranking | Retrieves the performance category and correspoding description from the relevant Google Sheets worksheet based on age, gender and watts value and displays them to the user. | ![screenshot of category and description](documentation/features/category.png) |
 | Program Exit / Restart | Asks the user to exit or restart. Exit closes the program safely and restart begins the program again with a clear terminal. | ![screenshot of program exit request](documentation/features/program_exit.png) |
+| User Identity Decision | Asks the user to enter their login or continue as guest | ![screenshot of login or guest option](documentation/features/user_identity.png) |
+| Save Data | Saved user is offered the option to store the workout data, if y entered, then data is saved to the google sheet | ![screenshot of data save interaction](documentation/features/save_data.png) ![screenshot of data in the google sheet](documentation/features/saved_data.png) |
 
 ### Future Features
 
-- **Basic History Storage**: Store the user's row times with timestamps to enable performance tracking over time.
 - **Performance progression comparison**: Provide user feedback based on past performances.  
 - **Data Visualisation**: Add charts and graphs to visually represent performance trends.
 - **Add Multiple Distance Options**: Allow the user to input the row distance instead of only 2000m.
@@ -191,11 +229,18 @@ Source: [Mermaid Flowchart for Row Assist](https://mermaid.ai/app/projects/212e9
 | [![badge](https://img.shields.io/badge/draw.io-grey?logo=diagramsdotnet)](https://www.drawio.com) | Flow diagrams for mapping the app's logic. |
 | [![badge](https://img.shields.io/badge/W3Schools-grey?logo=w3schools&logoColor=04AA6D)](https://www.w3schools.com) | Tutorials/Reference Guide. |
 | [![badge](https://img.shields.io/badge/StackOverflow-grey?logo=stackoverflow&logoColor=F58025)](https://stackoverflow.com) | Tutorials/Reference Guide. |
+| [![badge](https://img.shields.io/badge/Geeks_for_geeks-grey?logo=geeksforgeeks&logoColor=%232F8D46)](https://www.geeksforgeeks.org/) | Tutorials/Reference Guide. |
+| [![badge](https://img.shields.io/badge/Labex-grey?logo=labex&logoColor=%232E7EEE)](https://labex.io/tutorials) | Tutorials/Reference Guide. |
+| [![badge](https://img.shields.io/badge/Reddit-grey?logo=reddit&logoColor=%23FF4500)](https://www.reddit.com/) | Tutorials/Reference Guide. |
 | [![badge](https://img.shields.io/badge/Claude-grey?logo=claude&logoColor=%23D97757&color=gray)](https://claude.ai) | Help debug, troubleshoot, and explain things. |
+| [![badge](https://img.shields.io/badge/Mermaid-grey?logo=mermaid&logoColor=%23FF3670)](https://mermaid.ai/) | Create interactive. flowchart | 
+| [![badge](https://img.shields.io/badge/ASCII_art-grey?logo=heroku&logoColor=430098)](https://www.heroku.com) | Create ASCII graphics. |
 
 ## Database Design
 
 ### Data Model
+
+⚠️ --- Needs updating as features added --- ⚠️
 
 The Row Assist app uses Google Sheets as its data repository with a structured, scalable design to support multiple demographics and distances.
 
@@ -205,7 +250,23 @@ Each reference sheet contains age range boundaries in the first 2 columns and pe
 
 A separate worksheet titled `categories` provides detailed descriptions for each performance category. 
 
+A final worksheet titled `demo` stores the persitent user's saved workouts
+
 To follow best practice, a charts were created for the app's data structure, data flow and logic. I mapped them out using [Draw.io](https://www.draw.io). 
+
+>#### Data structure diagram
+>
+>![data structure diagram](documentation/data_structure_diagram.png)
+
+>#### Data flow diagram
+>
+>![data flow diagram](documentation/data_flow.png)
+
+>#### Flowchart
+>
+>The flowchart below represents the main process of this Python program. It shows the entire cycle of the application. I included potential future features to map out how they would fit in the app.
+>
+>![screenshot](documentation/flowchart.png)
 
 #### Key Design Decisions
 
@@ -224,20 +285,7 @@ To follow best practice, a charts were created for the app's data structure, dat
 - Validation checks for structurally valid inputs and does not screen for realistic values. Unrealistic but valid values (such as world record performances) are permitted with appropriate user messaging. This is in part to separate the concerns of validity and realism and also to allow for multiple distance entries in the future where a valid 500m time entry would definitely be below 2km world record time.
 - 2000m was chosen as the MVP scope boundary since it is the international gold standard of indoor rowing.
 - An exit/restart loop was chosen over exiting after each run to reflect real-world cases of multi-user or repeated-use scenarios such as rowing clubs or shared terminals. 
-
->#### Data structure diagram
->
->![data structure diagram](documentation/mvp_data_structure.png)
-
->#### Data flow diagram
->
->![data flow diagram](documentation/data_flow.png)
-
->#### Flowchart
->
->The flowchart below represents the main process of this Python program. It shows the entire cycle of the application. I included potential future features to map out how they would fit in the app.
->
->![screenshot](documentation/flowchart.png)
+- A lightweight login mechanism was implemented to support a demo user and guest usage without introducing full authentication complexity.
 
 #### Classes & Functions
 
@@ -259,6 +307,10 @@ The primary functions used on this application are:
 
 - `typed()`
     - Display text to the terminal with a typewriter effect. 
+- `check_user()`
+    - Validates username/offers guest access and returns age, gender and login status. 
+- `calculate_age()`
+    - Calculates user age from stored Date of Birth.       
 - `get_age()`
     - Get age input from the user.
 - `validate_age()`
@@ -291,6 +343,8 @@ The primary functions used on this application are:
     - Retrieve performance categories and descriptions from spreadsheet and convert to dictionary for lookup.  
 - `lookup_category()`
     - Run all data lookup functions to determine user's performance category. 
+- `save_row_data()`  
+    - Provides option for persistent user to save the workout data.  
 - `program_exit()`
     - Ask user to choose between exit and restart.
 - `main()`
@@ -300,7 +354,7 @@ The primary functions used on this application are:
 
 #### Imports
 
-⚠️ --- Complete to mvp --- ⚠️
+⚠️ --- Update as needed --- ⚠️
 
 I've used the following Python packages and external imports.
 
@@ -309,7 +363,7 @@ I've used the following Python packages and external imports.
 - `time`: used for adding time delays.
 - `math`: used for `floor()` function in split-time calculation.
 - `os`: used for clearing the terminal screen.
-- `colorama`: used for including colour in the terminal. ⚠️ Remove if not used ⚠️ 
+- `datetime`: used to provide today's date and calculate user age 
 
 ## Agile Development Process
 
@@ -484,9 +538,11 @@ By forking the GitHub Repository, you make a copy of the original repository on 
 
 ### Local VS Deployment
 
-⚠️ Add a note about the clear function working on local but not deployed - link to testing, known issues ⚠️
+|  |  |
+| --- | --- |
+| `os.system('clear')` function does not clear anything above the terminal window in the deployed version. Terminal is completely cleared on the local version. This is described further in [known issues](TESTING.md#known-issues) | ![screenshot of remaining data](documentation/defensive/restart.png) |
 
-There are no remaining major differences between the local version when compared to the deployed version online.
+There are no further remaining major differences between the local version when compared to the deployed version online.
 
 ## Credits
 
@@ -503,21 +559,19 @@ There are no remaining major differences between the local version when compared
 | [Geeks for Geeks](https://www.geeksforgeeks.org/python/enumerate-in-python/) | `enumerate()` - Retrieving indeces |
 | [Geeks for Geeks](https://www.geeksforgeeks.org/python/python-removing-first-element-of-list/) | `del` - Removing the first list item |  
 | [gspread](https://docs.gspread.org/en/latest/user-guide.html#getting-a-cell-value) | `.cell(row, col).value` Retrieving a cell value |
-| [Colorama](https://www.youtube.com/watch?v=u51Zjlnui4Y) | Adding color in Python |
+| [ASCII art](https://www.asciiart.eu/image-to-ascii) | Create image of rowing machine |
 | [StackOverflow](https://stackoverflow.com/questions/2084508/clear-the-terminal-in-python) | Clear the terminal screen |
 | [Botanic Garden Berlin Museum](https://www.bgbm.org/cdefd/collectionmodel/dsd.htm) | Data structure diagram example |
 | [ChatGPT](https://chatgpt.com) | Help with planning and explanations |
 | [Claude](https://claude.ai) | Development support and technical guidance |
+| [Labex](https://labex.io/tutorials/python-how-to-convert-timedelta-to-days-421860) | Datetime tutorial |
 
 ### Media
 
-⚠️ --- Remove if not used ---⚠️
-
 | Source | Notes |
 | --- | --- |
-| [ASCII Art Archive](https://www.asciiart.eu) | Pre-defined ASCII art |
-| [TEXT-IMAGE](https://www.text-image.com) | Converting an image to ASCII art |
-| [Patorjk](https://patorjk.com/software/taag) | Converting text to ASCII art |
+| [Vecteezy](https://www.vecteezy.com/vector-art/66946173-a-silhouette-of-a-man-on-a-rowing-machine-icon) | Source image for rowing machine ASCII art |
+|
 
 ### AI Use
 
@@ -537,6 +591,6 @@ I requested that both models used the Socratic approach and instructed both to a
 
 ### Acknowledgements
 
-- I would like to thank my Code Institute mentor, ⚠️ - [Tim Nelson](https://www.github.com/TravelTimN) - ⚠️ for the support throughout the development of this project.
+- I would like to thank my Code Institute mentors, [Tim Nelson](https://www.github.com/TravelTimN) ⚠️ And ... ⚠️for the support throughout the development of this project.
 - I would like to thank the [Code Institute Discord community](https://discord-portal.codeinstitute.net) for the moral support; it kept me going during periods of self doubt and impostor syndrome.
 - I would like to thank my partner, Niall, for believing in me and allowing me to make this transition into software development.
