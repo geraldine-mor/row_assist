@@ -4,7 +4,6 @@ import calc
 import os
 import ref_data
 from datetime import date
-from math import floor
 
 
 USER = {
@@ -20,7 +19,7 @@ def check_user():
         if user_login.lower() == USER["login"]:
             user_age = calc.calculate_age(USER["DOB"])
             user_gender = USER["gender"]
-            return user_age, user_gender
+            return user_age, user_gender, user_login
         elif user_login == "":
             print("")
             typed(
@@ -34,7 +33,7 @@ def check_user():
             print("\n")
             age = inputs.get_age()
             gender = inputs.get_gender()
-            return age, gender
+            return age, gender, False
         elif user_login.lower() != USER["login"] and user_login != "":
             typed(
         " I'm sorry that login is not recognised, please try again\n"
@@ -59,7 +58,7 @@ def main():
     typed(
         " Please enter your login or press 'Enter' to continue as a guest.\n"
     )
-    age, gender = check_user()
+    age, gender, user_login = check_user()
     distance = 2000
     # Added to make sure functions will run correctly when more distances added
     row_time = inputs.get_row_time()
@@ -75,6 +74,7 @@ def main():
     description = category_description[category]
     typed(f" You are: {description[0]}\n {description[1]}\n {description[2]}")
     print("\n")
+    ref_data.save_row_data(date.today(), split_time, watts, user_login)
 
 
 def run():

@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+from utils import typed
 
 
 SCOPE = [
@@ -82,3 +83,21 @@ def lookup_category(age, gender, distance, watts):
     col_index = get_col_number(sheet, row_index, watts)
     category = get_category(sheet, col_index)
     return category
+
+def save_row_data(date, split, watts, user_login):
+    if user_login:
+        while True:
+            save = input(" Do you wish to save this test data? Y/N:")
+            user_sheet = SHEET.worksheet("demo")
+            if save.lower() == "y":
+                save_data = [str(date), split, watts]
+                user_sheet.append_row(save_data)
+                typed(" Your test data has been saved")
+                print("\n")
+                break
+            elif save.lower() == "n":
+                typed(" Your test data has been deleted")
+                break
+            else:
+                continue
+

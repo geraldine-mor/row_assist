@@ -1,5 +1,5 @@
 from math import floor
-from datetime import date, timedelta
+from datetime import date
 
 
 def calculate_splits(seconds, distance):
