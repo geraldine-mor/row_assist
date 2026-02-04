@@ -33,7 +33,7 @@ def check_wr(time):
     the world record
     """
     if time < 335.8:  # Correct as of 28/1/26 (set in 2018)
-        typed(" Greetings Barry Allen!\n")
+        typed(" ⚡Greetings Barry Allen!⚡\n")
         typed(" The fastest 2k ever recorded is 5:35.8 and you smashed it!")
         print("\n")
 

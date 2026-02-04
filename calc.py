@@ -1,4 +1,5 @@
 from math import floor
+from datetime import date, timedelta
 
 
 def calculate_splits(seconds, distance):
@@ -26,3 +27,8 @@ def calculate_watts(split):
     calc_watts = round(2.8 / (split / 500)**3)
 
     return calc_watts
+
+
+def calculate_age(DOB):
+    age_diff = (date.today()- DOB).days
+    return age_diff
