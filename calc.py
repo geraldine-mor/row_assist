@@ -31,4 +31,5 @@ def calculate_watts(split):
 
 def calculate_age(DOB):
     age_diff = (date.today()- DOB).days
-    return age_diff
+    user_age = floor(age_diff / 365)
+    return user_age

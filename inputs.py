@@ -25,7 +25,6 @@ def get_gender():
     while True:
         utils.typed(" Please enter your gender: m/f\n")
         user_gender = input(" Gender: ")
-        print("")
         if validate.validate_gender(user_gender):
             break
 
@@ -37,6 +36,7 @@ def get_row_time():
     Compile valid input times
     Convert inputs into a readable string and and a computable float
     """
+    print("")  # To add a line space for clearer readability
     utils.typed(
         " Please enter your latest 2k test time. Minutes, seconds, tenths\n"
         )
