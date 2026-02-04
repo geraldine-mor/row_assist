@@ -74,7 +74,7 @@ def main():
     description = category_description[category]
     typed(f" You are: {description[0]}\n {description[1]}\n {description[2]}")
     print("\n")
-    ref_data.save_row_data(date.today(), split_time, watts, user_login)
+    ref_data.save_row_data(date.today(), row_time, watts, user_login)
 
 
 def run():

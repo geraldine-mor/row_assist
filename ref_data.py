@@ -84,20 +84,22 @@ def lookup_category(age, gender, distance, watts):
     category = get_category(sheet, col_index)
     return category
 
-def save_row_data(date, split, watts, user_login):
+def save_row_data(date, time, watts, user_login):
     if user_login:
         while True:
             save = input(" Do you wish to save this test data? Y/N:")
             user_sheet = SHEET.worksheet("demo")
             if save.lower() == "y":
-                save_data = [str(date), split, watts]
+                save_data = [str(date), time, watts]
                 user_sheet.append_row(save_data)
                 typed(" Your test data has been saved")
                 print("\n")
                 break
             elif save.lower() == "n":
                 typed(" Your test data has been deleted")
+                print("\n")
                 break
             else:
+                typed(" Invalid enrty.")
                 continue
 
