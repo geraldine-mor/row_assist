@@ -84,9 +84,10 @@ def lookup_category(age, gender, distance, watts):
     category = get_category(sheet, col_index)
     return category
 
+
 def save_row_data(date, time, watts, user_login):
     """
-    Provides option to save user data if the user is "logged in" and 
+    Provides option to save user data if the user is "logged in" and
     stores the data in the Google sheet
     """
     if user_login:
@@ -106,4 +107,3 @@ def save_row_data(date, time, watts, user_login):
             else:
                 typed(" Invalid enrty.")
                 continue
-

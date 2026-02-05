@@ -15,8 +15,8 @@ USER = {
 
 def check_user():
     """
-    Requests and verifies user login, if verified, retrieves stored 
-    age and gender data. Alternatively offers the option to proceed 
+    Requests and verifies user login, if verified, retrieves stored
+    age and gender data. Alternatively offers the option to proceed
     as a guest user requesting the age and gender data.
     Function returns user age, gender and login
     """
@@ -25,16 +25,17 @@ def check_user():
         if user_login.lower() == USER["login"]:
             user_age = calc.calculate_age(USER["DOB"])
             user_gender = USER["gender"]
+            typed(" Welcome back!\n")
             return user_age, user_gender, user_login
         elif user_login == "":
             print("")
             typed(
-        " You will soon be asked for your age, "
-        "gender and your latest 2k test time.\n"
+            " You will soon be asked for your age, "
+            "gender and your latest 2k test time.\n"
             )
             typed(
-        " I will calculate your split time and watts "
-        "and provide you with a ranking."
+            " I will calculate your split time and watts "
+            "and provide you with a ranking."
             )
             print("\n")
             age = inputs.get_age()
@@ -42,8 +43,8 @@ def check_user():
             return age, gender, False
         elif user_login.lower() != USER["login"] and user_login != "":
             typed(
-        " I'm sorry that login is not recognised, please try again\n"
-        " or press 'Enter' to continue as a guest.\n"
+            " I'm sorry that login is not recognised, please try again\n"
+            " or press 'Enter' to continue as a guest.\n"
             )
             continue
 
@@ -56,7 +57,7 @@ def main():
     # Source - https://stackoverflow.com/a/2084628
 
     display_header()
-   
+
     typed(
         " Welcome to Row Assist, your indoor rowing assistant."
     )

@@ -34,6 +34,6 @@ def calculate_age(DOB):
     Calculates user age from user dat of birth and today's date.
     Retruns user age
     """
-    age_diff = (date.today()- DOB).days
+    age_diff = (date.today() - DOB).days
     user_age = floor(age_diff / 365)
     return user_age

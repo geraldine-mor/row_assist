@@ -43,6 +43,10 @@ Defensive programming was manually tested with the below user acceptance testing
 
 | Feature | Expectation | Test | Result | Screenshot |
 | --- | --- | --- | --- | --- |
+| User Mode Selection | Feature is expected to accept valid login credentials. | Entered "demo" when prompted for login. | Login accepted, user authenticated, stored age and gender retrieved from USER data. | ![screenshot of successful login](documentation/defensive/login_demo.png) |
+| | Feature is expected to accept empty string for guest mode. | Pressed enter with no value when prompted for login. | Guest mode activated, user prompted to enter age and gender manually. | ![screenshot of guest mode](documentation/defensive/login_guest.png) |
+| | Feature is expected to reject invalid login credentials. | Entered "john" when prompted for login. | Error message displayed: "I'm sorry that login is not recognised, please try again or press 'Enter' to continue as a guest" and re-prompted. | ![screenshot of error message](documentation/defensive/login_invalid.png) |
+| | Feature is expected to be case-insensitive for valid login. | Entered "DEMO" and "Demo" when prompted for login. | Both accepted as valid login, user authenticated successfully. | ![screenshot of successful login](documentation/defensive/login_case.png) |
 | Age Input Validation | Feature is expected to reject non-numeric input. | Entered "forty" when prompted for the age. | Error message displayed: "Invalid age, please enter a number between 10 and 90" and re-prompted | ![screenshot of error message](documentation/defensive/age_forty.png) |
 | | Feature is expected to reject age entries below minimum (10). | Entered "7" for the age. | Error message displayed: "I'm sorry, only ages between 10 and 90 can be accepted" and re-prompted. | ![screenshot of error message](documentation/defensive/age_7.png) |
 |  | Feature is expected to reject age entries above the maximum (90). | Entered "92" for the age. | Error message displayed: "I'm sorry, only ages between 10 and 90 can be accepted" and re-prompted. | ![screenshot of error message](documentation/defensive/age_92.png) |

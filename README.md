@@ -286,6 +286,7 @@ To follow best practice, a charts were created for the app's data structure, dat
 - 2000m was chosen as the MVP scope boundary since it is the international gold standard of indoor rowing.
 - An exit/restart loop was chosen over exiting after each run to reflect real-world cases of multi-user or repeated-use scenarios such as rowing clubs or shared terminals. 
 - A lightweight login mechanism was implemented to support a demo user and guest usage without introducing full authentication complexity.
+- Despite the lack of secure user login credential validation, the user mode selection intput is called "Login" for ease of comprehension and improved user experience.
 
 #### Classes & Functions
 
