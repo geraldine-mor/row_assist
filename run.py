@@ -4,6 +4,8 @@ import calc
 import os
 import ref_data
 from datetime import date
+from gspread.exceptions import GSpreadException
+from google.auth.exceptions import GoogleAuthError
 
 
 USER = {
@@ -84,14 +86,19 @@ def main():
         typed(f" You are: {description[0]}\n {description[1]}\n {description[2]}")
         print("\n")
         ref_data.save_row_data(date.today(), row_time, watts, user_login, SHEET)
-    except Exception:
+    except (GSpreadException, GoogleAuthError):
         # print(traceback.format_exc())
         typed(
             " Apologies the database is not available at this time.\n"
             " Please check your connection and try again later\n"
             " If the problem persists, please contact customer support\n"
         )
-        
+    except Exception: 
+        typed(
+            " I'm sorry the program has encountered a problem and needs"
+            " to close.\n If the problem persists, please contact customer"
+            " support"
+        )
 
 def run():
     """
