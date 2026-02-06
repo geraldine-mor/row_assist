@@ -39,14 +39,16 @@ Lighthouse audits are not applicable to this project since they do not test the 
 
 ## Defensive Programming
 
+⚠️ --- Needs updating as features added --- ⚠️
+
 Defensive programming was manually tested with the below user acceptance testing to ensure invalid or unexpected user input is handled with clear feedback and without causing the program to crash.
 
 | Feature | Expectation | Test | Result | Screenshot |
 | --- | --- | --- | --- | --- |
-| User Mode Selection | Feature is expected to accept valid login credentials. | Entered "demo" when prompted for login. | Login accepted, user authenticated, stored age and gender retrieved from USER data. | ![screenshot of successful login](documentation/defensive/login_demo.png) |
-| | Feature is expected to accept empty string for guest mode. | Pressed enter with no value when prompted for login. | Guest mode activated, user prompted to enter age and gender manually. | ![screenshot of guest mode](documentation/defensive/login_guest.png) |
+| User Mode Selection | Feature is expected to accept valid login credentials. | Entered "demo" when prompted for login. | Login accepted, user authenticated, stored age and gender retrieved from USER data. | ![screenshot of successful login](documentation/defensive/demo_success.png) |
+| | Feature is expected to accept empty string for guest mode. | Pressed enter with no value when prompted for login. | Guest mode activated, user prompted to enter age and gender manually. | ![screenshot of guest mode](documentation/defensive/guest_success.png) |
 | | Feature is expected to reject invalid login credentials. | Entered "john" when prompted for login. | Error message displayed: "I'm sorry that login is not recognised, please try again or press 'Enter' to continue as a guest" and re-prompted. | ![screenshot of error message](documentation/defensive/login_invalid.png) |
-| | Feature is expected to be case-insensitive for valid login. | Entered "DEMO" and "Demo" when prompted for login. | Both accepted as valid login, user authenticated successfully. | ![screenshot of successful login](documentation/defensive/login_case.png) |
+| | Feature is expected to be case-insensitive for valid login. | Entered "DEMO" and "Demo" when prompted for login. | Both accepted as valid login, user authenticated successfully. | ![screenshot of successful login](documentation/defensive/demo_success.png) ![screenshot of successful login](documentation/defensive/DEMO_success.png) |
 | Age Input Validation | Feature is expected to reject non-numeric input. | Entered "forty" when prompted for the age. | Error message displayed: "Invalid age, please enter a number between 10 and 90" and re-prompted | ![screenshot of error message](documentation/defensive/age_forty.png) |
 | | Feature is expected to reject age entries below minimum (10). | Entered "7" for the age. | Error message displayed: "I'm sorry, only ages between 10 and 90 can be accepted" and re-prompted. | ![screenshot of error message](documentation/defensive/age_7.png) |
 |  | Feature is expected to reject age entries above the maximum (90). | Entered "92" for the age. | Error message displayed: "I'm sorry, only ages between 10 and 90 can be accepted" and re-prompted. | ![screenshot of error message](documentation/defensive/age_92.png) |
@@ -84,6 +86,8 @@ Defensive programming was manually tested with the below user acceptance testing
 
 ## User Story Testing
 
+⚠️ --- Needs updating as features added --- ⚠️
+
 | Target | Expectation | Outcome |  |
 | --- | --- | --- | --- |
 | As a user | I want to be greeted and receive clear instruction throughout | so that I understand and can use the app fully and easily. | ![screenshot of greeting](documentation/features/greeting.png) |
@@ -92,6 +96,7 @@ Defensive programming was manually tested with the below user acceptance testing
 | As a rower | I would like the application to compare my output to reference data | so that I can receive a category ranking relevant to my demographic. | ![screenshot of category](documentation/features/category_name.png) |
 | As a rower | I would like information about my ranking category | so that I can understand how my ranking compares to others. | ![screenshot of category description](documentation/features/category_description.png) |
 | As a coach | I would like to choose between exiting the program and restarting | so that all my athletes can enter their data. | ![screenshot of exit/restart](documentation/features/program_exit.png) |
+| As a returning user | I would like the application to store my performance tests | so that I can track improvements over time. | ![screenshot of save data](documentation/features/save_data.png) |
 
 ## Bugs
 
@@ -120,8 +125,7 @@ Any remaining open issues can be tracked [here](https://www.github.com/geraldine
 | Issue | Screenshot |
 | --- | --- |
 | When using a system clear function, any text above the height of the terminal (24 lines) does not clear, and remains when scrolling up. | ![screenshot](documentation/defensive/restart.png) |
-| ⚠️ The `colorama` terminal colors are fainter on Heroku when compared to the IDE locally. | ![screenshot](documentation/issues/colorama.png) |
-| ⚠️ Emojis are cut-off when viewing the application from Firefox. | ![screenshot](documentation/issues/emojis.png) |
+| Emojis are cut-off when viewing the application from Firefox. | ![screenshot](documentation/firefox_emojis.png) |
 | The Python terminal doesn't work well with Safari, and sometimes users cannot type in the application. | ![screenshot](documentation/safari_issue.png) |
 | If a user types `CTRL`+`C` in the terminal on the live site, they can manually stop the application and receive and error. | ![screenshot](documentation/keyboard_interrupt.png) |
 

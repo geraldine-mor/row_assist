@@ -287,6 +287,7 @@ To follow best practice, a charts were created for the app's data structure, dat
 - An exit/restart loop was chosen over exiting after each run to reflect real-world cases of multi-user or repeated-use scenarios such as rowing clubs or shared terminals. 
 - A lightweight login mechanism was implemented to support a demo user and guest usage without introducing full authentication complexity.
 - Despite the lack of secure user login credential validation, the user mode selection intput is called "Login" for ease of comprehension and improved user experience.
+- Exit confirmation omitted in favor of better UX. Users are prompted to save results immediately after viewing feedback, when the decision is most relevant. This eliminates the need for a generic "Are you sure?" at exit.
 
 #### Classes & Functions
 
@@ -379,6 +380,10 @@ I've used the following Python packages and external imports.
 ### GitHub Issues 
 
 [GitHub Issues](https://www.github.com/geraldine-mor/row_assist/issues) served as an another Agile tool. There, I managed my User Stories and tracked any issues/bugs.
+
+I used issue comments as I went along to help with the thought process. The ability to paste screenshots directly is a huge time saver. Examples of this can be found [here](https://github.com/geraldine-mor/row_assist/issues?q=label%3A%2B). 
+
+All [bugs](TESTING.md#bugs) are processed in this manner also.
 
 | Link | Screenshot |
 | --- | --- |

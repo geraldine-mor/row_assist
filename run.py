@@ -1,4 +1,4 @@
-from utils import typed, program_exit, display_header
+from utils import *
 import inputs
 import calc
 import os
@@ -75,14 +75,15 @@ def main():
     typed(f" Your watts generated are: {watts}")
     print("\n")
     typed(" Retrieving your ranking, please wait...\n")
-    category = ref_data.lookup_category(age, gender, distance, watts)
-    category_description = ref_data.get_category_description()
+    SHEET = ref_data.spreadsheet_connect()
+    category = ref_data.lookup_category(age, gender, distance, watts, SHEET)
+    category_description = ref_data.get_category_description(SHEET)
     typed(f" Your performance category is {category.title()}!\n")
     description = category_description[category]
     typed(f" You are: {description[0]}\n {description[1]}\n {description[2]}")
     print("\n")
-    ref_data.save_row_data(date.today(), row_time, watts, user_login)
-
+    ref_data.save_row_data(date.today(), row_time, watts, user_login, SHEET)
+    
 
 def run():
     """

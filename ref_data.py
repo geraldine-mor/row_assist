@@ -1,19 +1,30 @@
 import gspread
 from google.oauth2.service_account import Credentials
-from utils import typed
+from utils import typed, display_header
 
+def spreadsheet_connect():
+    SCOPE = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive.file",
+        "https://www.googleapis.com/auth/drive"
+    ]
 
-SCOPE = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-]
+    CREDS = Credentials.from_service_account_file("creds.json")
+    SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+    GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+    try:
+        SHEET = GSPREAD_CLIENT.open("row_assist")
+    except Exception:
+        typed(
+            " Apologies the database is not available at this time.\n"
+            " Please check your connection and try again later\n"
+            " If the problem persists, please contact customer support\n"
+        )
+        exit()
+    else:    
+        return SHEET
 
-CREDS = Credentials.from_service_account_file("creds.json")
-SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-
-SHEET = GSPREAD_CLIENT.open("row_assist")
+# SHEET = spreadsheet_connect()
 
 
 def get_row_number(col1, col2, age):
@@ -59,33 +70,33 @@ def get_category(sheet, index):
     return user_category
 
 
-def get_category_description():
+def get_category_description(sheet):
     """
     Retrieves all values from the categories sheet and converts
     them to a dictionary.
     """
-    keys = SHEET.worksheet("categories").col_values(1)
-    col2 = SHEET.worksheet("categories").col_values(2)
-    col3 = SHEET.worksheet("categories").col_values(3)
-    col4 = SHEET.worksheet("categories").col_values(4)
+    keys = sheet.worksheet("categories").col_values(1)
+    col2 = sheet.worksheet("categories").col_values(2)
+    col3 = sheet.worksheet("categories").col_values(3)
+    col4 = sheet.worksheet("categories").col_values(4)
     categories = {
         key: [a, b, c] for key, a, b, c in zip(keys, col2, col3, col4)}
     return categories
 
 
-def lookup_category(age, gender, distance, watts):
+def lookup_category(age, gender, distance, watts, sheet):
     """
     Determines user's performance category by looking up their age
     and watts against the relevant reference sheet
     """
-    sheet = SHEET.worksheet(f"{gender}_{distance}")
+    sheet = sheet.worksheet(f"{gender}_{distance}")
     row_index = get_row_number(sheet.col_values(1), sheet.col_values(2), age)
     col_index = get_col_number(sheet, row_index, watts)
     category = get_category(sheet, col_index)
     return category
 
 
-def save_row_data(date, time, watts, user_login):
+def save_row_data(date, time, watts, user_login, sheet):
     """
     Provides option to save user data if the user is "logged in" and
     stores the data in the Google sheet
@@ -93,7 +104,7 @@ def save_row_data(date, time, watts, user_login):
     if user_login:
         while True:
             save = input(" Do you wish to save this test data? Y/N:")
-            user_sheet = SHEET.worksheet(user_login)
+            user_sheet = sheet.worksheet(user_login)
             if save.lower() == "y":
                 save_data = [str(date), time, watts]
                 user_sheet.append_row(save_data)
