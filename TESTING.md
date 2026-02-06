@@ -48,7 +48,7 @@ Defensive programming was manually tested with the below user acceptance testing
 | User Mode Selection | Feature is expected to accept valid login credentials. | Entered "demo" when prompted for login. | Login accepted, user authenticated, stored age and gender retrieved from USER data. | ![screenshot of successful login](documentation/defensive/demo_success.png) |
 | | Feature is expected to accept empty string for guest mode. | Pressed enter with no value when prompted for login. | Guest mode activated, user prompted to enter age and gender manually. | ![screenshot of guest mode](documentation/defensive/guest_success.png) |
 | | Feature is expected to reject invalid login credentials. | Entered "john" when prompted for login. | Error message displayed: "I'm sorry that login is not recognised, please try again or press 'Enter' to continue as a guest" and re-prompted. | ![screenshot of error message](documentation/defensive/login_invalid.png) |
-| | Feature is expected to be case-insensitive for valid login. | Entered "DEMO" and "Demo" when prompted for login. | Both accepted as valid login, user authenticated successfully. | ![screenshot of successful login](documentation/defensive/demo_success.png) ![screenshot of successful login](documentation/defensive/DEMO_success.png) |
+| | Feature is expected to be case-insensitive for valid login. | Entered "DEMO" and "Demo" when prompted for login. | Both accepted as valid login, user authenticated successfully. | ![screenshot of successful login](documentation/defensive/demo_success.png) ![screenshot of successful login](documentation/defensive/demo_upper_success.png) |
 | Age Input Validation | Feature is expected to reject non-numeric input. | Entered "forty" when prompted for the age. | Error message displayed: "Invalid age, please enter a number between 10 and 90" and re-prompted | ![screenshot of error message](documentation/defensive/age_forty.png) |
 | | Feature is expected to reject age entries below minimum (10). | Entered "7" for the age. | Error message displayed: "I'm sorry, only ages between 10 and 90 can be accepted" and re-prompted. | ![screenshot of error message](documentation/defensive/age_7.png) |
 |  | Feature is expected to reject age entries above the maximum (90). | Entered "92" for the age. | Error message displayed: "I'm sorry, only ages between 10 and 90 can be accepted" and re-prompted. | ![screenshot of error message](documentation/defensive/age_92.png) |
@@ -58,7 +58,7 @@ Defensive programming was manually tested with the below user acceptance testing
 |  | Feature is expected to reject any letter except "m" or "f". | Entered "g" for the gender. | Error message displayed: "Invalid entry, please enter either m or f" and re-prompted. | ![screenshot of error message](documentation/defensive/gender_g.png) |
 |  | Feature is expected to reject multiple characters or words. | Entered "male" for the gender. | Error message displayed: "Invalid entry, please enter either m or f" and re-prompted. | ![screenshot of error message](documentation/defensive/gender_male.png) |
 |  | Feature is expected to accept lowercase valid input. | Entered both "m" and "f" for gender. | Both values accepted without issue and program moved on to next step. | ![screenshot of successful input](documentation/defensive/gender_m.png)  ![screenshot of successful input](documentation/defensive/gender_f.png) |
-|  | Feature is expected to accept uppercase valid input. | Entered both "M" and "F" for gender. | Both values accepted without issue and program moved on to next step. | ![screenshot of successful input](documentation/defensive/gender_M.png)  ![screenshot of successful input](documentation/defensive/gender_F.png) |
+|  | Feature is expected to accept uppercase valid input. | Entered both "M" and "F" for gender. | Both values accepted without issue and program moved on to next step. | ![screenshot of successful input](documentation/defensive/gender_m_upper.png)  ![screenshot of successful input](documentation/defensive/gender_f_upper.png) |
 |  | Feature is expected to reject blank entries. | Pressed enter with no value entered. | Error message displayed: "Invalid entry, please enter either m or f" and re-prompted. | ![screenshot of error message](documentation/defensive/gender_blank.png) |
 | Minutes Input Validation | Feature is expected to reject non-numeric characters. | Entered "z" for minutes. | Error message displayed: "Invalid entry, please enter a minutes value between 0 and 59" and re-prompted. | ![screenshot of error message](documentation/defensive/minutes_z.png) |
 |  | Feature is expected to reject negative values | Entered "-3" for minutes. | Error message displayed: "Invalid entry, please enter a minutes value between 0 and 59" and re-prompted. | ![screenshot of error message](documentation/defensive/minutes_negative.png) |
@@ -76,13 +76,26 @@ Defensive programming was manually tested with the below user acceptance testing
 |  | Feature is expected to reject blank input. | Pressed enter with no value entered. | Error message displayed: "Invalid entry, please enter a tenths value between 0 and 9" and re-prompted. | ![screenshot of error message](documentation/defensive/tenths_blank.png) |
 |  | Feature is expected to accept valid tenths values at the boundaries. | Entered "0" and "9" for tenths. | Both values accepted without issue and program moved on to next step. | ![screenshot of successful input](documentation/defensive/tenths_0.png) ![screenshot of successful input](documentation/defensive/tenths_9.png) |
 | Program Restart | Feature is expected to restart the program with a clear screen when any key except "x" is entered. | Entered "w", "Insert" and "7" as well as no value. | All values initiated the program restart and cleared the visible window though scrolling upward revealed uncleared text (see [known issues](#known-issues)). | ![screenshot of restart](documentation/defensive/restart.png) |
-| Program Exit | Feature is expected to safely close the program if "x" is entered. | Entered "x" and "X". | Program closed with no issues. | ![screenshot of closed program](documentation/defensive/exit_x.png) ![screenshot of closed program](documentation/defensive/exit_X.png) | 
+| Program Exit | Feature is expected to safely close the program if "x" is entered. | Entered "x" and "X". | Program closed with no issues. | ![screenshot of closed program](documentation/defensive/exit_x.png) ![screenshot of closed program](documentation/defensive/exit_x_upper.png) | 
 
 ### Edge Case Handling
 
 | Feature | Test | Result | Screenshot |
 | --- | --- | --- | --- |
 | World Record Detection | Entered time faster than world record (5:35.8) | Humorous message displayed: "Greetings Barry Allen! The fastest 2k ever recorded is 5:35.8 and you smashed it!" | ![screenshot of world record message](documentation/wr_message.png) |
+
+### Error Handling
+
+| Scenario | Test | Result | Screenshot |
+| --- | --- | --- | --- |
+| API Connection Failure | Disconnected the internet connection prior to program run | Program displayed datbase not available error messaged and prodeeded to the exit function | ![screenshot of error message](documentation/defensive/no_connection.png) |
+| API Connection Lost During Runtime | Disconnected the internet while the program was running | Program displayed datbase not available error messaged and prodeeded to the exit function | ![screenshot of error message](documentation/defensive/no_connection.png) |
+| Invalid Sheet Reference | Changed the name of the worksheet to "row_ssist" | Program displayed datbase not available error messaged and prodeeded to the exit function | ![screenshot of error message](documentation/defensive/no_connection.png) |
+| API Authentication Failure | Changed the credentials file name to cred.json in ref_py | Program displayed unexplained error message and proceeded to exit function | ![screenshot of error message](documentation/defensive/other_error.png) |
+| Missing Spreadsheet Data | Removed the data from a max age cell and agaon from a category row cell | Program displayed unexplained error message both times and proceeded to exit function | ![screenshot of error message](documentation/defensive/other_error.png) |
+
+**Testing Environment:** Local terminal (Python 3.14.2)
+**Reason:** Deployed mock terminal requires internet connection to load, preventing simulation of connection failures
 
 ## User Story Testing
 

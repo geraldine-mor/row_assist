@@ -2,6 +2,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 from utils import typed
 
+
 def spreadsheet_connect():
     SCOPE = [
         "https://www.googleapis.com/auth/spreadsheets",
@@ -24,7 +25,7 @@ def get_row_number(col1, col2, age):
     and returns the list index of the correct range tuple
     """
     age_range = [(x, y) for x, y in zip(col1, col2)]
-    del age_range[0]  
+    del age_range[0]
     # Removes title cell
     # Use of del keyword suggested by Geeks for Geeks (link in credits)
     for row_index, age_tuple in enumerate(age_range, 2):

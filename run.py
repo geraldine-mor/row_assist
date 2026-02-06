@@ -6,6 +6,7 @@ import ref_data
 from datetime import date
 from gspread.exceptions import GSpreadException
 from google.auth.exceptions import GoogleAuthError
+import traceback
 
 
 USER = {
@@ -32,12 +33,12 @@ def check_user():
         elif user_login == "":
             print("")
             typed(
-            " You will soon be asked for your age, "
-            "gender and your latest 2k test time.\n"
+                " You will soon be asked for your age, "
+                "gender and your latest 2k test time.\n"
             )
             typed(
-            " I will calculate your split time and watts "
-            "and provide you with a ranking."
+                " I will calculate your split time and watts "
+                "and provide you with a ranking."
             )
             print("\n")
             age = inputs.get_age()
@@ -45,8 +46,8 @@ def check_user():
             return age, gender, False
         elif user_login.lower() != USER["login"] and user_login != "":
             typed(
-            " I'm sorry that login is not recognised, please try again\n"
-            " or press 'Enter' to continue as a guest.\n"
+                " I'm sorry that login is not recognised, please try again\n"
+                " or press 'Enter' to continue as a guest.\n"
             )
             continue
 
@@ -79,13 +80,17 @@ def main():
     typed(" Retrieving your ranking, please wait...\n")
     try:
         SHEET = ref_data.spreadsheet_connect()
-        category = ref_data.lookup_category(age, gender, distance, watts, SHEET)
+        category = ref_data.lookup_category(
+            age, gender, distance, watts, SHEET)
         category_description = ref_data.get_category_description(SHEET)
         typed(f" Your performance category is {category.title()}!\n")
         description = category_description[category]
-        typed(f" You are: {description[0]}\n {description[1]}\n {description[2]}")
+        typed(
+            f" You are: {description[0]}\n {description[1]}\n {description[2]}"
+        )
         print("\n")
-        ref_data.save_row_data(date.today(), row_time, watts, user_login, SHEET)
+        ref_data.save_row_data(
+            date.today(), row_time, watts, user_login, SHEET)
     except (GSpreadException, GoogleAuthError):
         # print(traceback.format_exc())
         typed(
@@ -93,12 +98,15 @@ def main():
             " Please check your connection and try again later\n"
             " If the problem persists, please contact customer support\n"
         )
-    except Exception: 
+        print("")
+    except Exception:
         typed(
             " I'm sorry the program has encountered a problem and needs"
             " to close.\n If the problem persists, please contact customer"
             " support"
         )
+        print("\n")
+
 
 def run():
     """
