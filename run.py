@@ -56,7 +56,7 @@ def main():
     Runs all functions
     """
     os.system('cls' if os.name == 'nt' else 'clear')
-    # Source - https://stackoverflow.com/a/2084628
+    # Copied code, source - https://stackoverflow.com/a/2084628
 
     display_header()
 

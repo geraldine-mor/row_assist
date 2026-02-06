@@ -44,6 +44,7 @@ def get_row_time():
     seconds = get_time("seconds")
     tenths = get_tenths()
     display_time = f"{minutes}:{seconds.zfill(2)}.{tenths}"
+    # Use of zfill() inspired by reddit answer (link in credits) 
 
     utils.typed(f" You entered: {display_time}")
     print("\n")

@@ -7,7 +7,7 @@ Developer: Geraldine Morey ([geraldine-mor](https://www.github.com/geraldine-mor
 [![GitHub repo size](https://img.shields.io/github/repo-size/geraldine-mor/row_assist)](https://www.github.com/geraldine-mor/row_assist)
 [![badge](https://img.shields.io/badge/deployment-Heroku-purple)](https://row-assist-0ee155171c88.herokuapp.com)
 
-```text
+```title banner
  ██████╗  ██████╗ ██╗    ██╗    █████╗ ███████╗███████╗██╗███████╗████████╗
  ██╔══██╗██╔═══██╗██║    ██║   ██╔══██╗██╔════╝██╔════╝██║██╔════╝╚══██╔══╝
  ██████╔╝██║   ██║██║ █╗ ██║   ███████║███████╗███████╗██║███████╗   ██║
@@ -45,6 +45,8 @@ The program also delivers a performance category or ranking and explains how thi
 
 You are then offered the option to save or discard the data before being asked if you would like to exit or restart.
 
+Should the API connection fail, you will receive an error message before being offered the option to exit or restart.
+
 **Guest:**
 
 After the greeting, press 'Enter' to enter guest mode and you will be prompted to enter your age and indicate your gender before being asked to enter your time as above.
@@ -53,12 +55,12 @@ The program delivers the same feedback but will not offer the option to save pri
 
 ## UX
 
+ **MVP** <br>
+ A command-line indoor rowing assistant that collects basic user and performance data, calculates derived metrics, compares them against performance standards and provides tailored, categorised feedback to the user.
+
 ### The 5 Planes of UX
 
 #### 1. Strategy
-
-> **MVP** <br>
-> A command-line indoor rowing assistant that collects basic user and performance data, calculates derived metrics, compares them against performance standards and provides tailored, categorised feedback to the user.
 
 **Purpose**
 - Provide users with alternative metrics for their workout 
@@ -90,9 +92,10 @@ The program delivers the same feedback but will not offer the option to save pri
 <br>
 
 **Content Constraints**
-- Only 2000m tests accepted in MVP
+- Only 2000m tests accepted
 - Age must map to a defined range
-- Only male & female categories supported - HW and LW removed from MVP due to lack of available data
+- Only male & female categories supported
+- HW and LW categories removed due to lack of available data
 - The deployment terminal is set to 80 columns wide by 24 rows
 
 #### 3. Structure
@@ -110,55 +113,69 @@ The program delivers the same feedback but will not offer the option to save pri
 4. If applicable, user chooses whether to save data → is informed of successful save or deletion
 5. User chooses whether to exit the program or restart
 
+**[Flowchart](#flowchart)** (see below)
+
 #### 4. Skeleton
 
-**[Wireframes](#wireframes)** (see below)
+**Terminal Layout**
+- 80 columns × 24 rows display constraint
+- ASCII art branding header (ROW ASSIST logo)
+- ASCII art footer (rowing machine illustration)
+- Single-line spaces used throughout to create visual space between sections
+
+**Visual Hierarchy**
+- Application title: Large ASCII art letterforms
+- Welcome message: Standard text, left-aligned below header
+- Instructions: Plain text paragraph format
+- Prompts: Single-line, left-aligned with descriptive label
+- User input: Inline continuation of prompt line
+- Confirmation messages: Standalone line (e.g., "You entered: 7:45.6")
+- Processing indicators: Action statements ("Retrieving your ranking, please wait...")
+- Results: Each metric on its own line, label followed by colon and value
+- Performance feedback: Multi-line paragraph format with category emphasized
+- Navigation prompts: Instruction line with options specified
+
+**Output Formatting**
+- Calculated metrics: Label format - "Your split time is: [value]"
+- Time display: Standard format mm:ss.d (e.g., "1:56.4")
+- Performance category: Emphasised with exclamation mark ("Advanced!")
+- Contextual explanation: Multi-line plain text with comparison percentage
+
+**Input Structure**
+- Sequential single-field prompts for each data point
+- Time entry broken into three separate inputs (minutes, seconds, tenths)
+- Confirmation display before processing
+- Single-key commands for save/discard and exit/restart choice
+
+**Message Types**
+- Instructions: Conversational, second-person ("You will soon be asked...")
+- Prompts: Direct, imperative ("Please enter your age")
+- Feedback: Encouraging, second-person ("Fantastic performance...")
+- System actions: Present progressive ("Calculating...", "Retrieving...")
+
+Wireframes were not prepared for this project due to the visual and navigational constraints of the terminal environment. Wireframes serve primarily as a GUI design tool and I deemed it inappropriate since CLI applications have no GUI.
+
+This sample output clearly demonstrates the layout, spacing and formatting chosen.
+
+![screenshot of terminal output](documentation/terminal_output.png)
 
 #### 5. Surface
 
 **Visual Design Elements**
 - **Graphics** - ASCII graphics were added for a heading and closing image.
+- **Animation** - A typewriter effect was added to the print statements to create a more interactive feel.
+- **Emojis** - Lightning bolt emojis were used to emphasise speed in the Flash reference for sub world record time entries.
 
-## Wireframes
+## Flowchart
 
-To follow best practice, a flowchart was created to showcase the progression of the Python app.
+To follow best practice, a flowchart was created to showcase the progression of the Python app.The flowchart below represents the main process of this Python program. It shows the entire cycle of the application. 
+
+![screenshot](documentation/flowchart_final.png)
+
 I used [draw.io](https://www.drawio.com/) to design my app flowchart.
 I used [chatGPT](http://www.chatgpt.com) and [Mermaid Chart](http://www.mermaid.ai) to convert the flowchart to an interactive mermaid version.
 
-```mermaid
----
-config:
-  theme: mc
----
-flowchart TD
-    A([Start Program])
-    A --> B["Greet user and<br/>provide instructions"]
-
-    B --> C{"Login or continue<br/>as guest?"}
-    C -- Persistent user --> D["Retrieve stored user data<br/>(age, gender)"]
-    C -- Guest --> E["Request user data:<br/>age, gender"]
-
-    D --> F["Request row data:<br/>duration (MM:SS.s), distance"]
-    E --> F
-
-    F --> G{Is data valid?}
-    G -- No --> F
-    G -- Yes --> H["Parse data into<br/>correct format"]
-
-    H --> I["Calculate watts<br/>and 500m split"]
-    I --> J["Lookup performance category"]
-    J --> K["Provide user feedback"]
-
-    K --> L{"Persistent user?"}
-    L -- Yes --> M{"Save workout data?"}
-    M -- Yes --> N["Store workout data"]
-    M -- No --> O(["End / Restart Program"])
-
-    L -- No --> O
-    N --> O
-```
-
-Source: [Mermaid Flowchart for Row Assist](https://mermaid.ai/app/projects/212e9a6a-2b8a-4b72-be94-8a77217d6f55/diagrams/ccf39e03-b715-4b69-a013-1cd69f5dea7f/version/v0.1/edit)
+The Mermaid version can be found [here](https://mermaid.ai/app/projects/212e9a6a-2b8a-4b72-be94-8a77217d6f55/diagrams/ccf39e03-b715-4b69-a013-1cd69f5dea7f/version/v0.1/edit)
 
 ## User Stories
 
@@ -254,19 +271,13 @@ A final worksheet titled `demo` stores the persitent user's saved workouts
 
 To follow best practice, a charts were created for the app's data structure, data flow and logic. I mapped them out using [Draw.io](https://www.draw.io). 
 
->#### Data structure diagram
->
->![data structure diagram](documentation/data_structure_diagram.png)
+#### Data structure diagram
 
->#### Data flow diagram
->
->![data flow diagram](documentation/data_flow.png)
+![data structure diagram](documentation/data_structure_diagram.png)
 
->#### Flowchart
->
->The flowchart below represents the main process of this Python program. It shows the entire cycle of the application. I included potential future features to map out how they would fit in the app.
->
->![screenshot](documentation/flowchart.png)
+#### Data flow diagram
+
+![data flow diagram](documentation/data_flow_diagram.png)
 
 #### Key Design Decisions
 
@@ -358,14 +369,17 @@ The primary functions used on this application are:
 
 ⚠️ --- Update as needed --- ⚠️
 
-I've used the following Python packages and external imports.
+I used the following Python packages and external imports.
 
 - `gspread`: used with the Google Sheets API.
 - `google.oauth2.service_account`: used for the Google Sheets API credentials.
 - `time`: used for adding time delays.
 - `math`: used for `floor()` function in split-time calculation.
 - `os`: used for clearing the terminal screen.
-- `datetime`: used to provide today's date and calculate user age 
+- `datetime`: used to provide today's date and calculate user age. 
+- `gspread.exceptions`: used for GSpreadException in the error handler.
+- `google.auth.exceptions`: used for GoogleAuthExceptions in the error handler.
+
 
 ## Agile Development Process
 
@@ -466,21 +480,19 @@ This application uses [Google Sheets](https://docs.google.com/spreadsheets) to h
 
 To run your own version of this application, you will need to create your own Google Sheet. Please access the reference data from [this Google Sheet](https://docs.google.com/spreadsheets/d/119Xo6s5GHh3TByg5RX9KweasEAjIXfFIDiJ2PawTKCo/edit?usp=sharing) or the screenshots below:
 
->*Sheet must be named m_2000*
->
->![screenshot of m_2000 worksheet](documentation/m_2000.png)
+*Sheet must be named m_2000*
+![screenshot of m_2000 worksheet](documentation/m_2000.png)
 
->*Sheet must be named f_2000*
->
->![screenshot of f_2000 worksheet](documentation/f_2000.png)
+*Sheet must be named f_2000*
+![screenshot of f_2000 worksheet](documentation/f_2000.png)
 
->*Sheet must be named categories*
->
->![screenshot of categories worksheet](documentation/categories.png)
+*Sheet must be named categories*
+![screenshot of categories worksheet](documentation/categories.png)
 
 A credentials file in `.JSON` format from the Google Cloud Platform is also mandatory:
-
 [Google Cloud Platform](https://console.cloud.google.com)
+
+As this application is dependent upon the API connection, an error handler was included to inform the user that the connection was lost and proceeds to the exit/restart question.
 
 1. From the dashboard click on "Select a project", and then the **NEW PROJECT** button.
 2. Give the project a name, and then click **CREATE**.
@@ -562,15 +574,16 @@ There are no further remaining major differences between the local version when 
 | [Reddit](https://www.reddit.com/r/learnpython/comments/wo2dsf/help_with_turning_the_output_time_into_double/) | `zfill()` - Inserting a 0 in front of single digit minutes |
 | [Concept2](https://www.concept2.com/training/watts-calculator?srsltid=AfmBOopI0dHvoliPGL3P7TfzIBMty9e94rKL8qJ5mvJNdeJP5Di-7f1g) | Split-time to watts formula |
 | [Rowing Level](https://rowinglevel.com/rowing-times/2000m-times) | Rowing reference data |
-| [Geeks for Geeks](https://www.geeksforgeeks.org/python/enumerate-in-python/) | `enumerate()` - Retrieving indeces |
+| [w3 Schools](https://www.w3schools.com/python/ref_func_enumerate.asp) | `enumerate()` - Retrieving indeces, adding a start position |
 | [Geeks for Geeks](https://www.geeksforgeeks.org/python/python-removing-first-element-of-list/) | `del` - Removing the first list item |  
-| [gspread](https://docs.gspread.org/en/latest/user-guide.html#getting-a-cell-value) | `.cell(row, col).value` Retrieving a cell value |
+| [gspread](https://docs.gspread.org/en/latest/user-guide.html#getting-a-cell-value) | `.cell(row, col).value` Retrieving a cell value, API exceptions |
 | [ASCII art](https://www.asciiart.eu/image-to-ascii) | Create image of rowing machine |
 | [StackOverflow](https://stackoverflow.com/questions/2084508/clear-the-terminal-in-python) | Clear the terminal screen |
 | [Botanic Garden Berlin Museum](https://www.bgbm.org/cdefd/collectionmodel/dsd.htm) | Data structure diagram example |
 | [ChatGPT](https://chatgpt.com) | Help with planning and explanations |
-| [Claude](https://claude.ai) | Development support and technical guidance |
+| [Claude](https://claude.ai) | Development support, technical guidance and documentation advice |
 | [Labex](https://labex.io/tutorials/python-how-to-convert-timedelta-to-days-421860) | Datetime tutorial |
+| [Real Python](https://realpython.com/ref/stdlib/traceback/) | Used to debug when exception handler in place |
 
 ### Media
 
@@ -597,6 +610,7 @@ I requested that both models used the Socratic approach and instructed both to a
 
 ### Acknowledgements
 
-- I would like to thank my Code Institute mentors, [Tim Nelson](https://www.github.com/TravelTimN) ⚠️ And ... ⚠️for the support throughout the development of this project.
+- I would like to thank [Tim Nelson](https://www.github.com/TravelTimN) for the readme builder template.
+- I would like to thank Code Institute mentor Can Sücüllü for his support and guidance during the development of this project.
 - I would like to thank the [Code Institute Discord community](https://discord-portal.codeinstitute.net) for the moral support; it kept me going during periods of self doubt and impostor syndrome.
 - I would like to thank my partner, Niall, for believing in me and allowing me to make this transition into software development.

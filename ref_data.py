@@ -1,7 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
-from utils import typed, display_header
-import traceback
+from utils import typed
 
 def spreadsheet_connect():
     SCOPE = [
@@ -13,7 +12,7 @@ def spreadsheet_connect():
     CREDS = Credentials.from_service_account_file("creds.json")
     SCOPED_CREDS = CREDS.with_scopes(SCOPE)
     GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-    GSPREAD_CLIENT.set_timeout(30)
+    GSPREAD_CLIENT.set_timeout(10)
     SHEET = GSPREAD_CLIENT.open("row_assist")
     return SHEET
 
@@ -25,9 +24,12 @@ def get_row_number(col1, col2, age):
     and returns the list index of the correct range tuple
     """
     age_range = [(x, y) for x, y in zip(col1, col2)]
-    del age_range[0]  # Removes title cell
+    del age_range[0]  
+    # Removes title cell
+    # Use of del keyword suggested by Geeks for Geeks (link in credits)
     for row_index, age_tuple in enumerate(age_range, 2):
         # Row 0 doesn't exist and row 1 is headings
+        # Use of enumerate() explained by w3 schools (link in credits)
         min_age, max_age = age_tuple
         if int(age) >= int(min_age) and int(age) <= int(max_age):
             return row_index
@@ -40,10 +42,12 @@ def get_col_number(sheet, index, watts):
     the column number for the PREVIOUS column
     """
     watts_row = sheet.row_values(index)
-    watts_row = watts_row[2:]  # Removes min_age and max_age values
+    watts_row = watts_row[2:]
+    # Removes min_age and max_age values
     for col_index, ref_watts in enumerate(watts_row, 3):
         # Cols 1&2 are age values so enumerate starts at 3
         if int(watts) < int(sheet.cell(index, 3).value):
+            # Use of cell(row, column).value derived from gspread docs
             return 3
         elif int(watts) < int(ref_watts):
             return col_index - 1

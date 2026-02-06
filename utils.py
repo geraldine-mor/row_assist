@@ -10,6 +10,7 @@ def typed(string):
     for i in string:
         print(i, end="", flush=True)
         time.sleep(0.03)
+        # Code derived from Stack Overflow (link in credits)
 
 
 def display_header():
@@ -23,7 +24,8 @@ def display_header():
  ██╔══██╗██║   ██║██║███╗██║   ██╔══██║╚════██║╚════██║██║╚════██║   ██║
  ██║  ██║╚██████╔╝╚███╔███╔╝   ██║  ██║███████║███████║██║███████║   ██║
  ╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝    ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝╚══════╝   ╚═╝
-    """)  # Title artwork created with claude.ai
+    """)  
+    # Title artwork created with claude.ai
 
 
 def check_wr(time):
