@@ -1,6 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from utils import typed, display_header
+import traceback
 
 def spreadsheet_connect():
     SCOPE = [
@@ -12,19 +13,9 @@ def spreadsheet_connect():
     CREDS = Credentials.from_service_account_file("creds.json")
     SCOPED_CREDS = CREDS.with_scopes(SCOPE)
     GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-    try:
-        SHEET = GSPREAD_CLIENT.open("row_assist")
-    except Exception:
-        typed(
-            " Apologies the database is not available at this time.\n"
-            " Please check your connection and try again later\n"
-            " If the problem persists, please contact customer support\n"
-        )
-        exit()
-    else:    
-        return SHEET
-
-# SHEET = spreadsheet_connect()
+    GSPREAD_CLIENT.set_timeout(30)
+    SHEET = GSPREAD_CLIENT.open("row_assist")
+    return SHEET
 
 
 def get_row_number(col1, col2, age):

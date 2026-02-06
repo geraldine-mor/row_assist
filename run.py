@@ -75,15 +75,23 @@ def main():
     typed(f" Your watts generated are: {watts}")
     print("\n")
     typed(" Retrieving your ranking, please wait...\n")
-    SHEET = ref_data.spreadsheet_connect()
-    category = ref_data.lookup_category(age, gender, distance, watts, SHEET)
-    category_description = ref_data.get_category_description(SHEET)
-    typed(f" Your performance category is {category.title()}!\n")
-    description = category_description[category]
-    typed(f" You are: {description[0]}\n {description[1]}\n {description[2]}")
-    print("\n")
-    ref_data.save_row_data(date.today(), row_time, watts, user_login, SHEET)
-    
+    try:
+        SHEET = ref_data.spreadsheet_connect()
+        category = ref_data.lookup_category(age, gender, distance, watts, SHEET)
+        category_description = ref_data.get_category_description(SHEET)
+        typed(f" Your performance category is {category.title()}!\n")
+        description = category_description[category]
+        typed(f" You are: {description[0]}\n {description[1]}\n {description[2]}")
+        print("\n")
+        ref_data.save_row_data(date.today(), row_time, watts, user_login, SHEET)
+    except Exception:
+        # print(traceback.format_exc())
+        typed(
+            " Apologies the database is not available at this time.\n"
+            " Please check your connection and try again later\n"
+            " If the problem persists, please contact customer support\n"
+        )
+        
 
 def run():
     """
