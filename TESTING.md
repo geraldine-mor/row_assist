@@ -75,7 +75,11 @@ Defensive programming was manually tested with the below user acceptance testing
 |  | Feature is expected to reject values above 9. | Entered "12" for tenths. | Error message displayed: "Invalid entry, please enter a tenths value between 0 and 9" and re-prompted. | ![screenshot of error message](documentation/defensive/tenths_12.png) |
 |  | Feature is expected to reject blank input. | Pressed enter with no value entered. | Error message displayed: "Invalid entry, please enter a tenths value between 0 and 9" and re-prompted. | ![screenshot of error message](documentation/defensive/tenths_blank.png) |
 |  | Feature is expected to accept valid tenths values at the boundaries. | Entered "0" and "9" for tenths. | Both values accepted without issue and program moved on to next step. | ![screenshot of successful input](documentation/defensive/tenths_0.png) ![screenshot of successful input](documentation/defensive/tenths_9.png) |
-| ⚠️ --- Add Save data testing --- ⚠️ |  |  |  |
+| Save Data | Feature is expected to reject invalid data type | Entered "7" when prompted | Error message & re-prompt displayed: "Invalid entry. Do you wish to save this test adta? Y/N: " | ![screenshot of error message](documentation/defensive/save_7.png) |
+|  | Feature is expected to reject strings other than "y", "Y", "n" and "N" | Entered "yes" when prompted | Error message & re-prompt displayed: "Invalid entry. Do you wish to save this test adta? Y/N: " | ![screenshot of error message](documentation/defensive/save_yes.png) |
+|  | Feature is expected to reject blank entries | Entered "" when prompted | Error message & re-prompt displayed: "Invalid entry. Do you wish to save this test adta? Y/N: " | ![screenshot of error message](documentation/defensive/save_blank.png) | 
+|  | Feature is expected accept "y" and "Y" for save confirmation | Tested "y" and "Y" when prompted | Data saved both times | ![screenshot of save message](documentation/defensive/save_y.png) ![screenshot of save message](documentation/defensive/save_y_upper.png) ![screenshot of saved data](documentation/defensive/save_sheet.png)| 
+|  | Feature is expected accept "n" and "N" for save rejection | Tested "n" and "N" when prompted | Data descarded both times | ![screenshot of deleted message](documentation/defensive/save_n.png) ![screenshot of deleted message](documentation/defensive/save_n_upper.png) |
 | Program Restart | Feature is expected to restart the program with a clear screen when any key except "x" is entered. | Entered "w", "Insert" and "7" as well as no value. | All values initiated the program restart and cleared the visible window though scrolling upward revealed uncleared text (see [known issues](#known-issues)). | ![screenshot of restart](documentation/defensive/restart.png) |
 | Program Exit | Feature is expected to safely close the program if "x" is entered. | Entered "x" and "X". | Program closed with no issues. | ![screenshot of closed program](documentation/defensive/exit_x.png) ![screenshot of closed program](documentation/defensive/exit_x_upper.png) | 
 
@@ -84,6 +88,7 @@ Defensive programming was manually tested with the below user acceptance testing
 | Feature | Test | Result | Screenshot |
 | --- | --- | --- | --- |
 | World Record Detection | Entered time faster than world record (5:35.8) | Humorous message displayed: "Greetings Barry Allen! The fastest 2k ever recorded is 5:35.8 and you smashed it!" | ![screenshot of world record message](documentation/wr_message.png) |
+| Save Data Guest User Handling | Completed program as guest to see if save option offered | Program moved from category description to exit program without offering the save option | ![screenshot of no save option](documentation/save_guest.png) |
 
 ### Error Handling
 
