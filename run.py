@@ -4,12 +4,11 @@
 from utils import *
 import inputs
 import calc
-import os
 import ref_data
 from datetime import date
 from gspread.exceptions import GSpreadException
 from google.auth.exceptions import GoogleAuthError
-import traceback
+import traceback  # Only used for debugging
 
 
 def get_user():
@@ -74,9 +73,7 @@ def main():
     Manages calls to input collection, metric calculation and performance
     evaluating functions. Handles API/connection and data errors gracefully.
     """
-    # Copied code, source - https://stackoverflow.com/a/2084628
-    os.system('cls' if os.name == 'nt' else 'clear')
-
+    clear_terminal()
     display_header()
 
     typed(
@@ -86,17 +83,24 @@ def main():
     typed(
         " Please enter your login or press 'Enter' to continue as a guest.\n"
     )
+
     USER = get_user()
     age, gender, user_login = check_user(USER)
     # Added to allow functions to run correctly if more distances added
     distance = 2000
-    row_time = inputs.get_row_time()
+    print("")
+    row_time, display_time = inputs.get_row_time()
+    typed(f" You entered: {display_time}")
+    print("\n")
+    check_wr(row_time)
+    typed(" Calculating your scores...\n")
     split_time, display_split = calc.calculate_splits(row_time, distance)
     typed(f" Your split time is: {display_split}\n")
     watts = calc.calculate_watts(split_time)
     typed(f" Your watts generated are: {watts}")
     print("\n")
     typed(" Retrieving your ranking, please wait...\n")
+
     try:
         SHEET = ref_data.spreadsheet_connect()
         category = ref_data.lookup_category(
@@ -108,8 +112,7 @@ def main():
             f" You are: {description[0]}\n {description[1]}\n {description[2]}"
         )
         print("\n")
-        ref_data.save_row_data(
-            date.today(), row_time, watts, user_login, SHEET)
+        ref_data.save_row_data(row_time, watts, user_login, SHEET)
     except (GSpreadException, GoogleAuthError):
         # Uncomment to debug API errors
         # print(traceback.format_exc())

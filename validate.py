@@ -1,21 +1,27 @@
+"""Handles all validation logic for user inputs."""
+
+
 import utils
 
 
 def validate_age(age):
     """
-    Inside the try, converts age to an integer.
-    Raises ValueError if string cannot be converted into int
-    Raises TypeError if age falls outside the range 10-90
+    Validates user's age input for type and range
+
+    Args:
+        age (str): User's age input to be tested
+
+    Returns:
+        bool: True if age input is an integer in range 10-90, otherwise False
     """
     try:
         if int(age) < 10 or int(age) > 90:
-            raise TypeError
+            utils.typed(
+                " I'm sorry only ages between 10 and 90 can be accepted")
+            print("\n")
+            return False
     except ValueError:
         utils.typed(" Invalid age, please enter a number between 10 and 90")
-        print("\n")
-        return False
-    except TypeError:
-        utils.typed(" I'm sorry only ages between 10 and 90 can be accepted")
         print("\n")
         return False
 
@@ -24,8 +30,14 @@ def validate_age(age):
 
 def validate_gender(gender):
     """
-    Inside the try, checks for m or f character.
-    Raises ValueError if any other character is entered
+    Validates user's gender input for type and valid values
+
+    Args:
+        gender (str): User's gender input to be tested
+
+    Returns:
+        bool: True if gender input is "m", "M", "f" or "F",
+            otherwise False
     """
     try:
         if gender.lower() != "f" and gender.lower() != "m":
@@ -38,18 +50,26 @@ def validate_gender(gender):
     return True
 
 
-def validate_time(time, string):
+def validate_time(time, time_unit):
     """
-    Inside the try, converts time to integer
-    Raises ValueError if the string can't be converted or if minutes
-    fall ouside the range 0-59
+    Validates user's time inputs for type and range
+
+    Args:
+        time (str): User's time input to be tested
+        time_unit (str): Unit of time to be displayed in the error message,
+            minutes or seconds
+
+    Returns:
+        bool: True if time input is an integer in range 0-59, otherwise False
     """
     try:
         if int(time) < 0 or int(time) > 59:
             raise ValueError
     except ValueError:
         utils.typed(
-            f" Invalid entry, please enter a {string} value between 0 and 59")
+            f" Invalid entry, please enter a {time_unit}"
+            " value between 0 and 59"
+        )
         print("\n")
         return False
 
@@ -58,9 +78,13 @@ def validate_time(time, string):
 
 def validate_tenths(tenths):
     """
-    Inside the try, converts time to integer
-    Raises ValueError if the string can't be converted or if tenths
-    fall ouside the range 0-9
+    Validates user's tenths input for type and range
+
+    Args:
+        tenths (str): User's tenths input to be tested
+
+    Returns:
+        bool: True if time input is an integer in range 0-9, otherwise False
     """
     try:
         if int(tenths) < 0 or int(tenths) > 9:

@@ -1,22 +1,36 @@
+"""
+Utility functions for user interaction and display formatting.
+
+Primary functions are typewriter effects, ASCII graphics,
+terminal clearing and exit handling.
+"""
+
+
 import time
+import os
+
+
+def clear_terminal():
+    """Clears the terminal to begin a new session."""
+    # Copied code, source - https://stackoverflow.com/a/2084628
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def typed(string):
     """
-    Creates a typewriter effect for the text
-    Iterates through the string printing one letter at a time,
-    horizontally and immediately with a 0.03s time delay
+    Creates a typewriter effect for the text display.
+
+    Args:
+        string (str): text to be displayed to user
     """
+    # Code derived from Stack Overflow (link in credits)
     for i in string:
         print(i, end="", flush=True)
         time.sleep(0.02)
-        # Code derived from Stack Overflow (link in credits)
 
 
 def display_header():
-    """
-    Display the Row Assist title banner
-    """
+    """Displays the Row Assist title banner"""
     print("""
  ██████╗  ██████╗ ██╗    ██╗    █████╗ ███████╗███████╗██╗███████╗████████╗
  ██╔══██╗██╔═══██╗██║    ██║   ██╔══██╗██╔════╝██╔════╝██║██╔════╝╚══██╔══╝
@@ -24,15 +38,16 @@ def display_header():
  ██╔══██╗██║   ██║██║███╗██║   ██╔══██║╚════██║╚════██║██║╚════██║   ██║
  ██║  ██║╚██████╔╝╚███╔███╔╝   ██║  ██║███████║███████║██║███████║   ██║
  ╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝    ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝╚══════╝   ╚═╝
-    """)
-    # Title artwork created with claude.ai
+    """)  # Title artwork created with claude.ai
 
 
 def check_wr(time):
     """
-    Compares entered time value (in seconds) to world record and
-    returns humorous message if the user enters a time faster than
-    the world record
+    Compares user's row time value (in seconds) to world record time.
+    Displays humorous message to the user.
+
+    Args:
+        time (float): user's row time parsed into total seconds
     """
     if time < 335.8:  # Correct as of 28/1/26 (set in 2018)
         typed(" ⚡Greetings Barry Allen!⚡\n")
@@ -41,9 +56,7 @@ def check_wr(time):
 
 
 def display_rowing_image():
-    """
-    Display the rowing machine ASCII artwork as a closing graphic
-    """
+    """Displays the rowing machine ASCII artwork as a closing graphic"""
     time.sleep(0.7)
     print("""
                    .:==:
@@ -71,8 +84,10 @@ def display_rowing_image():
 
 def program_exit():
     """
-    Asks user if they would like to exit or restart
-    Exit commands triggers exit, restart triggers main()
+    Determines whether to exit the program and gives farewell message
+
+    Returns:
+        bool: True if user enters "x" when prompted
     """
     typed(" Do you wish to exit now or restart?\n")
     exit_command = input(

@@ -1,16 +1,25 @@
+"""
+Collects user demographic and row performance inputs
+
+All values are validated before being returned
+"""
+
+
 import utils
 import validate
 
 
 def get_age():
     """
-    Get user age data
-    Run a while loop to get valid data from the user
+    Collects user age data
+
+    Returns:
+        int: User age validated to be in the range 10-90
     """
     while True:
         utils.typed(" Please enter your age\n")
         user_age = input(" Age: ")
-        print("")  # Create a single line space, print("\n") was causing 2
+        print("")
         if validate.validate_age(user_age):
             break
 
@@ -19,8 +28,10 @@ def get_age():
 
 def get_gender():
     """
-    Get user gender data
-    Run a while loop to get valid data from the user
+    Collects user gender data
+
+    Returns:
+        str: User gender validated to be either "f" or "m"
     """
     while True:
         utils.typed(" Please enter your gender: m/f\n")
@@ -33,43 +44,49 @@ def get_gender():
 
 def get_row_time():
     """
-    Compile valid input times
-    Convert inputs into a readable string and and a computable float
+    Collates user's inputted row times. Converts inputs into a
+    readable string and and a float.
+
+    Returns:
+        tuple: (time_seconds (float), time_display (str))
+            time_seconds: Row time in total seconds for further use
+            time_display: User-friendly format mm:ss.d (eg 7:45.6)
     """
-    print("")  # To add a line space for clearer readability
     utils.typed(
         " Please enter your latest 2k test time. Minutes, seconds, tenths\n"
         )
     minutes = get_time("minutes")
     seconds = get_time("seconds")
     tenths = get_tenths()
+    # Use of zfill() inspired by reddit answer (link in credits)
     display_time = f"{minutes}:{seconds.zfill(2)}.{tenths}"
-    # Use of zfill() inspired by reddit answer (link in credits) 
-
-    utils.typed(f" You entered: {display_time}")
-    print("\n")
     time_as_seconds = (int(minutes) * 60) + int(seconds) + (int(tenths) / 10)
-    utils.check_wr(time_as_seconds)
-    utils.typed(" Calculating your scores...\n")
 
-    return time_as_seconds
+    return time_as_seconds, display_time
 
 
-def get_time(string):
+def get_time(time_unit):
     """
-    Get time values from user for latest row
-    Run a while loop to get valid data from the user
+    Collects row duration time information from user
+
+    Args:
+        time_unit (str): unit of time to be collected
+
+    Return:
+        str: User's time input validated to be in the range 0-59
     """
     while True:
-        user_time = input(f" {string.capitalize()}: ")
-        if validate.validate_time(user_time, string):
+        user_time = input(f" {time_unit.capitalize()}: ")
+        if validate.validate_time(user_time, time_unit):
             return user_time
 
 
 def get_tenths():
     """
-    Get tenths value for latest row
-    Run a while loop to get valid data from the user
+    Collects tenths portion of row time duration
+
+    Returns:
+        str: User's tenths input validated to be in the range 0-9
     """
     while True:
         user_tenths = input(" Tenths: ")
