@@ -14,7 +14,7 @@ def get_age():
         if validate.validate_age(user_age):
             break
 
-    return user_age
+    return int(user_age)
 
 
 def get_gender():

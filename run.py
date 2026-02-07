@@ -1,3 +1,6 @@
+"""Entry point and controller for the Row Assist application"""
+
+
 from utils import *
 import inputs
 import calc
@@ -9,25 +12,37 @@ from google.auth.exceptions import GoogleAuthError
 import traceback
 
 
-USER = {
-    "login": "demo",
-    "DOB": date(2000, 1, 14),
-    "gender": "m"
-}
+def get_user():
+    """Returns dict of user information"""
+    USER = {
+        "login": "demo",
+        "DOB": date(2000, 1, 14),
+        "gender": "m"
+    }
+    return USER
 
 
-def check_user():
+def check_user(user):
     """
-    Requests and verifies user login, if verified, retrieves stored
-    age and gender data. Alternatively offers the option to proceed
-    as a guest user requesting the age and gender data.
-    Function returns user age, gender and login
+    Selects user mode and obtains demographic data
+
+    Prompts user for login. If recognised, retrieves stored data.
+    If empty str, proceeds as guest and prompts for age/gender inputs.
+
+    Args:
+        user (dict): persistent user information
+
+    Returns:
+        tuple: (age (int), gender (str), login (str or bool))
+            age: user's age in years
+            gender: "m" or "f"
+            login: username string if persistent user, False if guest
     """
     while True:
         user_login = input(" Login: ")
-        if user_login.lower() == USER["login"]:
-            user_age = calc.calculate_age(USER["DOB"])
-            user_gender = USER["gender"]
+        if user_login.lower() == user["login"]:
+            user_age = calc.calculate_age(user["DOB"])
+            user_gender = user["gender"]
             typed(" Welcome back!\n")
             return user_age, user_gender, user_login
         elif user_login == "":
@@ -44,7 +59,7 @@ def check_user():
             age = inputs.get_age()
             gender = inputs.get_gender()
             return age, gender, False
-        elif user_login.lower() != USER["login"] and user_login != "":
+        elif user_login.lower() != user["login"] and user_login != "":
             typed(
                 " I'm sorry that login is not recognised, please try again\n"
                 " or press 'Enter' to continue as a guest.\n"
@@ -54,10 +69,13 @@ def check_user():
 
 def main():
     """
-    Runs all functions
+    Controls the main program flow from user input to feedback.
+
+    Manages calls to input collection, metric calculation and performance
+    evaluating functions. Handles API/connection and data errors gracefully.
     """
-    os.system('cls' if os.name == 'nt' else 'clear')
     # Copied code, source - https://stackoverflow.com/a/2084628
+    os.system('cls' if os.name == 'nt' else 'clear')
 
     display_header()
 
@@ -68,9 +86,10 @@ def main():
     typed(
         " Please enter your login or press 'Enter' to continue as a guest.\n"
     )
-    age, gender, user_login = check_user()
+    USER = get_user()
+    age, gender, user_login = check_user(USER)
+    # Added to allow functions to run correctly if more distances added
     distance = 2000
-    # Added to make sure functions will run correctly when more distances added
     row_time = inputs.get_row_time()
     split_time, display_split = calc.calculate_splits(row_time, distance)
     typed(f" Your split time is: {display_split}\n")
@@ -92,6 +111,7 @@ def main():
         ref_data.save_row_data(
             date.today(), row_time, watts, user_login, SHEET)
     except (GSpreadException, GoogleAuthError):
+        # Uncomment to debug API errors
         # print(traceback.format_exc())
         typed(
             " Apologies the database is not available at this time.\n"
@@ -100,6 +120,8 @@ def main():
         )
         print("")
     except Exception:
+        # Uncomment to debug unexpected errors
+        # print(traceback.format_exc())
         typed(
             " I'm sorry the program has encountered a problem and needs"
             " to close.\n If the problem persists, please contact customer"
@@ -109,10 +131,7 @@ def main():
 
 
 def run():
-    """
-    Restart main if any other key is pressed in program_exit
-    Exits the program cleanly if user chooses exit option
-    """
+    """Handles main program run loop, allowing restart or clean exit."""
     while True:
         main()
         if program_exit():
