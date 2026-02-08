@@ -9,9 +9,20 @@
 
 I have used the recommended [PEP8 CI Python Linter](https://pep8ci.herokuapp.com) to validate all of my Python files.
 
-Initially some of the files had several issues but all were largely whitespace errors or line length errors and were easily fixed, prior to deployment.
+Initial validation results showed multiple errors as shown below.
 
-> ![screenshot of validation errors](documentation/validation/validation_errors.png)
+![screenshot of validation errors](documentation/validation/validation_errors.png)
+
+The following errors were identified and resolved:
+
+| Error | Issue | Resolution | Example | 
+| --- | --- | --- | --- |
+| E501 | Long lines exceeded 79 characters | Used multi-line strings and used parentheses to break code over multiple lines, or created variables to shorten lines | ![screenshot of line length correction](documentation/validation/function_length_fix.png) ![screenshot of line length correction](documentation/validation/string_length_fix.png) ![screenshot of line length correction](documentation/validation/variable_length_fix.png) |
+| E302 | 1 blank line between functions instead of 2 | Added extra blank lines as required | ![screenshot of 2 blank lines](documentation/validation/two_blank_lines.png) |
+| W291 | Line had a trailing whitespace | Deleted all trailing whitespace |  |
+| E261 | Inline comments had 1 space before instead of 2 | Added extra space before all inline comments | ![screenshot of inline comment](documentation/validation/inline_comment.png) |
+| W293 | Blank line contained whitespace | Deleted all whitespace from blank lines |  |
+| W292 | Newlines were missing from the end of some files | Added newlines to the bottom of files as needed | ![screenshot of the end of a file](documentation/validation/newline.png) |
 
 ⚠️ Reconfirm all linter links show no errors before submission ⚠️
 

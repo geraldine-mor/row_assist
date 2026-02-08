@@ -80,7 +80,7 @@ The program delivers the same feedback but will not offer the option to save pri
 
 **[Features](#features)** (see below)
 
-⚠️ --- Currently set for the MVP and will need updating as features added --- ⚠️
+⚠️ --- Needs updating as features added --- ⚠️
 
 **Content Requirements**
 - Input content - user attributes (age, gender) and row performance data (time)
@@ -300,21 +300,9 @@ To follow best practice, a charts were created for the app's data structure, dat
 - Despite the lack of secure user login credential validation, the user mode selection intput is called "Login" for ease of comprehension and improved user experience.
 - Exit confirmation omitted in favor of better UX. Users are prompted to save results immediately after viewing feedback, when the decision is most relevant. This eliminates the need for a generic "Are you sure?" at exit.
 
-#### Classes & Functions
+#### Functions
 
-⚠️ --- Add class if used for users, otherwise remove --- ⚠️
-
-The program uses classes as a blueprint for the project's object-oriented programming (OOP). This allows for the object to be reusable and callable where necessary.
-
-```python
-class Person:
-    """ Insert docstring comments here """
-    def __init__(self, name, age, health, inventory):
-        self.name = name
-        self.age = age
-        self.health = health
-        self.inventory = inventory
-```
+⚠️ --- Needs updating as features added --- ⚠️
 
 The primary functions used on this application are:
 
@@ -367,19 +355,21 @@ The primary functions used on this application are:
 
 #### Imports
 
-⚠️ --- Update as needed --- ⚠️
-
 I used the following Python packages and external imports.
 
-- `gspread`: used with the Google Sheets API.
-- `google.oauth2.service_account`: used for the Google Sheets API credentials.
-- `time`: used for adding time delays.
-- `math`: used for `floor()` function in split-time calculation.
-- `os`: used for clearing the terminal screen.
-- `datetime`: used to provide today's date and calculate user age. 
-- `gspread.exceptions`: used for GSpreadException in the error handler.
-- `google.auth.exceptions`: used for GoogleAuthExceptions in the error handler.
+**Core Dependencies**
 
+- `gspread`: Essential for Google Sheets API integration. Chosen because it provides an interface for reading/writing spreadsheet data, eliminating the need for a traditional database while maintaining persistent data capabilities.
+- `google.oauth2.service_account`: Required for authentication with Google Sheets API. Handles credential management necessary for authorised API access.
+
+**Standard Library**
+
+- `time`: Used `sleep()` function to implement typewriter effect for enhanced user experience with progressive text display.
+- `math`: Required for `floor()` function in split-time calculations to ensure rounding behavior consistent with rowing ergometer display conventions.
+- `os`: Used `os.system()` to enable cross-platform terminal clearing  ensuring a clean interface for each program run.
+- `datetime`: Necessary for calculating user age from stored Date of Birth and timestamping saved workout data. Provides reliable date arithmetic. 
+- `gspread.exceptions`: Facilitate graceful error handling for API connectivity and worksheet issues, allowing the program to inform users of problems rather than crashing.
+- `google.auth.exceptions`: Facilitate graceful error handling for authentication issues, allowing the program to inform users of connection problems rather than crashing.
 
 ## Agile Development Process
 
@@ -515,7 +505,6 @@ As this application is dependent upon the API connection, an error handler was i
 19. Copy the `client_email` that is in the `creds.json` file.
 20. Share your Google Sheet to the `client_email`, ensuring "Editing" is enabled.
 21. Add the `creds.json` file to your `.gitignore` file, so as not to push your credentials to GitHub publicly.
-
 
 ### Local Development
 
