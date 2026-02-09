@@ -23,10 +23,10 @@ def typed(string):
     Args:
         string (str): text to be displayed to user
     """
-    # Code derived from Stack Overflow (link in credits)
+    # Code derived from Stack Overflow - (link in credits)
     for i in string:
         print(i, end="", flush=True)
-        time.sleep(0.02)
+        time.sleep(0.03)
 
 
 def display_header():

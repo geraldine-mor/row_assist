@@ -5,7 +5,7 @@ Developer: Geraldine Morey ([geraldine-mor](https://www.github.com/geraldine-mor
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/t/geraldine-mor/row_assist)](https://www.github.com/geraldine-mor/row_assist/commits/main)
 [![GitHub last commit](https://img.shields.io/github/last-commit/geraldine-mor/row_assist)](https://www.github.com/geraldine-mor/row_assist/commits/main)
 [![GitHub repo size](https://img.shields.io/github/repo-size/geraldine-mor/row_assist)](https://www.github.com/geraldine-mor/row_assist)
-[![badge](https://img.shields.io/badge/deployment-Heroku-purple)](https://row-assist-0ee155171c88.herokuapp.com)
+[![Deployment](https://img.shields.io/badge/deployment-Heroku-purple)](https://row-assist-0ee155171c88.herokuapp.com)
 
 ```title banner
  ██████╗  ██████╗ ██╗    ██╗    █████╗ ███████╗███████╗██╗███████╗████████╗
@@ -15,7 +15,6 @@ Developer: Geraldine Morey ([geraldine-mor](https://www.github.com/geraldine-mor
  ██║  ██║╚██████╔╝╚███╔███╔╝   ██║  ██║███████║███████║██║███████║   ██║
  ╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝    ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝╚══════╝   ╚═╝
 ```
-
 
 Row Assist is a command-line indoor rowing assistant that takes the user's indoor rowing 2k test performance data and calculates the watts generated and average /500m split time, compares the user's performance to a reference table and returns a ranking. 
 
@@ -27,13 +26,13 @@ This model reflects real-world rowing practice where rowing tests occur as disti
 
 ## Instructions
 
-⚠️ --- Needs updating as features added --- ⚠️
-
 **How to use Row Assist**
+
+_Please avoid typing during the typewriter animation as this can interfere with the output and cause unnecessary delays._
 
 **User:**
 
-You will be greeted and asked to enter your login or press 'Enter' to continue as a guest 
+You will be greeted and asked to enter your login or press 'Enter' to continue as a guest
 
 The 'Login' for demonstration purposes is "demo"
 
@@ -49,7 +48,7 @@ Should the API connection fail, you will receive an error message before being o
 
 **Guest:**
 
-After the greeting, press 'Enter' to enter guest mode and you will be prompted to enter your age and indicate your gender before being asked to enter your time as above.
+After the greeting, press 'Enter' to enter guest mode. You will be prompted to enter your age and indicate your gender before being asked to enter your time as above.
 
 The program delivers the same feedback but will not offer the option to save prior to exiting.
 
@@ -80,8 +79,6 @@ The program delivers the same feedback but will not offer the option to save pri
 
 **[Features](#features)** (see below)
 
-⚠️ --- Needs updating as features added --- ⚠️
-
 **Content Requirements**
 - Input content - user attributes (age, gender) and row performance data (time)
 - Reference content - Google sheet containing categorised, searchable data sorted by gender, age range, watt threshold and performance category
@@ -103,8 +100,6 @@ The program delivers the same feedback but will not offer the option to save pri
 **Information Architecture**
 - **Hierarchy**:
   - User demography and row performance data input as the primary focus for ease of use
-
-⚠️ --- Needs updating as features added --- ⚠️
 
 **User Flow**
 1. User opens the app → user views greeting and instructions
@@ -179,26 +174,24 @@ The Mermaid version can be found [here](https://mermaid.ai/app/projects/212e9a6a
 
 ## User Stories
 
-| Target | Expectation | Outcome |
-| --- | --- | --- |
-| As a user | I want to be greeted and receive clear instruction throughout | so that I understand and can use the app fully and easily. |
-| As a rower | I would like to input my age, gender and 2000m time | so that the app can evaluate my performance. |
-| As a rower | I would like the app to calculate my split time and watts | so that I can understand more about my workout. |
-| As a rower | I would like the application to compare my output to reference data | so that I can receive a category ranking relevant to my demographic. |
-| As a rower | I would like information about my ranking category | so that I can understand how my ranking compares to others. |
-| As a coach | I would like to choose between exiting the program and restarting | so that all my athletes can enter their data. |
-| As a returning user | I would like the application to store my performance tests | so that I can track improvements over time. |
-| As a returning user | I would like to see trends in my performance | so that I can evaluate my training effectivesness. |
-| As a returning user | I would like to see visual charts of my performance history | so that progress is easy to interpret and compare. |
-| As a rower | I would like to enter alternative distances | so that I can evaluate performance over a range of tests. |
-| As a lightweight rower | I would like to see weight class adjustments | so that rankings are fair and my feedback is relevant |
-| As a new user | I would like to create a profile | so that my details don't need to be re-entered each time. |
-| As a returning user | I would like to update my profile | so that performance comparisons remain valid. |
-| As a coach | I want to view performance data for multple athletes | so that can track progression and develop training interventions. | 
+| Target | Expectation | Outcome | Classification |
+| --- | --- | --- | --- |
+| As a user | I want to be greeted and receive clear instruction throughout | so that I understand and can use the app fully and easily. | ![Must Have](https://img.shields.io/badge/Must_Have-brightgreen) |
+| As a rower | I would like to input my age, gender and 2000m time | so that the app can evaluate my performance. | ![Must Have](https://img.shields.io/badge/Must_Have-brightgreen) |
+| As a rower | I would like the app to calculate my split time and watts | so that I can understand more about my workout. | ![Must Have](https://img.shields.io/badge/Must_Have-brightgreen) |
+| As a rower | I would like the application to compare my output to reference data | so that I can receive a category ranking relevant to my demographic. | ![Must Have](https://img.shields.io/badge/Must_Have-brightgreen) |
+| As a rower | I would like information about my ranking category | so that I can understand how my ranking compares to others. | ![Should Have](https://img.shields.io/badge/Should_Have-9e0ae0) |
+| As a coach | I would like to choose between exiting the program and restarting | so that all my athletes can enter their data. | ![Should Have](https://img.shields.io/badge/Should_Have-9e0ae0) |
+| As a returning user | I would like the application to store my performance tests | so that I can track improvements over time. | ![Could Have](https://img.shields.io/badge/Could_Have-fa1f7b) |
+| As a returning user | I would like to see trends in my performance | so that I can evaluate my training effectiveness. | ![Won't Have](https://img.shields.io/badge/Won't_Have-390820) |
+| As a returning user | I would like to see visual charts of my performance history | so that progress is easy to interpret and compare. | ![Won't Have](https://img.shields.io/badge/Won't_Have-390820) |
+| As a rower | I would like to enter alternative distances | so that I can evaluate performance over a range of tests. | ![Won't Have](https://img.shields.io/badge/Won't_Have-390820) |
+| As a lightweight rower | I would like to see weight class adjustments | so that rankings are fair and my feedback is relevant | ![Won't Have](https://img.shields.io/badge/Won't_Have-390820) |
+| As a new user | I would like to create a profile | so that my details don't need to be re-entered each time. | ![Won't Have](https://img.shields.io/badge/Won't_Have-390820) |
+| As a returning user | I would like to update my profile | so that performance comparisons remain valid. | ![Won't Have](https://img.shields.io/badge/Won't_Have-390820) |
+| As a coach | I want to view performance data for multiple athletes | so that can track progression and develop training interventions. | ![Won't Have](https://img.shields.io/badge/Won't_Have-390820) |
 
 ## Features
-
-⚠️ --- Needs updating as features added --- ⚠️
 
 ### Existing Features
 
@@ -210,10 +203,10 @@ The Mermaid version can be found [here](https://mermaid.ai/app/projects/212e9a6a
 | Time Transformation | Time inputs are _collated_ into the format mm:ss.d for user display and _parsed_ to total seconds for calculations. | ![screenshot of formatted time](documentation/features/time_format.png) |
 | Split-time Calculation | Calculates the split-time from the data provided and displays it to the user. | ![screenshot of split-time](documentation/features/split_time.png) |
 | Watts Calculation | Calculates watts from from the generated split-time value and displays it to the user. | ![screenshot of watts](documentation/features/watts.png) |
-| Performance Ranking | Retrieves the performance category and correspoding description from the relevant Google Sheets worksheet based on age, gender and watts value and displays them to the user. | ![screenshot of category and description](documentation/features/category.png) |
+| Performance Ranking | Retrieves the performance category and corresponding description from the relevant Google Sheets worksheet based on age, gender and watts value and displays them to the user. | ![screenshot of category and description](documentation/features/category.png) |
 | Program Exit / Restart | Asks the user to exit or restart. Exit closes the program safely and restart begins the program again with a clear terminal. | ![screenshot of program exit request](documentation/features/program_exit.png) |
 | User Identity Decision | Asks the user to enter their login or continue as guest | ![screenshot of login or guest option](documentation/features/user_identity.png) |
-| Save Data | Saved user is offered the option to store the workout data, if y entered, then data is saved to the google sheet | ![screenshot of data save interaction](documentation/features/save_data.png) ![screenshot of data in the google sheet](documentation/features/saved_data.png) |
+| Save Data | Persistent user is offered the option to store the workout data, if y entered, then data is saved to the google sheet | ![screenshot of data save interaction](documentation/features/save_data.png) ![screenshot of data in the google sheet](documentation/features/saved_data.png) |
 
 ### Future Features
 
@@ -250,14 +243,12 @@ The Mermaid version can be found [here](https://mermaid.ai/app/projects/212e9a6a
 | [![badge](https://img.shields.io/badge/Labex-grey?logo=labex&logoColor=%232E7EEE)](https://labex.io/tutorials) | Tutorials/Reference Guide. |
 | [![badge](https://img.shields.io/badge/Reddit-grey?logo=reddit&logoColor=%23FF4500)](https://www.reddit.com/) | Tutorials/Reference Guide. |
 | [![badge](https://img.shields.io/badge/Claude-grey?logo=claude&logoColor=%23D97757&color=gray)](https://claude.ai) | Help debug, troubleshoot, and explain things. |
-| [![badge](https://img.shields.io/badge/Mermaid-grey?logo=mermaid&logoColor=%23FF3670)](https://mermaid.ai/) | Create interactive. flowchart | 
-| [![badge](https://img.shields.io/badge/ASCII_art-grey?logo=heroku&logoColor=430098)](https://www.heroku.com) | Create ASCII graphics. |
+| [![badge](https://img.shields.io/badge/Mermaid-grey?logo=mermaid&logoColor=%23FF3670)](https://mermaid.ai/) | Create interactive flowchart | 
+| [![badge](https://img.shields.io/badge/ASCII_art-grey)](https://www.asciiart.eu/) | Create ASCII graphics. |
 
 ## Database Design
 
 ### Data Model
-
-⚠️ --- Needs updating as features added --- ⚠️
 
 The Row Assist app uses Google Sheets as its data repository with a structured, scalable design to support multiple demographics and distances.
 
@@ -267,7 +258,7 @@ Each reference sheet contains age range boundaries in the first 2 columns and pe
 
 A separate worksheet titled `categories` provides detailed descriptions for each performance category. 
 
-A final worksheet titled `demo` stores the persitent user's saved workouts
+A final worksheet titled `demo` stores the persistent user's saved workouts
 
 To follow best practice, a charts were created for the app's data structure, data flow and logic. I mapped them out using [Draw.io](https://www.draw.io). 
 
@@ -301,8 +292,6 @@ To follow best practice, a charts were created for the app's data structure, dat
 - Exit confirmation omitted in favor of better UX. Users are prompted to save results immediately after viewing feedback, when the decision is most relevant. This eliminates the need for a generic "Are you sure?" at exit.
 
 #### Functions
-
-⚠️ --- Needs updating as features added --- ⚠️
 
 The primary functions used on this application are:
 
@@ -355,7 +344,7 @@ The primary functions used on this application are:
 
 #### Imports
 
-I used the following Python packages and external imports.
+I used the following Python packages and external imports:
 
 **Core Dependencies**
 
@@ -377,10 +366,9 @@ I used the following Python packages and external imports.
 
 [GitHub Projects](https://www.github.com/geraldine-mor/row_assist/projects) served as an Agile tool for this project. Through it, User Stories and issues/bugs were planned and tracked using a Kanban project board.
 
-![screenshot](documentation/project_board.png)
+![screenshot of project board](documentation/project_board.png)
 
-⚠️ --- Take screenshots when all issues closed / moved to backlog ---⚠️
-
+![screenshot of project board](documentation/project_complete.png)
 ### GitHub Issues 
 
 [GitHub Issues](https://www.github.com/geraldine-mor/row_assist/issues) served as an another Agile tool. There, I managed my User Stories and tracked any issues/bugs.
@@ -391,16 +379,16 @@ All [bugs](TESTING.md#bugs) are processed in this manner also.
 
 | Link | Screenshot |
 | --- | --- |
-| [![GitHub issues](https://img.shields.io/github/issues-search/geraldine-mor/row_assist?query=is%3Aissue%20is%3Aopen%20-label%3Abug&label=Open%20Issues&color=yellow)](https://www.github.com/geraldine-mor/row_assist/issues?q=is%3Aissue%20is%3Aopen%20-label%3Abug) | ![screenshot](documentation/gh-issues-open.png) |
-| [![GitHub closed issues](https://img.shields.io/github/issues-search/geraldine-mor/row_assist?query=is%3Aissue%20is%3Aclosed%20-label%3Abug&label=Closed%20Issues&color=green)](https://www.github.com/geraldine-mor/row_assist/issues?q=is%3Aissue%20is%3Aclosed%20-label%3Abug) | ![screenshot](documentation/gh-issues-closed.png) |
+| [![GitHub issues](https://img.shields.io/github/issues-search/geraldine-mor/row_assist?query=is%3Aissue%20is%3Aopen%20-label%3Abug&label=Open%20Issues&color=yellow)](https://www.github.com/geraldine-mor/row_assist/issues?q=is%3Aissue%20is%3Aopen%20-label%3Abug) | ![screenshot of open issues](documentation/open_issues.png) |
+| [![GitHub closed issues](https://img.shields.io/github/issues-search/geraldine-mor/row_assist?query=is%3Aissue%20is%3Aclosed%20-label%3Abug&label=Closed%20Issues&color=green)](https://www.github.com/geraldine-mor/row_assist/issues?q=is%3Aissue%20is%3Aclosed%20-label%3Abug) | ![screenshot](documentation/closed_issues.png) |
 
-### MoSCoW Prioritization ⚠️ --- Update when complete ---⚠️
+### MoSCoW Prioritization
 
 I categorised my User Stories for prioritising and implementing them. Using this approach, I was able to apply "MoSCoW" prioritisation and labels to my User Stories within the Issues tab.
 
-- **Must Have**: guaranteed to be delivered - required to Pass the project (*max ~60% of stories*)
-- **Should Have**: adds significant value, but not vital (*~20% of stories*)
-- **Could Have**: has small impact if left out (*the rest ~20% of stories*)
+- **Must Have**: guaranteed to be delivered - required to Pass the project
+- **Should Have**: adds significant value, but not vital
+- **Could Have**: has small impact if left out
 - **Won't Have**: not a priority for this iteration - future features
 
 ## Testing
@@ -573,6 +561,7 @@ There are no further remaining major differences between the local version when 
 | [Claude](https://claude.ai) | Development support, technical guidance and documentation advice |
 | [Labex](https://labex.io/tutorials/python-how-to-convert-timedelta-to-days-421860) | Datetime tutorial |
 | [Real Python](https://realpython.com/ref/stdlib/traceback/) | Used to debug when exception handler in place |
+| [Stack Overflow](https://stackoverflow.com/questions/55470005/prevent-reading-of-previous-prior-user-keyboard-input-from-sys-stdin-that-wor) |
 
 ### Media
 

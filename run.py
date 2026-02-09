@@ -8,7 +8,6 @@ import ref_data
 from datetime import date
 from gspread.exceptions import GSpreadException
 from google.auth.exceptions import GoogleAuthError
-import traceback  # Only used for debugging
 
 
 def get_user():
@@ -75,6 +74,7 @@ def main():
     """
     clear_terminal()
     display_header()
+    print("Please avoid typing until instructed to do so.")
 
     typed(
         " Welcome to Row Assist, your indoor rowing assistant."
@@ -114,8 +114,6 @@ def main():
         print("\n")
         ref_data.save_row_data(row_time, watts, user_login, SHEET)
     except (GSpreadException, GoogleAuthError):
-        # Uncomment to debug API errors
-        # print(traceback.format_exc())
         typed(
             " Apologies the database is not available at this time.\n"
             " Please check your connection and try again later\n"
@@ -123,8 +121,6 @@ def main():
         )
         print("")
     except Exception:
-        # Uncomment to debug unexpected errors
-        # print(traceback.format_exc())
         typed(
             " I'm sorry the program has encountered a problem and needs"
             " to close.\n If the problem persists, please contact customer"

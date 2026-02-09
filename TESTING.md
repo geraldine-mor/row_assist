@@ -24,8 +24,6 @@ The following errors were identified and resolved:
 | W293 | Blank line contained whitespace | Deleted all whitespace from blank lines |  |
 | W292 | Newlines were missing from the end of some files | Added newlines to the bottom of files as needed | ![screenshot of the end of a file](documentation/validation/newline.png) |
 
-⚠️ Reconfirm all linter links show no errors before submission ⚠️
-
 | Directory | File | URL | Screenshot | Notes |
 | --- | --- | --- | --- | --- |
 |  | [calc.py](https://github.com/geraldine-mor/row_assist/blob/main/calc.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/geraldine-mor/row_assist/main/calc.py) | ![screenshot of calc.py no issues](documentation/validation/calc_validation.png) |  |
@@ -49,8 +47,6 @@ This project is a Python command-line only application deployed via The Code Ins
 Lighthouse audits are not applicable to this project since they do not test the Python command-line application but rather focus on the provided interface.
 
 ## Defensive Programming
-
-⚠️ --- Needs updating as features added --- ⚠️
 
 Defensive programming was manually tested with the below user acceptance testing to ensure invalid or unexpected user input is handled with clear feedback and without causing the program to crash.
 
@@ -86,9 +82,9 @@ Defensive programming was manually tested with the below user acceptance testing
 |  | Feature is expected to reject values above 9. | Entered "12" for tenths. | Error message displayed: "Invalid entry, please enter a tenths value between 0 and 9" and re-prompted. | ![screenshot of error message](documentation/defensive/tenths_12.png) |
 |  | Feature is expected to reject blank input. | Pressed enter with no value entered. | Error message displayed: "Invalid entry, please enter a tenths value between 0 and 9" and re-prompted. | ![screenshot of error message](documentation/defensive/tenths_blank.png) |
 |  | Feature is expected to accept valid tenths values at the boundaries. | Entered "0" and "9" for tenths. | Both values accepted without issue and program moved on to next step. | ![screenshot of successful input](documentation/defensive/tenths_0.png) ![screenshot of successful input](documentation/defensive/tenths_9.png) |
-| Save Data | Feature is expected to reject invalid data type | Entered "7" when prompted | Error message & re-prompt displayed: "Invalid entry. Do you wish to save this test adta? Y/N: " | ![screenshot of error message](documentation/defensive/save_7.png) |
-|  | Feature is expected to reject strings other than "y", "Y", "n" and "N" | Entered "yes" when prompted | Error message & re-prompt displayed: "Invalid entry. Do you wish to save this test adta? Y/N: " | ![screenshot of error message](documentation/defensive/save_yes.png) |
-|  | Feature is expected to reject blank entries | Entered "" when prompted | Error message & re-prompt displayed: "Invalid entry. Do you wish to save this test adta? Y/N: " | ![screenshot of error message](documentation/defensive/save_blank.png) | 
+| Save Data | Feature is expected to reject invalid data type | Entered "7" when prompted | Error message & re-prompt displayed: "Invalid entry. Do you wish to save this test data? Y/N: " | ![screenshot of error message](documentation/defensive/save_7.png) |
+|  | Feature is expected to reject strings other than "y", "Y", "n" and "N" | Entered "yes" when prompted | Error message & re-prompt displayed: "Invalid entry. Do you wish to save this test data? Y/N: " | ![screenshot of error message](documentation/defensive/save_yes.png) |
+|  | Feature is expected to reject blank entries | Entered "" when prompted | Error message & re-prompt displayed: "Invalid entry. Do you wish to save this test data? Y/N: " | ![screenshot of error message](documentation/defensive/save_blank.png) | 
 |  | Feature is expected accept "y" and "Y" for save confirmation | Tested "y" and "Y" when prompted | Data saved both times | ![screenshot of save message](documentation/defensive/save_y.png) ![screenshot of save message](documentation/defensive/save_y_upper.png) ![screenshot of saved data](documentation/defensive/save_sheet.png)| 
 |  | Feature is expected accept "n" and "N" for save rejection | Tested "n" and "N" when prompted | Data descarded both times | ![screenshot of deleted message](documentation/defensive/save_n.png) ![screenshot of deleted message](documentation/defensive/save_n_upper.png) |
 | Program Restart | Feature is expected to restart the program with a clear screen when any key except "x" is entered. | Entered "w", "Insert" and "7" as well as no value. | All values initiated the program restart and cleared the visible window though scrolling upward revealed uncleared text (see [known issues](#known-issues)). | ![screenshot of restart](documentation/defensive/restart.png) |
@@ -105,18 +101,16 @@ Defensive programming was manually tested with the below user acceptance testing
 
 | Scenario | Test | Result | Screenshot |
 | --- | --- | --- | --- |
-| API Connection Failure | Disconnected the internet connection prior to program run | Program displayed datbase not available error messaged and prodeeded to the exit function | ![screenshot of error message](documentation/defensive/no_connection.png) |
-| API Connection Lost During Runtime | Disconnected the internet while the program was running | Program displayed datbase not available error messaged and prodeeded to the exit function | ![screenshot of error message](documentation/defensive/no_connection.png) |
-| Invalid Sheet Reference | Changed the name of the worksheet to "row_ssist" | Program displayed datbase not available error messaged and prodeeded to the exit function | ![screenshot of error message](documentation/defensive/no_connection.png) |
+| API Connection Failure | Disconnected the internet connection prior to program run | Program displayed database not available error messaged and proceeded to the exit function | ![screenshot of error message](documentation/defensive/no_connection.png) |
+| API Connection Lost During Runtime | Disconnected the internet while the program was running | Program displayed database not available error messaged and proceeded to the exit function | ![screenshot of error message](documentation/defensive/no_connection.png) |
+| Invalid Sheet Reference | Changed the name of the worksheet to "row_ssist" | Program displayed database not available error messaged and proceeded to the exit function | ![screenshot of error message](documentation/defensive/no_connection.png) |
 | API Authentication Failure | Changed the credentials file name to cred.json in ref_py | Program displayed unexplained error message and proceeded to exit function | ![screenshot of error message](documentation/defensive/other_error.png) |
-| Missing Spreadsheet Data | Removed the data from a max age cell and agaon from a category row cell | Program displayed unexplained error message both times and proceeded to exit function | ![screenshot of error message](documentation/defensive/other_error.png) |
+| Missing Spreadsheet Data | Removed the data from a max age cell and again from a category row cell | Program displayed unexplained error message both times and proceeded to exit function | ![screenshot of error message](documentation/defensive/other_error.png) |
 
 **Testing Environment:** Local terminal (Python 3.14.2)
 **Reason:** Deployed mock terminal requires internet connection to load, preventing simulation of connection failures
 
 ## User Story Testing
-
-⚠️ --- Needs updating as features added --- ⚠️
 
 | Target | Expectation | Outcome |  |
 | --- | --- | --- | --- |
@@ -138,9 +132,7 @@ I used [GitHub Issues](https://www.github.com/geraldine-mor/row_assist/issues) t
 
 All previously closed/fixed bugs can be tracked [here](https://www.github.com/geraldine-mor/row_assist/issues?q=is%3Aissue+is%3Aclosed+label%3Abug).
 
-![screenshot](documentation/bugs/gh-issues-closed.png)
-
-⚠️ Add screenshots of bugs when complete ⚠️
+![screenshot](documentation/closed_bugs.png)
 
 ### Unfixed Bugs
 
@@ -148,16 +140,17 @@ All previously closed/fixed bugs can be tracked [here](https://www.github.com/ge
 
 Any remaining open issues can be tracked [here](https://www.github.com/geraldine-mor/row_assist/issues?q=is%3Aissue+is%3Aopen+label%3Abug).
 
-![screenshot](documentation/bugs/gh-issues-open.png)
+![screenshot of no open bugs](documentation/no_bugs.png)
 
 ### Known Issues
 
 | Issue | Screenshot |
 | --- | --- |
-| When using a system clear function, any text above the height of the terminal (24 lines) does not clear, and remains when scrolling up. | ![screenshot](documentation/defensive/restart.png) |
-| Emojis are cut-off when viewing the application from Firefox. | ![screenshot](documentation/firefox_emojis.png) |
-| The Python terminal doesn't work well with Safari, and sometimes users cannot type in the application. | ![screenshot](documentation/safari_issue.png) |
-| If a user types `CTRL`+`C` in the terminal on the live site, they can manually stop the application and receive and error. | ![screenshot](documentation/keyboard_interrupt.png) |
+| When using a system clear function, any text above the height of the terminal (24 lines) does not clear, and remains when scrolling up. | ![screenshot of uncleared text](documentation/defensive/restart.png) |
+| Emojis are cut-off when viewing the application from Firefox. | ![screenshot of distorted emojis](documentation/firefox_emojis.png) |
+| The Python terminal doesn't work well with Safari, and sometimes users cannot type in the application. | ![screenshot of safari issue](documentation/safari_issue.png) |
+| If a user types `CTRL`+`C` in the terminal on the live site, they can manually stop the application and receive an error. | ![screenshot of keyboard interrupt](documentation/keyboard_interrupt.png) |
+| Keystrokes during the typewriter effect are displayed, disrupting the flow of text. 'Enter' key presses are queued and tried as input values. Any fix I found online also disabled the Ctrl+C command and since the unexpected user interations don't cause the program to crash I decided to add a user instruction rather than implement an imperfect fix. | ![screenshot of typewriter issue](documentation/typewriter_issue.png) |
 
 > [!IMPORTANT]  
 > There are no remaining bugs that I am aware of, though, even after thorough testing, I cannot rule out the possibility.
