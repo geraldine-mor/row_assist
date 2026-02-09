@@ -115,16 +115,16 @@ def main():
         ref_data.save_row_data(row_time, watts, user_login, SHEET)
     except (GSpreadException, GoogleAuthError):
         typed(
-            " Apologies the database is not available at this time.\n"
-            " Please check your connection and try again later\n"
-            " If the problem persists, please contact customer support\n"
+            " Apologies, the database is not available at this time.\n"
+            " Please check your connection and try again later.\n"
+            " If the problem persists, please contact customer support.\n"
         )
         print("")
     except Exception:
         typed(
-            " I'm sorry the program has encountered a problem and needs"
+            " I'm sorry, the program has encountered a problem and needs"
             " to close.\n If the problem persists, please contact customer"
-            " support"
+            " support."
         )
         print("\n")
 

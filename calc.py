@@ -25,7 +25,7 @@ def calculate_splits(seconds, distance):
     calc_split = seconds / (distance / 500)
     split_mins = floor(calc_split / 60)
     split_secs = round(calc_split - (split_mins * 60), 1)
-    # zfill(4) ensure consistent mm.d format (eg "05.2" not "5.2")
+    # zfill(4) ensures consistent ss.d format (eg "05.2" not "5.2")
     user_split = f"{split_mins}:{str(split_secs).zfill(4)}"
 
     return calc_split, user_split

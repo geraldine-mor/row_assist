@@ -45,7 +45,7 @@ def get_gender():
 def get_row_time():
     """
     Collates user's inputted row times. Converts inputs into a
-    readable string and and a float.
+    readable string and a float.
 
     Returns:
         tuple: (time_seconds (float), time_display (str))

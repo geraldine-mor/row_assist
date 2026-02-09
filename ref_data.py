@@ -93,7 +93,7 @@ def get_col_number(sheet, index, watts):
 
 def get_category(sheet, index):
     """
-    Retrieves the performance ranking from the the spreadsheet cell
+    Retrieves the performance ranking from the spreadsheet cell
 
     Args:
         sheet (gspread.spreadsheet.Spreadsheet):
@@ -165,7 +165,7 @@ def save_row_data(time, watts, user_login, sheet):
     today = date.today()
     if user_login:
         while True:
-            save = input(" Do you wish to save this test data? Y/N:")
+            save = input(" Do you wish to save this test data? Y/N: ")
             user_sheet = sheet.worksheet(user_login)
             if save.lower() == "y":
                 save_data = [str(today), time, watts]

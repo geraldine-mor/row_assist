@@ -6,6 +6,8 @@ Developer: Geraldine Morey ([geraldine-mor](https://www.github.com/geraldine-mor
 [![GitHub last commit](https://img.shields.io/github/last-commit/geraldine-mor/row_assist)](https://www.github.com/geraldine-mor/row_assist/commits/main)
 [![GitHub repo size](https://img.shields.io/github/repo-size/geraldine-mor/row_assist)](https://www.github.com/geraldine-mor/row_assist)
 [![Deployment](https://img.shields.io/badge/deployment-Heroku-purple)](https://row-assist-0ee155171c88.herokuapp.com)
+[![GitHub branch](https://img.shields.io/badge/deployed--branch-main-blue)](https://github.com/geraldine-mor/row_assist/tree/main)
+[![GitHub branch](https://img.shields.io/badge/development--branch-debug-coral)](https://github.com/geraldine-mor/row_assist/tree/debug)
 
 ```title banner
  ██████╗  ██████╗ ██╗    ██╗    █████╗ ███████╗███████╗██╗███████╗████████╗
@@ -369,6 +371,7 @@ I used the following Python packages and external imports:
 ![screenshot of project board](documentation/project_board.png)
 
 ![screenshot of project board](documentation/project_complete.png)
+
 ### GitHub Issues 
 
 [GitHub Issues](https://www.github.com/geraldine-mor/row_assist/issues) served as an another Agile tool. There, I managed my User Stories and tracked any issues/bugs.
