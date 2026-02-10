@@ -108,6 +108,7 @@ Defensive programming was manually tested with the below user acceptance testing
 | Missing Spreadsheet Data | Removed the data from a max age cell and again from a category row cell | Program displayed unexplained error message both times and proceeded to exit function | ![screenshot of error message](documentation/defensive/other_error.png) |
 
 **Testing Environment:** Local terminal (Python 3.14.2)
+
 **Reason:** Deployed mock terminal requires internet connection to load, preventing simulation of connection failures
 
 ## User Story Testing
