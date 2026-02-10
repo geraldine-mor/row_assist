@@ -564,7 +564,6 @@ There are no further remaining major differences between the local version when 
 | [Claude](https://claude.ai) | Development support, technical guidance and documentation advice |
 | [Labex](https://labex.io/tutorials/python-how-to-convert-timedelta-to-days-421860) | Datetime tutorial |
 | [Real Python](https://realpython.com/ref/stdlib/traceback/) | Used to debug when exception handler in place |
-| [Stack Overflow](https://stackoverflow.com/questions/55470005/prevent-reading-of-previous-prior-user-keyboard-input-from-sys-stdin-that-wor) |
 
 ### Media
 
