@@ -74,7 +74,7 @@ def main():
     """
     clear_terminal()
     display_header()
-    print("Please avoid typing until instructed to do so.")
+    print(" Please avoid typing until instructed to do so.")
 
     typed(
         " Welcome to Row Assist, your indoor rowing assistant."
