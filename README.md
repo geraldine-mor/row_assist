@@ -470,6 +470,9 @@ To run your own version of this application, you will need to create your own Go
 *Sheet must be named categories*
 ![screenshot of categories worksheet](documentation/categories.png)
 
+*Sheet must be named demo*<br>
+<img width="368" height="60" alt="image" src="https://github.com/user-attachments/assets/feabf858-b380-417e-be64-89e2283c73ad" />
+
 A credentials file in `.JSON` format from the Google Cloud Platform is also mandatory:
 [Google Cloud Platform](https://console.cloud.google.com)
 
